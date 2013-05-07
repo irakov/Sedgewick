@@ -11,7 +11,7 @@ public class BinarySearch
 		int right=a.length-1;
 		while(left<=right)
 		{
-			int middle=(left+right)/2;
+			int middle=left+(right-left)/2;
 			if(a[middle]<key)
 				left=middle+1;
 			else
