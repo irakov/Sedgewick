@@ -33,8 +33,7 @@ public class FixedCapacityStackOfStrings
 		if(size==0)
 			throw new EmptyStackException();
 		size--;
-		String s=stack[size];
-		return s;
+		return stack[size];
 	}
 	
 	public class EmptyStackException extends Exception
