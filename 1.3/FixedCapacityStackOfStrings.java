@@ -22,7 +22,7 @@ public class FixedCapacityStackOfStrings
 	
 	public void push(String s) throws FullStackException
 	{
-		if(size>stack.length)
+		if(size>=stack.length)
 			throw new FullStackException();
 		stack[size]=s;
 		size++;
