@@ -31,6 +31,7 @@ public class ResizingArrayStack<Item> implements Iterable<Item>
 			throw new EmptyStackException();
 		size--;
 		Item item=stack[size];
+		stack[size]=null;//avoid loitering!
 		if(size<=stack.length/4)
 			resize(stack.length/2);
 		return item;
