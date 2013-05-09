@@ -1,6 +1,9 @@
 //page 142
 
-public class LinkedList<Item>
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class LinkedList<Item> implements Iterable<Item>
 {
 	private Node first;
 	private Node last;
@@ -50,10 +53,39 @@ public class LinkedList<Item>
 		return size;
 	}
 	
+	public Iterator<Item> iterator()
+	{
+		return new LinkedListIterator();
+	}
+	
 	private class Node
 	{
 		public Item item;
 		public Node next;
+	}
+	
+	private class LinkedListIterator implements Iterator<Item>
+	{
+		private Node currentNode=first;
+		
+		public boolean hasNext()
+		{
+			return currentNode!=null;
+		}
+		
+		public Item next()
+		{
+			if(currentNode==null)
+				throw new NoSuchElementException();
+			Item returnValue=currentNode.item;
+			currentNode=currentNode.next;
+			return returnValue;
+		}
+		
+		public void remove()
+		{
+			throw new UnsupportedOperationException();
+		}
 	}
 	
 	public static void main(String[] args)
@@ -64,6 +96,10 @@ public class LinkedList<Item>
 		list.insertFirst(2);
 		StdOut.println("list size "+list.size());
 		list.insertFirst(3);
+		for(Integer i:list)
+		{
+			StdOut.println("item "+i);
+		}
 		StdOut.println("list size "+list.size());
 		StdOut.println("popped "+list.removeFirst());
 		StdOut.println("list size "+list.size());
@@ -78,6 +114,10 @@ public class LinkedList<Item>
 		list.insertLast(6);
 		StdOut.println("list size "+list.size());
 		list.insertFirst(7);
+		for(Integer i:list)
+		{
+			StdOut.println("item "+i);
+		}
 		StdOut.println("list size "+list.size());
 		StdOut.println("popped "+list.removeFirst());
 		StdOut.println("list size "+list.size());
