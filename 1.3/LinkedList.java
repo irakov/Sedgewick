@@ -36,6 +36,13 @@ public class LinkedList<Item> implements Iterable<Item>
 		return item;
 	}
 	
+	public Item getFirst()
+	{
+		if(first==null)
+			return null;
+		return first.item;
+	}
+	
 	public void insertLast(Item item)
 	{
 		Node oldLast=last;
@@ -46,6 +53,13 @@ public class LinkedList<Item> implements Iterable<Item>
 		else
 			first=last;
 		size++;
+	}
+	
+	public Item getLast()
+	{
+		if(last==null)
+			return null;
+		return last.item;
 	}
 	
 	public int size()
