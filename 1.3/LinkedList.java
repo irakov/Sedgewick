@@ -1,7 +1,6 @@
 //page 142
 
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 public class LinkedList<Item> implements Iterable<Item>
 {
@@ -36,13 +35,6 @@ public class LinkedList<Item> implements Iterable<Item>
 		return item;
 	}
 	
-	public Item getFirst()
-	{
-		if(first==null)
-			return null;
-		return first.item;
-	}
-	
 	public void insertLast(Item item)
 	{
 		Node oldLast=last;
@@ -55,11 +47,9 @@ public class LinkedList<Item> implements Iterable<Item>
 		size++;
 	}
 	
-	public Item getLast()
+	public Node getFirst()
 	{
-		if(last==null)
-			return null;
-		return last.item;
+		return first;
 	}
 	
 	public int size()
@@ -69,39 +59,15 @@ public class LinkedList<Item> implements Iterable<Item>
 	
 	public Iterator<Item> iterator()
 	{
-		return new LinkedListIterator();
+		return new LinkedListIterator<Item>(this);
 	}
 	
-	private class Node
+	public class Node
 	{
 		public Item item;
 		public Node next;
 	}
-	
-	private class LinkedListIterator implements Iterator<Item>
-	{
-		private Node currentNode=first;
-		
-		public boolean hasNext()
-		{
-			return currentNode!=null;
-		}
-		
-		public Item next()
-		{
-			if(currentNode==null)
-				throw new NoSuchElementException();
-			Item returnValue=currentNode.item;
-			currentNode=currentNode.next;
-			return returnValue;
-		}
-		
-		public void remove()
-		{
-			throw new UnsupportedOperationException();
-		}
-	}
-	
+
 	public static void main(String[] args)
 	{
 		LinkedList<Integer> list=new LinkedList<Integer>();
