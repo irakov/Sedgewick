@@ -39,6 +39,6 @@ public class Queue<Item> implements Iterable<Item>
 				StdOut.print(s.dequeue()+" ");
 		}
 		
-		StdOut.println("("+s.size()+" left on stack)");
+		StdOut.println("("+s.size()+" left in queue)");
 	}
 }
