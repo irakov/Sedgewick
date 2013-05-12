@@ -1,4 +1,5 @@
 //page 133
+//with 1.3.1
 
 public class FixedCapacityStackOfStrings
 {
@@ -15,6 +16,11 @@ public class FixedCapacityStackOfStrings
 		return size==0;
 	}
 	
+	public boolean isFull()
+	{
+		return size==stack.length;
+	}
+	
 	public int size()
 	{
 		return size;
@@ -22,7 +28,7 @@ public class FixedCapacityStackOfStrings
 	
 	public void push(String s) throws FullStackException
 	{
-		if(size>=stack.length)
+		if(isFull())
 			throw new FullStackException();
 		stack[size]=s;
 		size++;
@@ -30,7 +36,7 @@ public class FixedCapacityStackOfStrings
 	
 	public String pop() throws EmptyStackException
 	{
-		if(size==0)
+		if(isEmpty())
 			throw new EmptyStackException();
 		size--;
 		return stack[size];
