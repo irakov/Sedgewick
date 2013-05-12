@@ -1,5 +1,6 @@
 //page 149
 //algorithm 1.2
+//with 1.3.7.
 
 import java.util.Iterator;
 
@@ -21,6 +22,13 @@ public class Stack<Item> implements Iterable<Item>
 		return list.removeFirst();
 	}
 	
+	public Item peek()
+	{
+		if(!isEmpty())
+			return list.getFirst().item;
+		return null;
+	}
+	
 	public Iterator<Item> iterator()
 	{
 		return new LinkedListIterator<Item>(list);
@@ -40,5 +48,7 @@ public class Stack<Item> implements Iterable<Item>
 		}
 		
 		StdOut.println("("+s.size()+" left on stack)");
+		if(!s.isEmpty())
+			StdOut.println("peeking top item: "+s.peek());
 	}
 }
