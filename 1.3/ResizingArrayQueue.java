@@ -63,7 +63,7 @@ public class ResizingArrayQueue<Item> implements Iterable<Item>
 	
 	private class ArrayQueueIterator implements Iterator<Item>
 	{
-		private int position=leftIndex-1;
+		private int position=leftIndex;
 		
 		public boolean hasNext(){return position<rightIndex;}
 		
@@ -71,8 +71,9 @@ public class ResizingArrayQueue<Item> implements Iterable<Item>
 		{
 			if(!hasNext())
 				throw new NoSuchElementException();
+			Item item=queue[position];
 			position++;
-			return queue[position];
+			return item;
 		}
 		
 		public void remove()
@@ -95,5 +96,7 @@ public class ResizingArrayQueue<Item> implements Iterable<Item>
 		}
 		
 		StdOut.println("("+s.size()+" left in queue)");
+		for(String st:s)
+			StdOut.print(st+" ");
 	}
 }
