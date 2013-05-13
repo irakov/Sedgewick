@@ -18,7 +18,7 @@ public class InfixToPostfix
 					String p=operators.peek();
 					if(p.equals("("));
 					else
-						if(p.equals("+")||p.equals("-"))
+						if(p.equals("+")||p.equals("-")||p.equals("*")||p.equals("/"))
 							StdOut.print(operators.pop()+" ");
 				}
 				operators.push(s);
@@ -30,7 +30,7 @@ public class InfixToPostfix
 					String p=operators.peek();
 					if(p.equals("("));
 					else
-						if(p.equals("+")||p.equals("-"))
+						if(p.equals("+")||p.equals("-")||p.equals("*")||p.equals("/"))
 							StdOut.print(operators.pop()+" ");
 				}
 				operators.push(s);
