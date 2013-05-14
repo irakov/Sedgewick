@@ -2,6 +2,7 @@
 //with 1.3.19
 //with 1.3.20
 //with 1.3.21
+//with 1.3.24
 
 import java.util.Iterator;
 
@@ -104,6 +105,27 @@ public class LinkedList<Item> implements Iterable<Item>
 		return false;
 	}
 	
+	public void removeAfter(Item item)
+	{
+		if(first==null||last==null)
+			return;
+		Node currentNode=first;
+		while(currentNode!=null)
+		{
+			if(currentNode.item==item)
+			{
+				if(currentNode!=last)
+				{
+					if(currentNode.next==last)
+						last=currentNode;
+					currentNode.next=currentNode.next.next;
+				}
+				return;
+			}
+			currentNode=currentNode.next;
+		}
+	}
+	
 	public Node getFirst()
 	{
 		return first;
@@ -159,7 +181,8 @@ public class LinkedList<Item> implements Iterable<Item>
 		StdOut.println("popped last "+list.removeLast());
 		StdOut.println("popped last "+list.removeLast());
 		StdOut.println("popped first "+list.removeFirst());
-		StdOut.println("popped third "+list.delete(2));
+		StdOut.println("popped after 8 ");
+		list.removeAfter(8);
 		StdOut.println("popped first "+list.delete(0));
 		StdOut.println("popped last "+list.delete(1));
 		StdOut.println("list size "+list.size());
