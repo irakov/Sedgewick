@@ -8,7 +8,7 @@
 
 import java.util.Iterator;
 
-public class LinkedList<Item> implements Iterable<Item>
+public class LinkedList<Item extends Comparable<Item>> implements Iterable<Item>
 {
 	private Node first;
 	private Node last;
@@ -191,6 +191,21 @@ public class LinkedList<Item> implements Iterable<Item>
 		}
 	}
 	
+	public Item max()
+	{
+		if(first==null||last==null)
+			return null;
+		Node currentNode=first;
+		Item maxItem=first.item;
+		while(currentNode!=null)
+		{
+			if(currentNode.item.compareTo(maxItem)>0)
+				maxItem=currentNode.item;
+			currentNode=currentNode.next;
+		}
+		return maxItem;
+	}
+	
 	public Node getFirst()
 	{
 		return first;
@@ -246,6 +261,7 @@ public class LinkedList<Item> implements Iterable<Item>
 		StdOut.println("list size "+list.size());
 		StdOut.println("finding 9 "+list.find(9));
 		StdOut.println("finding 2 "+list.find(2));
+		StdOut.println("max item is "+list.max());
 		for(Integer i:list)
 		{
 			StdOut.println("item "+i);

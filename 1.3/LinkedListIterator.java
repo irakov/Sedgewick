@@ -1,7 +1,7 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class LinkedListIterator<Item> implements Iterator<Item>
+public class LinkedListIterator<Item extends Comparable<Item>> implements Iterator<Item>
 {
 	private LinkedList<Item>.Node currentNode;
 	
