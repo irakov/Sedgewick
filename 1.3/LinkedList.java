@@ -5,6 +5,8 @@
 //with 1.3.24
 //with 1.3.25
 //with 1.3.26
+//with 1.3.27
+//with 1.3.30
 
 import java.util.Iterator;
 
@@ -206,6 +208,21 @@ public class LinkedList<Item extends Comparable<Item>> implements Iterable<Item>
 		return maxItem;
 	}
 	
+	public LinkedList<Item> reverse()
+	{
+		if(first==null||last==null)
+			return null;
+		LinkedList<Item> list=new LinkedList<Item>();
+		Node currentNode=first;
+		while(currentNode!=null)
+		{
+			list.insertFirst(currentNode.item);
+			currentNode=currentNode.next;
+		}
+		
+		return list;
+	}
+	
 	public Node getFirst()
 	{
 		return first;
@@ -263,6 +280,12 @@ public class LinkedList<Item extends Comparable<Item>> implements Iterable<Item>
 		StdOut.println("finding 2 "+list.find(2));
 		StdOut.println("max item is "+list.max());
 		for(Integer i:list)
+		{
+			StdOut.println("item "+i);
+		}
+		StdOut.println("reverse!");
+		LinkedList<Integer> reverse=list.reverse();
+		for(Integer i:reverse)
 		{
 			StdOut.println("item "+i);
 		}
