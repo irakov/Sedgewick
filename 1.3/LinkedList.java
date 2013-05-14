@@ -1,6 +1,7 @@
 //page 142
 //with 1.3.19
 //with 1.3.20
+//with 1.3.21
 
 import java.util.Iterator;
 
@@ -89,6 +90,20 @@ public class LinkedList<Item> implements Iterable<Item>
 		return result;
 	}
 	
+	public boolean find(Item item)
+	{
+		if(first==null||last==null)
+			return false;
+		Node currentNode=first;
+		while(currentNode!=null)
+		{
+			if(currentNode.item==item)
+				return true;
+			currentNode=currentNode.next;
+		}
+		return false;
+	}
+	
 	public Node getFirst()
 	{
 		return first;
@@ -135,6 +150,8 @@ public class LinkedList<Item> implements Iterable<Item>
 		list.insertFirst(9);
 		list.insertFirst(10);
 		StdOut.println("list size "+list.size());
+		StdOut.println("finding 9 "+list.find(9));
+		StdOut.println("finding 2 "+list.find(2));
 		for(Integer i:list)
 		{
 			StdOut.println("item "+i);
