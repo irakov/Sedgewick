@@ -4,6 +4,7 @@
 //with 1.3.21
 //with 1.3.24
 //with 1.3.25
+//with 1.3.26
 
 import java.util.Iterator;
 
@@ -72,7 +73,7 @@ public class LinkedList<Item> implements Iterable<Item>
 		return result;
 	}
 	
-	public Item delete(int k)
+	public Item remove(int k)
 	{
 		if(first==null || last==null)
 			return null;
@@ -158,6 +159,38 @@ public class LinkedList<Item> implements Iterable<Item>
 		}
 	}
 	
+	public void removeAll(Item item)
+	{
+		if(first==null||last==null)
+			return;
+		Node currentNode=first;
+		Node previousNode=null;
+		while(currentNode!=null)
+		{
+			if(currentNode.item==item)
+			{
+				if(currentNode==first)
+				{
+					first=currentNode.next;
+					size--;
+					continue;
+				}
+				if(currentNode==last)
+				{
+					previousNode.next=null;
+					last=previousNode;
+					size--;
+					continue;
+				}
+				previousNode.next=currentNode.next;
+				size--;
+			}
+			else
+				previousNode=currentNode;
+			currentNode=currentNode.next;
+		}
+	}
+	
 	public Node getFirst()
 	{
 		return first;
@@ -182,6 +215,7 @@ public class LinkedList<Item> implements Iterable<Item>
 	public static void main(String[] args)
 	{
 		LinkedList<Integer> list=new LinkedList<Integer>();
+		list.insertFirst(8);
 		list.insertFirst(1);
 		list.insertFirst(2);
 		list.insertFirst(3);
@@ -198,13 +232,17 @@ public class LinkedList<Item> implements Iterable<Item>
 		StdOut.println("list size "+list.size());
 		list.insertLast(4);
 		list.insertLast(5);
+		list.insertLast(8);
 		list.insertLast(6);
 		list.insertFirst(7);
 		list.insertFirst(8);
+		list.insertFirst(13);
+		list.insertFirst(14);
 		list.insertFirst(9);
 		list.insertAfter(6,11);
 		list.insertAfter(7,12);
 		list.insertFirst(10);
+		list.insertLast(8);
 		StdOut.println("list size "+list.size());
 		StdOut.println("finding 9 "+list.find(9));
 		StdOut.println("finding 2 "+list.find(2));
@@ -217,8 +255,14 @@ public class LinkedList<Item> implements Iterable<Item>
 		StdOut.println("popped first "+list.removeFirst());
 		StdOut.println("popped after 8 ");
 		list.removeAfter(8);
-		StdOut.println("popped first "+list.delete(0));
-		StdOut.println("popped last "+list.delete(1));
+		StdOut.println("popped first "+list.remove(0));
+		StdOut.println("popped 2nd "+list.remove(1));
+		StdOut.println("list size "+list.size());
+		for(Integer i:list)
+		{
+			StdOut.println("item "+i);
+		}
+		list.removeAll(8);
 		StdOut.println("list size "+list.size());
 		for(Integer i:list)
 		{
