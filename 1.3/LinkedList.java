@@ -3,6 +3,7 @@
 //with 1.3.20
 //with 1.3.21
 //with 1.3.24
+//with 1.3.25
 
 import java.util.Iterator;
 
@@ -88,6 +89,7 @@ public class LinkedList<Item> implements Iterable<Item>
 			currentNode=currentNode.next;
 		Item result=currentNode.next.item;
 		currentNode.next=currentNode.next.next;
+		size--;
 		return result;
 	}
 	
@@ -119,7 +121,37 @@ public class LinkedList<Item> implements Iterable<Item>
 					if(currentNode.next==last)
 						last=currentNode;
 					currentNode.next=currentNode.next.next;
+					size--;
 				}
+				return;
+			}
+			currentNode=currentNode.next;
+		}
+	}
+	
+	public void insertAfter(Item afterItem,Item item)
+	{
+		if(first==null||last==null)
+			return;
+		Node currentNode=first;
+		while(currentNode!=null)
+		{
+			if(currentNode.item==afterItem)
+			{
+				Node newNode=new Node();
+				newNode.item=item;
+				if(currentNode==last)
+				{
+					currentNode.next=newNode;
+					last=newNode;
+				}
+				else
+				{
+					Node afterNode=currentNode.next;
+					currentNode.next=newNode;
+					newNode.next=afterNode;
+				}
+				size++;
 				return;
 			}
 			currentNode=currentNode.next;
@@ -170,6 +202,8 @@ public class LinkedList<Item> implements Iterable<Item>
 		list.insertFirst(7);
 		list.insertFirst(8);
 		list.insertFirst(9);
+		list.insertAfter(6,11);
+		list.insertAfter(7,12);
 		list.insertFirst(10);
 		StdOut.println("list size "+list.size());
 		StdOut.println("finding 9 "+list.find(9));
