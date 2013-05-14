@@ -1,4 +1,5 @@
 //page 142
+//with 1.3.19
 
 import java.util.Iterator;
 
@@ -47,6 +48,26 @@ public class LinkedList<Item> implements Iterable<Item>
 		size++;
 	}
 	
+	public Item removeLast()
+	{
+		if(last==null)
+			return null;
+		Item result=last.item;
+		if(first==last)
+			first=last=null;
+		else
+		{
+			Node currentNode=first;
+			while(currentNode.next!=last)
+				currentNode=currentNode.next;
+			currentNode.next=null;
+			last=currentNode;
+		}
+		size--;
+		
+		return result;
+	}
+	
 	public Node getFirst()
 	{
 		return first;
@@ -72,40 +93,35 @@ public class LinkedList<Item> implements Iterable<Item>
 	{
 		LinkedList<Integer> list=new LinkedList<Integer>();
 		list.insertFirst(1);
-		StdOut.println("list size "+list.size());
 		list.insertFirst(2);
-		StdOut.println("list size "+list.size());
 		list.insertFirst(3);
+		StdOut.println("list size "+list.size());
 		for(Integer i:list)
 		{
 			StdOut.println("item "+i);
 		}
+		StdOut.println("popped first "+list.removeFirst());
 		StdOut.println("list size "+list.size());
-		StdOut.println("popped "+list.removeFirst());
+		StdOut.println("popped first "+list.removeFirst());
 		StdOut.println("list size "+list.size());
-		StdOut.println("popped "+list.removeFirst());
-		StdOut.println("list size "+list.size());
-		StdOut.println("popped "+list.removeFirst());
+		StdOut.println("popped first "+list.removeFirst());
 		StdOut.println("list size "+list.size());
 		list.insertLast(4);
-		StdOut.println("list size "+list.size());
 		list.insertLast(5);
-		StdOut.println("list size "+list.size());
 		list.insertLast(6);
-		StdOut.println("list size "+list.size());
 		list.insertFirst(7);
+		StdOut.println("list size "+list.size());
 		for(Integer i:list)
 		{
 			StdOut.println("item "+i);
 		}
+		StdOut.println("popped last "+list.removeLast());
+		StdOut.println("popped last "+list.removeLast());
+		StdOut.println("popped first "+list.removeFirst());
 		StdOut.println("list size "+list.size());
-		StdOut.println("popped "+list.removeFirst());
-		StdOut.println("list size "+list.size());
-		StdOut.println("popped "+list.removeFirst());
-		StdOut.println("list size "+list.size());
-		StdOut.println("popped "+list.removeFirst());
-		StdOut.println("list size "+list.size());
-		StdOut.println("popped "+list.removeFirst());
-		StdOut.println("list size "+list.size());
+		for(Integer i:list)
+		{
+			StdOut.println("item "+i);
+		}
 	}
 }
