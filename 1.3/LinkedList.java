@@ -29,12 +29,12 @@ public class LinkedList<Item extends Comparable<Item>> implements Iterable<Item>
 	
 	public Item removeFirst()
 	{
-		Item item=null;
-		if(first!=null)
-		{
-			item=first.item;
-			first=first.next;
-		}
+		if(first==null)
+			return null;
+	
+		Item item=first.item;
+		first=first.next;
+		
 		if(first==null)
 			last=null;
 		
@@ -174,14 +174,12 @@ public class LinkedList<Item extends Comparable<Item>> implements Iterable<Item>
 				if(currentNode==first)
 				{
 					first=currentNode.next;
-					size--;
 					continue;
 				}
 				if(currentNode==last)
 				{
 					previousNode.next=null;
 					last=previousNode;
-					size--;
 					continue;
 				}
 				previousNode.next=currentNode.next;
