@@ -59,11 +59,12 @@ public class DoubleLinkedList<Item extends Comparable<Item>> implements Iterable
 			return null;
 			
 		Item item=last.item;
-		last.previous.next=null;
 		last=last.previous;
 		
 		if(last==null)
 			first=null;
+		else
+			last.next=null;
 		
 		size--;
 		
