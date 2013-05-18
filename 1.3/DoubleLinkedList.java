@@ -85,10 +85,9 @@ public class DoubleLinkedList<Item extends Comparable<Item>> implements Iterable
 				DoubleLinkedNode beforeNode=currentNode.previous;
 				newNode.previous=beforeNode;
 				if(beforeNode!=null)
-				{
 					beforeNode.next=newNode;
+				else
 					first=newNode;
-				}
 				newNode.next=currentNode;
 				currentNode.previous=newNode;
 				size++;
