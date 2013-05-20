@@ -8,11 +8,8 @@ public class CircularLinkedListIterator<Item extends Comparable<Item>> implement
 
 	public CircularLinkedListIterator(CircularLinkedList<Item> list)
 	{
-		lastNode=list.getFirst();
-		if(lastNode!=null)
-			currentNode=lastNode.next;
-		else
-			currentNode=null;
+		lastNode=list.getLast();
+		currentNode=list.getFirst();
 	}
 
 	public boolean hasNext()
