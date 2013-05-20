@@ -14,7 +14,7 @@ public class CircularLinkedListIterator<Item extends Comparable<Item>> implement
 
 	public boolean hasNext()
 	{
-		return currentNode!=null||currentNode!=lastNode;
+		return currentNode!=null&&currentNode!=lastNode;
 	}
 	
 	public Item next()
