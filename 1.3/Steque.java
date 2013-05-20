@@ -2,7 +2,7 @@
 //1.3.32
 import java.util.Iterator;
 
-public class Steque<Item extends Comparable<Item>> 
+public class Steque<Item extends Comparable<Item>> implements Iterable<Item>
 {
 	private LinkedList<Item> list=new LinkedList<Item>();
 	
@@ -46,5 +46,8 @@ public class Steque<Item extends Comparable<Item>>
 		}
 		
 		StdOut.println("("+s.size()+" left on steque)");
+		
+		for(String st:s)
+			StdOut.print(st+" ");
 	}
 }
