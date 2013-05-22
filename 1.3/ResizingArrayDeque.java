@@ -5,10 +5,12 @@ import java.util.NoSuchElementException;
 public class ResizingArrayDeque<Item> implements Iterable<Item>
 {
 	private Item[] deque=(Item[])new Object[2];
-	public int leftPosition=0,rightPosition=1,leftStart=0,rightStart=1;
+	private int leftPosition=0,rightPosition=1,leftStart=0,rightStart=1;
 	
 	private void rebase(int newSize)
 	{
+		if(newSize<2)
+			return;
 		Item[] newDeque=(Item[])new Object[newSize];
 		int newLeftStart=newSize/2-1;
 		int newRightStart=newSize/2;
@@ -30,6 +32,7 @@ public class ResizingArrayDeque<Item> implements Iterable<Item>
 				newDeque[k]=deque[i];
 				k++;
 			}
+			else break;
 		}
 		
 		deque=newDeque;
@@ -42,6 +45,8 @@ public class ResizingArrayDeque<Item> implements Iterable<Item>
 	public boolean isEmpty(){return leftPosition==leftStart&&rightPosition==rightStart;}
 	
 	public int size(){return leftStart-leftPosition+rightPosition-rightStart;}
+	
+	public int length(){return deque.length;}
 	
 	public void pushLeft(Item item)
 	{
@@ -71,7 +76,7 @@ public class ResizingArrayDeque<Item> implements Iterable<Item>
 		leftPosition++;
 		Item item=deque[leftPosition];
 		deque[leftPosition]=null;
-		if(size()>=2&&rightPosition-leftPosition<=deque.length/4)
+		if(rightPosition-leftPosition<=deque.length/4)
 			rebase(size()/2);
 		return item;
 	}
@@ -88,7 +93,7 @@ public class ResizingArrayDeque<Item> implements Iterable<Item>
 		rightPosition--;
 		Item item=deque[rightPosition];
 		deque[rightPosition]=null;
-		if(size()>=2&&rightPosition-leftPosition<=deque.length/4)
+		if(rightPosition-leftPosition<=deque.length/4)
 			rebase(size()/2);
 		return item;
 	}
@@ -136,7 +141,6 @@ public class ResizingArrayDeque<Item> implements Iterable<Item>
 		}
 		
 		StdOut.println("("+deque.size()+" items left in deque)");
-		StdOut.println(deque.leftPosition+" "+deque.leftStart+" "+deque.rightStart+" "+deque.rightPosition);
 		for(String s:deque)
 			StdOut.print(s+" ");
 	}
