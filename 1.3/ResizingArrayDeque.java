@@ -46,8 +46,6 @@ public class ResizingArrayDeque<Item> implements Iterable<Item>
 	
 	public int size(){return leftStart-leftPosition+rightPosition-rightStart;}
 	
-	public int length(){return deque.length;}
-	
 	public void pushLeft(Item item)
 	{
 		deque[leftPosition]=item;
