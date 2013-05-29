@@ -4,7 +4,7 @@
 
 import java.util.Iterator;
 
-public class Stack<Item> implements Iterable<Item>
+public class Stack<Item extends Comparable<Item>> implements Iterable<Item>
 {
 	private LinkedList<Item> list=new LinkedList<Item>();
 	
