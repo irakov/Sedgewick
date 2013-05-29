@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 
 public class RingBuffer<Item> implements Iterable<Item>
 {
-	public int maxSize,size,first,last;
+	private int maxSize,size,first,last;
 	private Item[] buffer;
 	
 	public RingBuffer(int maxSize)
@@ -91,7 +91,6 @@ public class RingBuffer<Item> implements Iterable<Item>
 				ring.enqueue(item);
 			else if(!ring.isEmpty())
 				StdOut.print(ring.dequeue()+" ");
-			StdOut.println(ring.size+" "+ring.first+" "+ring.last);
 		}
 		
 		for(String st:ring)
