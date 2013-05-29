@@ -14,23 +14,13 @@ public class FourSum
 		Arrays.sort(a);//n*log n
 		Map<Integer, Set<TwoSumMembers>> twoSums=computeTwoElementSum(a); //n^2 log n
 		Set<Integer> sums=twoSums.keySet();
-		for(Integer sum:sums)
+		for(Integer sum:sums)	//the more sums, the less elements for each: sums*size=n
 		{
-			StdOut.println(sum);
-			Set<TwoSumMembers> otherMembers=twoSums.get(-sum);
-			if(otherMembers!=null)
-			{
-				result+=twoSums.get(sum).size()*otherMembers.size();
-				Set<TwoSumMembers> thisMembers=twoSums.get(sum);
-				for(TwoSumMembers member:thisMembers)
-				{
-					StdOut.println("this "+member.firstElementIndex+" "+member.secondElementIndex);
-				}
-				for(TwoSumMembers member:otherMembers)
-				{
-					StdOut.println("other "+member.firstElementIndex+" "+member.secondElementIndex);
-				}
-			}
+			Set<TwoSumMembers> thisMembers=twoSums.get(sum);
+			Set<TwoSumMembers> otherMembers=twoSums.get(-sum); //log n
+			if(sum==0)
+				thisMembers.removeAll(otherMembers);
+			result+=thisMembers.size()*otherMembers.size();
 		}
 		return result;
 	}
@@ -39,17 +29,13 @@ public class FourSum
 	{
 		Map<Integer, Set<TwoSumMembers>> result=new TreeMap<Integer,Set<TwoSumMembers>>();
 		for(int i=0;i<a.length;i++)				//n
-			for(int j=0;j<a.length;j++)				//n
+			for(int j=i+1;j<a.length;j++)				//n
 			{
-				if(i!=j)	
-				{
-					Set<TwoSumMembers> set=result.get(a[i]+a[j]);//log n
-					if(set==null)
-						set=new TreeSet<TwoSumMembers>();
-				
-					set.add(new TwoSumMembers(i,j));
-					result.put(a[i]+a[j],set);	//log n
-				}
+				Set<TwoSumMembers> set=result.get(a[i]+a[j]);//log n
+				if(set==null)
+					set=new TreeSet<TwoSumMembers>();
+				set.add(new TwoSumMembers(i,j));
+				result.put(a[i]+a[j],set);	//log n
 			}
 			
 		return result;
