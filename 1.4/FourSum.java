@@ -18,9 +18,12 @@ public class FourSum
 		{
 			Set<TwoSumMembers> thisMembers=twoSums.get(sum);
 			Set<TwoSumMembers> otherMembers=twoSums.get(-sum); //log n
-			if(sum==0)
-				thisMembers.removeAll(otherMembers);
-			result+=thisMembers.size()*otherMembers.size();
+			if(otherMembers!=null)
+			{
+				if(sum==0)
+					thisMembers.removeAll(otherMembers);
+				result+=thisMembers.size()*otherMembers.size();
+			}
 		}
 		return result;
 	}
