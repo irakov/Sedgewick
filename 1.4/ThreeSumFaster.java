@@ -13,11 +13,10 @@ public class ThreeSumFaster
 		for(int left=0;left<a.length-2;left++)	//n
 		{
 			int right=a.length-1;
-			int sum=a[left]+a[right];
 			int i=left+1;
 			while(i<right)
 			{
-				StdOut.println(a[left]+" "+a[i]+" "+a[right]+" "+sum);
+				int sum=a[left]+a[right];
 				if(sum+a[i]==0)
 				{
 					result++;
