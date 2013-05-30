@@ -7,30 +7,27 @@ public class ThreeSumFaster
 	public int count(int[] a)
 	{
 		int result=0;
-		int left=0;
-		int right=a.length-1;
 		
 		Arrays.sort(a); //n*log n
 		
-		while(left<right-1)	//n
+		for(int left=0;left<a.length-2;left++)	//n
 		{
+			int right=a.length-1;
 			int sum=a[left]+a[right];
-			for(int i=left+1;i<right;i++)	//n
+			int i=left+1;
+			while(i<right)
 			{
+				StdOut.println(a[left]+" "+a[i]+" "+a[right]+" "+sum);
 				if(sum+a[i]==0)
+				{
 					result++;
-				if(i==right-1)
-					if(sum+a[i]<=0)
-					{
-						left++;
-						right=a.length-1;
-						break;
-					}
+					i++;
+				}
+				else
+					if(sum+a[i]<0)
+						i++;
 					else
-					{
 						right--;
-						break;
-					}
 			}
 		}
 		
