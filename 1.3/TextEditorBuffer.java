@@ -20,8 +20,10 @@ public class TextEditorBuffer
 	
 	public String delete()
 	{
-		size--;
-		return right.pop();
+		String item=right.pop();
+		if(item!=null)
+			size--;
+		return item;
 	}
 	
 	public void left(int k)
