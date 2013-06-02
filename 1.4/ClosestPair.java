@@ -7,6 +7,7 @@ public class ClosestPair
 {
 	public PairResult find(int[] a)
 	{
+		Arrays.sort(a);
 		return divide(a, 0, a.length-1);
 	}
 	
@@ -61,5 +62,9 @@ public class ClosestPair
 	
 	public static void main(String[] args)
 	{
+		ClosestPair cp=new ClosestPair();
+		int[] a={-11,12,113,0,29,7,2,22};
+		PairResult result=cp.find(a);
+		StdOut.println(result.value1+" "+result.value2+" "+result.difference);
 	}
 }
