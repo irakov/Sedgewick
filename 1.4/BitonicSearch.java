@@ -60,8 +60,9 @@ public class BitonicSearch
 			int middle=(left+right)/2;
 			if(a[middle]==term)
 				return middle;
-			if(binarySearch(a,left,middle,term)==-1)
-				return binarySearch(a,middle+1,right,term);
+			if(term<a[middle])
+				return binarySearch(a,left,middle,term);
+			return binarySearch(a,middle+1,right,term);
 		}
 		return -1;
 	}
