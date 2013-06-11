@@ -16,7 +16,7 @@ public class BitonicSearch
 			return binarySearch(a,maxPosition+1,a.length-1,term)!=-1;
 		if(binarySearch(a,0,maxPosition,term)==-1)
 			return binarySearch(a,maxPosition+1,a.length-1,term)!=-1;
-		return false;
+		return true;
 	}
 	
 	private int findMax(int[] a)
