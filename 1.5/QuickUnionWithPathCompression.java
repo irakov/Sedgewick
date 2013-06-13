@@ -26,12 +26,16 @@ public class QuickUnionWithPathCompression
 	
 	public int find(int p)
 	{
-		while(p!=id[p])
+		int root=p;
+		while(root!=id[root])
+			root=id[root];
+		while(p!=root)
 		{
-			id[p]=id[id[p]];
-			p=id[p];
+			int temp=id[p];
+			id[p]=root;
+			p=temp;
 		}
-		return p;
+		return root;
 	}
 	
 	public void union(int p, int q)
