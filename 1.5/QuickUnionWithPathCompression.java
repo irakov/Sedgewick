@@ -1,5 +1,5 @@
-//algorithm 1.5
-//page 224
+//1.5.12
+//page 237
 
 public class QuickUnionWithPathCompression
 {

@@ -1,5 +1,5 @@
-//algorithm 1.5
-//page 228
+//1.5.13
+//page 237
 
 public class WeightedQuickUnionWithPathCompression
 {
