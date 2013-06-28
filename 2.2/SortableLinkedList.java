@@ -136,112 +136,84 @@ public class SortableLinkedList<Item extends Comparable<Item>> implements Iterab
 	
 	public void sort()
 	{
-		//de adaugat si previous
 		boolean isSorted=false;
-		Node left=first;
+		Node preLeftStart=null;
+		Node leftStart=first;
 		Node right=last;
-		Node leftPos=first;
-		Node rightPos=leftPos.next;
+		Node leftEnd=first;
+		Node rightEnd=leftEnd.next;
 		
 		while(!isSorted)
 		{
 			isSorted=true;
-			left=first;
+			preLeftStart=null;
+			leftStart=first;
 			
-			while(left!=right&&left!=null)
+			while(leftStart!=right&&leftStart!=null)
 			{
-				leftPos=left;
-				while(leftPos!=null&&leftPos!=right&&leftPos.item.compareTo(leftPos.next.item)<0)
-					leftPos=leftPos.next;
-				rightPos=leftPos.next;
-				while(rightPos!=null&&rightPos!=right&&rightPos.item.compareTo(rightPos.next.item)<0)
-					rightPos=rightPos.next;
-				if(rightPos!=null)
+				leftEnd=leftStart;
+				//ceva legat de right?!
+				while(leftEnd!=null&&leftEnd.next!=null&&leftEnd.item.compareTo(leftEnd.next.item)<=0)
+					leftEnd=leftEnd.next;
+				StdOut.println("leftEnd "+leftEnd.item);
+				rightEnd=leftEnd.next;
+				while(rightEnd!=null&&rightEnd.next!=null&&rightEnd.item.compareTo(rightEnd.next.item)<=0)
+					rightEnd=rightEnd.next;
+				if(rightEnd!=null)
+					StdOut.println("rightEnd "+rightEnd.item);
+				if(rightEnd!=null)
 				{
-					//merge(left,leftPos,rightPos);
+					StdOut.println("merge "+rightEnd.item);
+					merge(preLeftStart,leftStart,leftEnd,rightEnd);
 					isSorted=false;
-					left=rightPos.next;
+					preLeftStart=rightEnd;
+					leftStart=rightEnd.next;
+					if(leftStart==null)
+						StdOut.println("isnull");
+					else
+						StdOut.println("leftStart "+leftStart.item);
 				}
 				else
-					left=null;
+				{
+					leftStart=null;
+					preLeftStart=last;
+				}
 			}
 		}
 	}
 	
-	// public void sort()
-	// {
-		// boolean isSorted=false;
-		// Node preLeftStart=null;
-		// Node leftStart=first;
-		// Node leftEnd=first;
-		// Node rightStart=null;
-		// Node rightEnd=null;
-		
-		// while(!isSorted)
-		// {
-			// isSorted=true;
-			// while(leftStart!=null)
-			// {
-				// leftEnd=leftStart;
-				// while(leftEnd!=null&&leftEnd.next!=null&&leftEnd.item.compareTo(leftEnd.next.item)<0)
-					// leftEnd=leftEnd.next;
-				// rightStart=leftEnd.next;
-				// rightEnd=rightStart;
-				// while(rightEnd!=null&&rightEnd.next!=null&&rightEnd.item.compareTo(rightEnd.next.item)<0)
-					// rightEnd=rightEnd.next;
-				// if(rightEnd!=null)
-				// {
-					// isSorted=false;
-					// merge(preLeftStart,leftStart,leftEnd,rightStart,rightEnd);
-					// preLeftStart=rightEnd;
-					// leftStart=rightEnd.next;
-				// }
-				// else
-					// {
-						// preLeftStart=leftStart;
-						// leftStart=null;
-					// }
-			// }
-		// }
-	// }
-		
-	// private void merge(Node preLeftStart,Node leftStart,Node leftEnd,Node rightStart,Node rightEnd)
-	// {
-		// Node preLeftTemp=preLeftStart;
-		// Node leftTemp=leftStart;
-		// Node preRightTemp=leftEnd;
-		// Node rightTemp=rightStart;
-		
-		// StdOut.println("merge: "+leftStart.item+" "+leftEnd.item+" "+rightStart.item+" "+rightEnd.item);
-		// while(leftTemp!=rightTemp&&rightTemp!=rightEnd.next&&rightTemp!=null)
-		// {
-			
-			// for(Item str:this)
-				// StdOut.print(str);
-			// StdOut.println("");
-			// if(leftTemp.item.compareTo(rightTemp.item)<=0)
-			// {
-				// preLeftTemp=leftTemp;
-				// leftTemp=leftTemp.next;
-			// }
-			// else
-			// {
-				// if(preLeftTemp!=null)
-					// preLeftTemp.next=rightTemp;
-				// else
-				// {
-					// first=rightTemp;
-					// preLeftStart=rightTemp;
-					// preLeftTemp=rightTemp;
-					// leftStart=rightTemp;
-				// }
-				// Node temp=rightTemp.next;
-				// rightTemp.next=leftTemp;
-				// preRightTemp.next=temp;
-				// rightTemp=temp;
-			// }
-		// }
-	// }
+	private void merge(Node preLeftStart,Node leftStart,Node leftEnd,Node rightEnd)
+	{
+		Node rightStart=leftEnd.next;
+		while(leftStart!=null&&rightStart!=null&&rightStart.next!=leftStart)
+		{
+			StdOut.println("merge");
+			for(Item str:this)
+				StdOut.print(str);
+			StdOut.println("");
+			StdOut.println(leftStart.item+" "+rightStart.item);
+			StdIn.readString();
+			if(leftStart.item.compareTo(rightStart.item)<=0)
+			{
+				preLeftStart=leftStart;
+				leftStart=leftStart.next;
+			}
+			else
+			{
+				Node nextRightStart=rightStart.next;
+				if(preLeftStart==null)
+				{
+					first=rightStart;
+					preLeftStart=first;
+				}
+				else
+					preLeftStart.next=rightStart;
+				rightStart.next=leftStart;
+				leftEnd.next=nextRightStart;
+				rightStart=nextRightStart;
+			}
+		}
+	}
 	
 	public class Node
 	{
