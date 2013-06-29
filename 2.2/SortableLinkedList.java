@@ -137,6 +137,33 @@ public class SortableLinkedList<Item extends Comparable<Item>> implements Iterab
 	public void sort()
 	{
 		boolean isSorted=false;
+		Node left=first;
+		Node right=last;
+		Node leftPos=first;
+		Node preLeftPos=null;
+		Node rightPos=leftPos.next;
+		
+		while(!isSorted)
+		{
+			isSorted=true;
+			left=first;
+			
+			while(left!=right)
+			{
+				leftPos=left;
+				while(leftPos!=right&&leftPos.value.compareTo(leftPos.next.value)<=0)
+				{
+					preLeftPos=leftPos;
+					leftPos=leftPos.next;
+				}
+				rightPos=leftPos.next;
+			}
+		}
+	}
+	
+	public void sort()
+	{
+		boolean isSorted=false;
 		Node preLeftStart=null;
 		Node leftStart=first;
 		Node right=last;
