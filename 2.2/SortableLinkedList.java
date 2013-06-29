@@ -140,7 +140,7 @@ public class SortableLinkedList<Item extends Comparable<Item>> implements Iterab
 		Node left=first;
 		Node right=last;
 		Node leftPos=first;
-		Node preLeftPos=null;
+		Node preLeft=null;
 		Node rightPos=leftPos.next;
 		
 		while(!isSorted)
@@ -148,62 +148,25 @@ public class SortableLinkedList<Item extends Comparable<Item>> implements Iterab
 			isSorted=true;
 			left=first;
 			
-			while(left!=right)
+			while(left!=null&&left.next!=null)
 			{
 				leftPos=left;
-				while(leftPos!=right&&leftPos.value.compareTo(leftPos.next.value)<=0)
-				{
-					preLeftPos=leftPos;
+				while(leftPos.next!=null&&leftPos.item.compareTo(leftPos.next.item)<=0)
 					leftPos=leftPos.next;
-				}
 				rightPos=leftPos.next;
-			}
-		}
-	}
-	
-	public void sort()
-	{
-		boolean isSorted=false;
-		Node preLeftStart=null;
-		Node leftStart=first;
-		Node right=last;
-		Node leftEnd=first;
-		Node rightEnd=leftEnd.next;
-		
-		while(!isSorted)
-		{
-			isSorted=true;
-			preLeftStart=null;
-			leftStart=first;
-			
-			while(leftStart!=right&&leftStart!=null)
-			{
-				leftEnd=leftStart;
-				//ceva legat de right?!
-				while(leftEnd!=null&&leftEnd.next!=null&&leftEnd.item.compareTo(leftEnd.next.item)<=0)
-					leftEnd=leftEnd.next;
-				StdOut.println("leftEnd "+leftEnd.item);
-				rightEnd=leftEnd.next;
-				while(rightEnd!=null&&rightEnd.next!=null&&rightEnd.item.compareTo(rightEnd.next.item)<=0)
-					rightEnd=rightEnd.next;
-				if(rightEnd!=null)
-					StdOut.println("rightEnd "+rightEnd.item);
-				if(rightEnd!=null)
+				while(rightPos!=null&&rightPos.next!=null&&rightPos.item.compareTo(rightPos.next.item)<=0)
+					rightPos=rightPos.next;
+				if(rightPos!=null)
 				{
-					StdOut.println("merge "+rightEnd.item);
-					merge(preLeftStart,leftStart,leftEnd,rightEnd);
+					merge(preLeft,left,leftPos,rightPos);
 					isSorted=false;
-					preLeftStart=rightEnd;
-					leftStart=rightEnd.next;
-					if(leftStart==null)
-						StdOut.println("isnull");
-					else
-						StdOut.println("leftStart "+leftStart.item);
+					preLeft=rightPos;
+					left=rightPos.next;
 				}
 				else
 				{
-					leftStart=null;
-					preLeftStart=last;
+					preLeft=null;
+					left=null;
 				}
 			}
 		}
@@ -214,12 +177,6 @@ public class SortableLinkedList<Item extends Comparable<Item>> implements Iterab
 		Node rightStart=leftEnd.next;
 		while(leftStart!=null&&rightStart!=null&&rightStart.next!=leftStart)
 		{
-			StdOut.println("merge");
-			for(Item str:this)
-				StdOut.print(str);
-			StdOut.println("");
-			StdOut.println(leftStart.item+" "+rightStart.item);
-			StdIn.readString();
 			if(leftStart.item.compareTo(rightStart.item)<=0)
 			{
 				preLeftStart=leftStart;
@@ -237,6 +194,7 @@ public class SortableLinkedList<Item extends Comparable<Item>> implements Iterab
 					preLeftStart.next=rightStart;
 				rightStart.next=leftStart;
 				leftEnd.next=nextRightStart;
+				preLeftStart=rightStart;
 				rightStart=nextRightStart;
 			}
 		}
