@@ -1,9 +1,6 @@
 //2.1.24
 //page 267
 
-<<<<<<< HEAD
-public class InsertionSortWithSentinel
-=======
 public class InsertionSortWithSentinel
 {
 	public static void sort(Comparable[] a)
@@ -33,4 +30,3 @@ public class InsertionSortWithSentinel
 			StdOut.print(a[i]+" ");
 	}
 }
->>>>>>> insertion sort with sentinel
