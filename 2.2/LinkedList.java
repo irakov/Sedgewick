@@ -46,6 +46,30 @@ public class LinkedList<Item> implements Iterable<Item>
 		size++;
 	}
 	
+	public void insert(Item item, int k)
+	{
+		if(first==null || last==null)
+			return null;
+		if(k==0)
+			return insertFirst(item);
+		if(k==size)
+			return insertLast(item);
+		if(k>size)
+			return;
+		
+		Node currentNode=first;
+		for(int i=0;i<k;i++)
+			currentNode=currentNode.next;
+		
+		Node node=new Node();
+		node.item=item;
+		Node nextNode=currentNode.next;
+		
+		currentNode.next=node;
+		node.next=nextNode;
+		size++;
+	}
+	
 	public Item removeLast()
 	{
 		if(last==null)
