@@ -49,11 +49,17 @@ public class LinkedList<Item> implements Iterable<Item>
 	public void insert(Item item, int k)
 	{
 		if(first==null || last==null)
-			return null;
+			return;
 		if(k==0)
-			return insertFirst(item);
+		{
+			insertFirst(item);
+			return;
+		}
 		if(k==size)
-			return insertLast(item);
+		{
+			insertLast(item);
+			return;
+		}
 		if(k>size)
 			return;
 		
