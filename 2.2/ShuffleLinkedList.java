@@ -4,7 +4,7 @@
 
 public class ShuffleLinkedList<Item extends Comparable<Item>>
 {
-	public void shuffle(LinkedList<Item> list)
+	public void shuffle(LinkedList<Item> list,Item dummy)
 	{	
 		if(list.size()==1)
 			return;
@@ -19,19 +19,19 @@ public class ShuffleLinkedList<Item extends Comparable<Item>>
 				list2.insertLast(list.removeLast());
 		}
 		
-		shuffle(list1);
-		shuffle(list2);
+		shuffle(list1,dummy);
+		shuffle(list2,dummy);
 		
 		if(list2.size()<list1.size())
 		{
 			int i=StdRandom.uniform(list2.size());
-			list2.insert(Integer.MAX_VALUE,i);
+			list2.insert(dummy,i);
 		}
 		
-		merge(list,list1,list2);
+		merge(list,list1,list2,dummy);
 	}
 	
-	private void merge(LinkedList<Item> list,LinkedList<Item> list1,LinkedList<Item> list2)
+	private void merge(LinkedList<Item> list,LinkedList<Item> list1,LinkedList<Item> list2,Item dummy)
 	{
 		while(list1.size()!=0&&list2.size()!=0)
 		{
@@ -47,7 +47,7 @@ public class ShuffleLinkedList<Item extends Comparable<Item>>
 		while(list2.size()!=0)
 			list.insertLast(list2.removeLast());
 			
-		list.removeAll(Integer.MAX_VALUE);
+		list.removeAll(dummy);
 	}
 
 	public static void main(String[] args)
@@ -56,5 +56,9 @@ public class ShuffleLinkedList<Item extends Comparable<Item>>
 		String[] a=In.readStrings();
 		for(String s:a)
 			list.insertLast(s);
+		ShuffleLinkedList<String> shuffle=new ShuffleLinkedList<String>();
+		shuffle.shuffle(list,new String("TEST"));
+		while(list.size()!=0)
+			StdOut.println(list.removeLast());
 	}
 }
