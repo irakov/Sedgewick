@@ -15,7 +15,6 @@ public class BottomUpMergeSort
 	
 	private static void merge(Comparable[] a,int left,int middle,int right)
 	{
-		StdOut.println(left+" "+middle+" "+right);
 		for(int i=left;i<=right;i++)
 			aux[i]=a[i];
 		int i=left;
