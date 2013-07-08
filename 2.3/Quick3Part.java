@@ -59,13 +59,13 @@ public class Quick3Part
 	private static int medianOf3(Comparable[] items,int left,int middle,int right)
 	{
 		if(items[left].compareTo(items[middle])>0)
-			if(items[left].compareTo(items[right])>0)
-				return left;
+			if(items[middle].compareTo(items[right])>0)
+				return middle;
 			else
 				return right;
 		else
-			if(items[middle].compareTo(items[right])>0)
-				return middle;
+			if(items[left].compareTo(items[right])>0)
+				return left;
 		return right;
 	}
 	
