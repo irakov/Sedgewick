@@ -1,7 +1,7 @@
 //2.3.18
 //page 305
 
-public class Quick3Part
+public class QuickMedian3Part
 {
 	public static void sort(Comparable[] items)
 	{
