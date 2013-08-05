@@ -1,5 +1,4 @@
-//algorithm 2.6 (+2.4.22)
-//page 309+318
+//page 311
 import java.util.NoSuchElementException;
 
 public class MinPQ<Key extends Comparable<Key>>
