@@ -139,63 +139,11 @@ public class MaxPQWithLinks<Item extends Comparable<Item>>
 	{
 		while(node!=root&&node.getParent().getValue().compareTo(node.getValue())<0)
 		{
-			Node<Item> parentNode=node.getParent();
-			Node<Item> parentParent=parentNode.getParent();
-			
-			Node<Item> leftChild=null;
-			if(node.getLeftChild()!=null)
-				leftChild=node.removeLeftChild();
-				
-			Node<Item> rightChild=null;
-			if(node.getRightChild()!=null)
-				rightChild=node.removeRightChild();
-			
-			Node<Item> siblingNode=null;
-			boolean nodeIsLeft=false;
-			if(node==parentNode.getLeftChild())
-			{
-				node=parentNode.removeLeftChild();
-				nodeIsLeft=true;
-				if(parentNode.getRightChild()!=null)
-					siblingNode=parentNode.removeRightChild();
-			}
-			else
-			{
-				node=parentNode.removeRightChild();
-				siblingNode=parentNode.removeLeftChild();
-			}
-			
-			if(parentParent==null)
-				root=node;
-			else
-			{
-				if(parentParent.getLeftChild()==parentNode)
-					parentNode=parentParent.removeLeftChild();
-				else
-					parentNode=parentParent.removeRightChild();
-					
-				parentParent.addChild(node);
-			}
-			
-			if(nodeIsLeft)
-			{
-				node.addChild(parentNode);
-				if(siblingNode!=null)
-					node.addChild(siblingNode);
-			}
-			else
-			{
-				node.addChild(siblingNode);
-				node.addChild(parentNode);
-			}
-			
-			if(leftChild!=null)
-				parentNode.addChild(leftChild);
-			if(rightChild!=null)
-				parentNode.addChild(rightChild);
-				
-			if(node==lastNode)
-				lastNode=parentNode;
+			Node<Item> parent=node.getParent();
+			Item temp=node.getValue();
+			node.setValue(parent.getValue());
+			parent.setValue(temp);
+			node=parent;
 		}
 	}
 	
@@ -228,10 +176,6 @@ public class MaxPQWithLinks<Item extends Comparable<Item>>
 				}
 				else break;
 			}
-		}
-		if(node.getLeftChild()==null)
-		{
-			lastNode=node;
 		}
 	}
 	
