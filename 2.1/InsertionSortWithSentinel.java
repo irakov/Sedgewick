@@ -3,19 +3,19 @@
 
 public class InsertionSortWithSentinel
 {
-	public static void sort(Comparable[] a)
+	public static <T extends Comparable<T>> void sort(T[] a)
 	{
 		for(int i=1;i<a.length;i++)
 		{
 			if(a[i].compareTo(a[0])<0)
 			{
-				Comparable item=a[i];
+				T item=a[i];
 				a[i]=a[0];
 				a[0]=item;
 			}
 			for(int j=i;a[j].compareTo(a[j-1])<0;j--)
 			{
-				Comparable item=a[j];
+				T item=a[j];
 				a[j]=a[j-1];
 				a[j-1]=item;
 			}

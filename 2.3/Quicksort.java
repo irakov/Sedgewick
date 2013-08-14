@@ -3,13 +3,13 @@
 
 public class Quicksort
 {
-	public static void sort(Comparable[] items)
+	public static <T extends Comparable<T>> void sort(T[] items)
 	{
 		StdRandom.shuffle(items);
 		sort(items,0,items.length-1);
 	}
 	
-	private static void sort(Comparable[] items,int left, int right)
+	private static <T extends Comparable<T>> void sort(T[] items,int left, int right)
 	{
 		if(left<right)
 		{
@@ -19,11 +19,11 @@ public class Quicksort
 		}
 	}
 	
-	private static int partition(Comparable[] items,int left,int right)
+	private static <T extends Comparable<T>> int partition(T[] items,int left,int right)
 	{
 		int i=left;
 		int j=right+1;
-		Comparable pivot=items[left];
+		T pivot=items[left];
 		while(true)
 		{
 			while(items[++i].compareTo(pivot)<0)
@@ -34,11 +34,11 @@ public class Quicksort
 					break;
 			if(i>=j)
 				break;
-			Comparable temp=items[i];
+			T temp=items[i];
 			items[i]=items[j];
 			items[j]=temp;
 		}
-		Comparable temp=items[left];
+		T temp=items[left];
 		items[left]=items[j];
 		items[j]=temp;
 		

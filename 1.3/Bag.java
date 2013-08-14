@@ -3,7 +3,7 @@
 
 import java.util.Iterator;
 
-public class Bag<Item> implements Iterable<Item>
+public class Bag<Item extends Comparable<Item>> implements Iterable<Item>
 {
 	private LinkedList<Item> list=new LinkedList<Item>();
 	

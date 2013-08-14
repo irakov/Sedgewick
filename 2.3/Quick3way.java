@@ -2,27 +2,27 @@
 
 public class Quick3way
 {
-	public static void sort(Comparable[] items)
+	public static <T extends Comparable<T>> void sort(T[] items)
 	{
 		StdRandom.shuffle(items);
 		sort(items,0,items.length-1);
 	}
 	
-	private static void sort(Comparable[] items,int left,int right)
+	private static <T extends Comparable<T>> void sort(T[] items,int left,int right)
 	{
 		if(left>= right)return;
 	
 		int lt=left;
 		int gt=right;
 		int i=left+1;
-		Comparable pivot=items[left];
+		T pivot=items[left];
 		
 		while(i<=gt)
 		{
 			int result=items[i].compareTo(pivot);
 			if(result<0)
 			{
-				Comparable temp=items[i];
+				T temp=items[i];
 				items[i]=items[lt];
 				items[lt]=temp;
 				i++;
@@ -31,7 +31,7 @@ public class Quick3way
 			else
 				if(result>0)
 				{
-					Comparable temp=items[i];
+					T temp=items[i];
 					items[i]=items[gt];
 					items[gt]=temp;
 					gt--;

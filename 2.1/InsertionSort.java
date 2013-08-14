@@ -3,13 +3,13 @@
 
 public class InsertionSort
 {
-	public static void sort(Comparable[] a)
+	public static <T extends Comparable<T>> void sort(T[] a)
 	{
 		for(int i=1;i<a.length;i++)
 		{
 			for(int j=i;j>0&&a[j].compareTo(a[j-1])<0;j--)
 			{
-				Comparable temp=a[j-1];
+				T temp=a[j-1];
 				a[j-1]=a[j];
 				a[j]=temp;
 			}

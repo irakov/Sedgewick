@@ -4,20 +4,20 @@ import java.util.Stack;
 
 public class NonRecursiveQuicksort
 {
-	public static void sort(Comparable[] items)
+	public static <T extends Comparable<T>> void sort(T[] items)
 	{
-		Comparable[] result=new Comparable[items.length];
-		Stack stack=new Stack();
+		T[] result=(T[])new Comparable[items.length];
+		Stack<Params> stack=new Stack<Params>();
 		StdRandom.shuffle(items);
 		stack.push(new Params(0,items.length-1));
 		sort(stack,items);
 	}
 	
-	private static void sort(Stack stack,Comparable[] items)
+	private static <T extends Comparable<T>> void sort(Stack<Params> stack,T[] items)
 	{
 		while(stack.size()!=0)
 		{
-			Params params=(Params)stack.pop();
+			Params params=stack.pop();
 			if(params.Right>params.Left)
 			{
 				int i=partition(items,params.Left,params.Right);
@@ -35,11 +35,11 @@ public class NonRecursiveQuicksort
 		}
 	}
 	
-	private static int partition(Comparable[] items,int left,int right)
+	private static <T extends Comparable<T>> int partition(T[] items,int left,int right)
 	{
 		int i=left;
 		int j=right+1;
-		Comparable pivot=items[left];
+		T pivot=items[left];
 		while(true)
 		{
 			while(items[++i].compareTo(pivot)<0)
@@ -51,12 +51,12 @@ public class NonRecursiveQuicksort
 			
 			if(i>=j) break;
 			
-			Comparable temp=items[i];
+			T temp=items[i];
 			items[i]=items[j];
 			items[j]=temp;
 		}
 		
-		Comparable temp=items[left];
+		T temp=items[left];
 		items[left]=items[j];
 		items[j]=temp;
 		

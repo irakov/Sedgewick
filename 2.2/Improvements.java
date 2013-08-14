@@ -3,16 +3,16 @@
 
 public class Improvements
 {
-	public static void sort(Comparable[] a,int cutoff)
+	public static <T extends Comparable<T>> void sort(T[] a,int cutoff)
 	{
-		Comparable[] aux=new Comparable[a.length];
+		T[] aux=(T[])new Comparable[a.length];
 		for(int i=0;i<a.length;i++)
 			aux[i]=a[i];
 			
 		sort(aux,a,0,a.length-1,cutoff);
 	}	
 	
-	private static void sort(Comparable[] source,Comparable[] destination,int left,int right,int cutoff)
+	private static <T extends Comparable<T>> void sort(T[] source,T[] destination,int left,int right,int cutoff)
 	{
 		if(left<right)
 		{
@@ -35,7 +35,7 @@ public class Improvements
 		}
 	}
 	
-	private static void merge(Comparable[] source,Comparable[] destination,int left,int middle,int right)
+	private static <T extends Comparable<T>> void merge(T[] source,T[] destination,int left,int middle,int right)
 	{
 		int i=left;
 		int j=middle+1;
@@ -66,11 +66,11 @@ public class Improvements
 		}
 	}
 	
-	private static void insertionSort(Comparable[] a,int left,int right)
+	private static <T extends Comparable<T>> void insertionSort(T[] a,int left,int right)
 	{
 		for(int i=left;i<=right;i++)
 		{
-			Comparable temp=a[i];
+			T temp=a[i];
 			int j=i-1;
 			while(j>=left&&a[j].compareTo(temp)>0)
 			{

@@ -3,7 +3,7 @@
 
 public class Heapsort
 { 
-	private static void sink(Comparable[] items,int position,int size)
+	private static <T extends Comparable<T>> void sink(T[] items,int position,int size)
 	{
 		while(position*2<=size)
 		{
@@ -17,14 +17,14 @@ public class Heapsort
 		}
 	}
 	
-	private static void exchange(Comparable[] items,int i,int j)
+	private static <T extends Comparable<T>> void exchange(T[] items,int i,int j)
 	{
-		Comparable temp=items[i-1];
+		T temp=items[i-1];
 		items[i-1]=items[j-1];
 		items[j-1]=temp;
 	}
 	
-	private static void sort(Comparable[] items)
+	private static <T extends Comparable<T>> void sort(T[] items)
 	{
 		int size=items.length;
 		for(int i=size/2;i>=1;i--)

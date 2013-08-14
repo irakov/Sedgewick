@@ -3,17 +3,17 @@
 
 public class InsertionSortWithoutExchanges
 {
-	public static void sort(Comparable[] a)
+	public static <T extends Comparable<T>> void sort(T[] a)
 	{
 		for(int i=1;i<a.length;i++)
 		{
 			if(a[i].compareTo(a[0])<0)
 			{
-				Comparable item=a[i];
+				T item=a[i];
 				a[i]=a[0];
 				a[0]=item;
 			}
-			Comparable temp=a[i];
+			T temp=a[i];
 			int j=i-1;
 			while(j>=0&&a[j].compareTo(temp)>0)
 			{

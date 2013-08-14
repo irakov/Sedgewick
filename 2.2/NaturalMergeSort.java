@@ -4,15 +4,13 @@
 
 public class NaturalMergeSort
 {
-	private static Comparable[] aux;
-
-	public static void sort(Comparable[] a)
+	public static <T extends Comparable<T>> void sort(T[] a)
 	{
-		aux=new Comparable[a.length];
-		naturalMergeSort(a);
+		T[] aux=(T[])new Comparable[a.length];
+		naturalMergeSort(a,aux);
 	}
 	
-	private static void naturalMergeSort(Comparable[] a)
+	private static <T extends Comparable<T>> void naturalMergeSort(T[] a,T[] aux)
 	{
 		int left=0;
 		int right=a.length-1;
@@ -35,7 +33,7 @@ public class NaturalMergeSort
 					rightPos++;
 				if(rightPos<=right)//if it would've been entirely sorted rightPos would've been one more to the right
 				{
-					merge(a,left,leftPos,rightPos);
+					merge(a,aux,left,leftPos,rightPos);
 					isSorted=false;
 				}
 				left=rightPos+1;
@@ -43,7 +41,7 @@ public class NaturalMergeSort
 		}
 	}
 	
-	private static void merge(Comparable[] a,int left,int middle,int right)
+	private static <T extends Comparable<T>> void merge(T[] a,T[] aux,int left,int middle,int right)
 	{
 		for(int i=left;i<=right;i++)
 			aux[i]=a[i];

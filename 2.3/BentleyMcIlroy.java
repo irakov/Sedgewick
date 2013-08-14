@@ -3,13 +3,13 @@
 
 public class BentleyMcIlroy
 {
-	public static void sort(Comparable[] items)
+	public static <T extends Comparable<T>> void sort(T[] items)
 	{
 		StdRandom.shuffle(items);
 		sort(items,0,items.length-1);
 	}
 	
-	private static void sort(Comparable[] items,int left,int right)
+	private static <T extends Comparable<T>> void sort(T[] items,int left,int right)
 	{
 		if(left>=right)
 			return;
@@ -29,9 +29,9 @@ public class BentleyMcIlroy
 		}
 	}
 	
-	private static Pair<Integer,Integer> partition(Comparable[] items,int left,int right)
+	private static <T extends Comparable<T>> Pair<Integer,Integer> partition(T[] items,int left,int right)
 	{
-		Comparable pivot=items[left];
+		T pivot=items[left];
 		int i=left;
 		int j=right+1;
 		int p=left;
@@ -44,7 +44,7 @@ public class BentleyMcIlroy
 				if(items[i].compareTo(pivot)==0)
 				{
 					p++;
-					Comparable temp=items[p];
+					T temp=items[p];
 					items[p]=items[i];
 					items[i]=temp;
 				}
@@ -57,7 +57,7 @@ public class BentleyMcIlroy
 				if(items[j].compareTo(pivot)==0)
 				{
 					q--;
-					Comparable temp=items[q];
+					T temp=items[q];
 					items[q]=items[j];
 					items[j]=temp;
 				}
@@ -68,7 +68,7 @@ public class BentleyMcIlroy
 			if(i>=j)
 				break;
 				
-			Comparable temp=items[i];
+			T temp=items[i];
 			items[i]=items[j];
 			items[j]=temp;
 		}
@@ -77,7 +77,7 @@ public class BentleyMcIlroy
 		//				 =     <        >         =
 		if(p>q)
 			p=q;
-		Comparable[] temps=new Comparable[p-left+1];
+		T[] temps=(T[])new Comparable[p-left+1];
 		for(int k=left;k<=p;k++)
 			temps[k-left]=items[k];
 		for(int k=p+1;k<=j;k++)
@@ -85,7 +85,7 @@ public class BentleyMcIlroy
 		for(int k=0;k<=p-left;k++)
 			items[k+j-p+left]=temps[k];
 			
-		temps=new Comparable[right-q+1];
+		temps=(T[])new Comparable[right-q+1];
 		for(int k=q;k<=right;k++)
 			temps[k-q]=items[k];
 		for(int k=q-1;k>=j+1;k--)
@@ -93,7 +93,7 @@ public class BentleyMcIlroy
 		for(int k=0;k<=right-q;k++)
 			items[j+1+k]=temps[k];
 		
-		return new Pair(j-p-1+left,right-q+j+2);
+		return new Pair<Integer,Integer>(j-p-1+left,right-q+j+2);
 	}
 	
 	public static void main(String[] args)

@@ -2,18 +2,17 @@
 
 public class BottomUpMergeSort
 {
-	private static Comparable[] aux;
-	public static void sort(Comparable[] a)
+	public static <T extends Comparable<T>> void sort(T[] a)
 	{
-		aux=new Comparable[a.length];
+		T[] aux=(T[])new Comparable[a.length];
 		for(int size=1;size<a.length;size+=size)
 		{
 			for(int i=0;i+size<a.length;i+=2*size)
-				merge(a,i,i+size-1,Math.min(i+2*size-1,a.length-1));
+				merge(a,aux,i,i+size-1,Math.min(i+2*size-1,a.length-1));
 		}
 	}
 	
-	private static void merge(Comparable[] a,int left,int middle,int right)
+	private static <T extends Comparable<T>> void merge(T[] a,T[] aux,int left,int middle,int right)
 	{
 		for(int i=left;i<=right;i++)
 			aux[i]=a[i];

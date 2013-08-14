@@ -3,7 +3,7 @@
 
 public class QuicksortNoSentinels
 {
-	public static void sort(Comparable[] items)
+	public static <T extends Comparable<T>> void sort(T[] items)
 	{
 		StdRandom.shuffle(items);
 		
@@ -12,14 +12,14 @@ public class QuicksortNoSentinels
 			if(items[i].compareTo(items[maxPos])>0)
 				maxPos=i;
 		
-		Comparable temp=items[maxPos];
+		T temp=items[maxPos];
 		items[maxPos]=items[items.length-1];
 		items[items.length-1]=temp;
 		
 		sort(items,0,items.length-1);
 	}
 	
-	private static void sort(Comparable[] items,int left,int right)
+	private static <T extends Comparable<T>> void sort(T[] items,int left,int right)
 	{
 		if(right<=left) return;
 		int i=partition(items,left,right);
@@ -27,11 +27,11 @@ public class QuicksortNoSentinels
 		sort(items,i+1,right);
 	}
 	
-	private static int partition(Comparable[] items,int left,int right)
+	private static <T extends Comparable<T>> int partition(T[] items,int left,int right)
 	{
 		int i=left;
 		int j=right+1;
-		Comparable pivot=items[left];
+		T pivot=items[left];
 		while(true)
 		{
 			while(items[++i].compareTo(pivot)<0);
@@ -39,12 +39,12 @@ public class QuicksortNoSentinels
 			
 			if(i>=j) break;
 			
-			Comparable temp=items[i];
+			T temp=items[i];
 			items[i]=items[j];
 			items[j]=temp;
 		}
 		
-		Comparable temp=items[left];
+		T temp=items[left];
 		items[left]=items[j];
 		items[j]=temp;
 		

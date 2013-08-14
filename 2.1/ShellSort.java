@@ -3,7 +3,7 @@
 
 public class ShellSort
 {
-	public static void sort(Comparable[] a)
+	public static <T extends Comparable<T>> void sort(T[] a)
 	{
 		int n=a.length;
 		int h=1;
@@ -14,7 +14,7 @@ public class ShellSort
 			for(int i=h;i<n;i++)
 				for(int j=i;j>=h&&a[j].compareTo(a[j-h])<0;j-=h)
 				{
-					Comparable temp=a[j-h];
+					T temp=a[j-h];
 					a[j-h]=a[j];
 					a[j]=temp;
 				}

@@ -3,13 +3,13 @@
 
 public class FasterMerge
 {
-	public static void sort(Comparable[] a)
+	public static <T extends Comparable<T>> void sort(T[] a)
 	{
-		Comparable[] aux=new Comparable[a.length];
+		T[] aux=(T[])new Comparable[a.length];
 		sort(a,aux,0,a.length-1);
 	}
 	
-	private static void sort(Comparable[] a,Comparable[] aux, int left,int right)
+	private static <T extends Comparable<T>> void sort(T[] a,T[] aux, int left,int right)
 	{
 		if(left<right)
 		{
@@ -20,7 +20,7 @@ public class FasterMerge
 		}
 	}
 	
-	private static void merge(Comparable[] a,Comparable[] aux,int left,int middle,int right)
+	private static <T extends Comparable<T>> void merge(T[] a,T[] aux,int left,int middle,int right)
 	{
 		for(int i=left;i<=middle;i++)
 			aux[i]=a[i];
