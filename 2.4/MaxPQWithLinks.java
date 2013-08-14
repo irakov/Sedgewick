@@ -55,11 +55,11 @@ public class MaxPQWithLinks<Item extends Comparable<Item>>
 						node=parent;
 				}
 			}
-			//swim(lastNode);
+			swim(lastNode);
 		}
 		
 		size++;
-	}
+		}
 	
 	public Item max()
 	{
@@ -77,14 +77,15 @@ public class MaxPQWithLinks<Item extends Comparable<Item>>
 		if(lastNode==root)
 		{	
 			root=null;
-			levels--;;
+			levels--;
 			lastNode=null;
+			size--;
 		}
 		else
 		{
+			size--;
 			root.setValue(lastNode.getValue());
-			
-			if(size==(1<<levels))
+			if(size==(1<<(levels-1))-1)
 			{
 				levels--;
 				lastNode.getParent().removeLeftChild();
@@ -117,10 +118,9 @@ public class MaxPQWithLinks<Item extends Comparable<Item>>
 						node=parent;
 				}
 			}
-		}
 			
-		//sink(root);
-		size--;
+			sink(root);
+		}
 		
 		return max;
 	}
@@ -137,7 +137,7 @@ public class MaxPQWithLinks<Item extends Comparable<Item>>
 	
 	private void swim(Node<Item> node) throws InvalidOperationException
 	{
-		while(node!=root&&node.getParent().getValue().compareTo(node.getValue())>0)
+		while(node!=root&&node.getParent().getValue().compareTo(node.getValue())<0)
 		{
 			Node<Item> parentNode=node.getParent();
 			Node<Item> parentParent=parentNode.getParent();
@@ -162,8 +162,7 @@ public class MaxPQWithLinks<Item extends Comparable<Item>>
 			else
 			{
 				node=parentNode.removeRightChild();
-				if(parentNode.getLeftChild()!=null)
-					siblingNode=parentNode.removeLeftChild();
+				siblingNode=parentNode.removeLeftChild();
 			}
 			
 			if(parentParent==null)
@@ -194,6 +193,9 @@ public class MaxPQWithLinks<Item extends Comparable<Item>>
 				parentNode.addChild(leftChild);
 			if(rightChild!=null)
 				parentNode.addChild(rightChild);
+				
+			if(node==lastNode)
+				lastNode=parentNode;
 		}
 	}
 	
@@ -203,7 +205,7 @@ public class MaxPQWithLinks<Item extends Comparable<Item>>
 		{
 			boolean isLeftChildGreater=true;
 			if(node.getRightChild()!=null)
-				if(node.getRightChild().getValue().compareTo(node.getLeftChild().getValue())>0)
+				if(node.getRightChild().getValue().compareTo(node.getLeftChild().getValue())>=0)
 					isLeftChildGreater=false;
 					
 			if(isLeftChildGreater)
@@ -212,6 +214,7 @@ public class MaxPQWithLinks<Item extends Comparable<Item>>
 					Item tempValue=node.getValue();
 					node.setValue(node.getLeftChild().getValue());
 					node.getLeftChild().setValue(tempValue);
+					node=node.getLeftChild();
 				}
 				else break;
 			else
@@ -221,9 +224,14 @@ public class MaxPQWithLinks<Item extends Comparable<Item>>
 					Item tempValue=node.getValue();
 					node.setValue(node.getRightChild().getValue());
 					node.getRightChild().setValue(tempValue);
+					node=node.getRightChild();
 				}
 				else break;
 			}
+		}
+		if(node.getLeftChild()==null)
+		{
+			lastNode=node;
 		}
 	}
 	
