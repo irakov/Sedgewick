@@ -1,4 +1,5 @@
 //page 311
+//+2.4.26
 import java.util.NoSuchElementException;
 
 public class MinPQ<Key extends Comparable<Key>>
@@ -67,39 +68,36 @@ public class MinPQ<Key extends Comparable<Key>>
 	
 	private void swim(int position)
 	{
-		while(position>1&&pq[position/2].compareTo(pq[position])>0)
+		Key temp=pq[position];
+		int parentPosition=position/2;
+		while(parentPosition>=1&&pq[parentPosition].compareTo(temp)>0)
 		{
-			Key temp=pq[position];
-			pq[position]=pq[position/2];
-			pq[position/2]=temp;
-			position=position/2;
+			pq[position]=pq[parentPosition];
+			position=parentPosition;
+			parentPosition/=2;
 		}
+		pq[position]=temp;
 	}
 	
 	private void sink(int position)
 	{
-		while(position<=size/2)
+		Key temp=pq[position];
+		int leftChild=2*position;
+		int rightChild=2*position+1;
+		int lowerChild=leftChild;
+		if(leftChild<=size&&rightChild<=size&&pq[rightChild].compareTo(pq[leftChild])<0)
+			lowerChild=rightChild;
+		while(lowerChild<=size&&pq[lowerChild].compareTo(temp)<0)
 		{
-			Key thisKey=pq[position];
-			Key leftChild=pq[2*position];
-			Key rightChild=pq[2*position+1];
-			if(leftChild.compareTo(rightChild)<0)
-				if(leftChild.compareTo(thisKey)<0)
-				{
-					pq[position]=leftChild;
-					pq[2*position]=thisKey;
-					position=2*position;
-				}
-				else break;
-			else
-				if(rightChild.compareTo(thisKey)<0)
-				{
-					pq[position]=rightChild;
-					pq[2*position+1]=thisKey;
-					position=2*position+1;
-				}
-				else break;
+			pq[position]=pq[lowerChild];
+			position=lowerChild;
+			leftChild=2*position;
+			rightChild=2*position+1;
+			lowerChild=leftChild;
+			if(leftChild<=size&&rightChild<=size&&pq[rightChild].compareTo(pq[leftChild])<0)
+				lowerChild=rightChild;
 		}
+		pq[position]=temp;
 	}
 	
 	private void resize(int newSize)
