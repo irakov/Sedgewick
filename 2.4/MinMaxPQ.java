@@ -1,5 +1,4 @@
 //2.4.29
-//2.4.29
 import java.util.NoSuchElementException;
 
 public class MinMaxPQ<T extends Comparable<T>>
@@ -16,6 +15,7 @@ public class MinMaxPQ<T extends Comparable<T>>
 		minHeap=(T[])new Comparable[2];
 		maxToMin=new Integer[2];
 		minToMax=new Integer[2];
+		
 		size=0;
 	}
 	
@@ -37,29 +37,32 @@ public class MinMaxPQ<T extends Comparable<T>>
 	
 	public T deleteMaximum()
 	{
-		if(size==0)
+		if(isEmpty())
 			throw new NoSuchElementException();
-		
+			
 		T max=maxHeap[1];
 		maxExchange(1,size);
 		minExchange(minToMax[size],size);
 		
 		size--;
 		
-		maxSink(1);
-		minSink(minToMax[size]);
+		if(size>0)
+		{
+			maxSink(1);
+			minSink(minToMax[size]);
 		
-		maxHeap[size+1]=null;
-		minHeap[size+1]=null;
+			maxHeap[size+1]=null;
+			minHeap[size+1]=null;
 		
-		if(size>0&&size<=(maxHeap.length-1)/4)
-			resize(maxHeap.length/2);
+			if(size<=(maxHeap.length-1)/4)
+				resize(maxHeap.length/2);
+		}
 		return max;
 	}
 	
 	public T deleteMinimum()
 	{
-		if(size==0)
+		if(isEmpty())
 			throw new NoSuchElementException();
 			
 		T min=minHeap[1];
@@ -68,28 +71,31 @@ public class MinMaxPQ<T extends Comparable<T>>
 		
 		size--;
 		
-		minSink(1);
-		minSink(maxToMin[size]);
+		if(size>0)
+		{
+			minSink(1);
+			maxSink(maxToMin[size]);
 		
-		minHeap[size+1]=null;
-		maxHeap[size+1]=null;
+			minHeap[size+1]=null;
+			maxHeap[size+1]=null;
 		
-		if(size>0&&size<=(minHeap.length-1)/4)
-			resize(minHeap.length/2);
+			if(size<=(minHeap.length-1)/4)
+				resize(minHeap.length/2);
+		}
 		return min;
 	}
 	
 	//O(1)
 	public T findMaximum()
 	{
-		if(size==0)
+		if(isEmpty())
 			throw new NoSuchElementException();
 		return maxHeap[1];
 	}
 	
 	public T findMinimum()
 	{
-		if(size==0)
+		if(isEmpty())
 			throw new NoSuchElementException();
 		return minHeap[1];
 	}
@@ -107,70 +113,48 @@ public class MinMaxPQ<T extends Comparable<T>>
 	//private methods
 	private void maxSwim(int index)
 	{
-		T key=maxHeap[index];
-		int parentIndex=index/2;
-		while(parentIndex>=1&&maxHeap[parentIndex].compareTo(maxHeap[index])<0)
+		while(index>1&&maxHeap[index/2].compareTo(maxHeap[index])<0)
 		{
-			maxHeap[index]=maxHeap[parentIndex];
-			index=parentIndex;
-			parentIndex/=2;
+			maxExchange(index/2,index);
+			index/=2;
 		}
-		maxHeap[index]=key;
 	}
 	
 	private void minSwim(int index)
 	{
-		T key=minHeap[index];
-		int parentIndex=index/2;
-		while(parentIndex>=1&&minHeap[parentIndex].compareTo(minHeap[index])>0)
+		while(index>1&&minHeap[index/2].compareTo(minHeap[index])>0)
 		{
-			minHeap[index]=minHeap[parentIndex];
-			index=parentIndex;
-			parentIndex/=2;
+			minExchange(index/2,index);
+			index/=2;
 		}
-		minHeap[index]=key;
 	}
 	
 	private void maxSink(int index)
 	{
-		T key=maxHeap[index];
-		int leftChild=2*index;
-		int rightChild=2*index+1;
-		int greaterChild=leftChild;
-		if(leftChild<=size&&rightChild<=size&&maxHeap[leftChild].compareTo(maxHeap[rightChild])<0)
-			greaterChild=rightChild;
-		while(greaterChild<=size&&maxHeap[greaterChild].compareTo(key)>0)
+		while(index<=size/2)
 		{
-			maxHeap[index]=maxHeap[greaterChild];
-			index=greaterChild;
-			leftChild=2*index;
-			rightChild=2*index+1;
-			greaterChild=leftChild;
-			if(leftChild<=size&&rightChild<=size&&maxHeap[leftChild].compareTo(maxHeap[rightChild])<0)
-				greaterChild=rightChild;
+			int child=2*index;
+			if(child<size&&maxHeap[child].compareTo(maxHeap[child+1])<0)
+				child++;
+			if(maxHeap[index].compareTo(maxHeap[child])>0)
+				break;
+			maxExchange(index,child);
+			index=child;
 		}
-		maxHeap[index]=key;
 	}
 	
 	private void minSink(int index)
 	{
-		T key=minHeap[index];
-		int leftChild=2*index;
-		int rightChild=2*index+1;
-		int smallerChild=leftChild;
-		if(leftChild<=size&&rightChild<=size&&minHeap[leftChild].compareTo(minHeap[rightChild])>0)
-			smallerChild=rightChild;
-		while(smallerChild<=size&&minHeap[smallerChild].compareTo(key)<0)
+		while(index<=size/2)
 		{
-			minHeap[index]=minHeap[smallerChild];
-			index=smallerChild;
-			leftChild=2*index;
-			rightChild=2*index+1;
-			smallerChild=leftChild;
-			if(leftChild<=size&&rightChild<=size&&minHeap[leftChild].compareTo(minHeap[rightChild])>0)
-				smallerChild=rightChild;
+			int child=2*index;
+			if(child<size&&minHeap[child].compareTo(minHeap[child+1])>0)
+				child++;
+			if(minHeap[index].compareTo(minHeap[child])<0)
+				break;
+			minExchange(index,child);
+			index=child;
 		}
-		minHeap[index]=key;
 	}
 	
 	private void resize(int newSize)
@@ -204,7 +188,11 @@ public class MinMaxPQ<T extends Comparable<T>>
 		
 		Integer tempPos=minToMax[pos1];
 		minToMax[pos1]=minToMax[pos2];
-		minToMax[pos2]=minToMax[tempPos];
+		minToMax[pos2]=tempPos;
+		
+		tempPos=maxToMin[minToMax[pos1]];
+		maxToMin[minToMax[pos1]]=maxToMin[minToMax[pos2]];
+		maxToMin[minToMax[pos2]]=tempPos;
 	}
 	
 	private void minExchange(int pos1,int pos2)
@@ -216,6 +204,10 @@ public class MinMaxPQ<T extends Comparable<T>>
 		Integer tempPos=maxToMin[pos1];
 		maxToMin[pos1]=maxToMin[pos2];
 		maxToMin[pos2]=tempPos;
+		
+		tempPos=minToMax[maxToMin[pos1]];
+		minToMax[maxToMin[pos1]]=minToMax[maxToMin[pos2]];
+		minToMax[maxToMin[pos2]]=tempPos;
 	}
 	
 	public static void main(String[] args) 
