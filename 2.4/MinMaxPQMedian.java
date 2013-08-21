@@ -63,12 +63,19 @@ public class MinMaxPQMedian<T extends Comparable<T>>
 			maxHeap[size+1]=null;
 			rebalance();
 			
-			if(size>0&&maxHeapSize<=(maxHeap.length-1)/4)
+			if(maxHeapSize>0&&maxHeapSize<=(maxHeap.length-1)/4)
 				maxHeap=resize(maxHeap.length/2,maxHeap);
 		}
 		else
 		{
 			minHeap[1]=minHeap[minHeapSize--];
+			median=minHeap[1];
+			minSink(1);
+			minHeap[minHeapSize+1]=null;
+			rebalance();
+			
+			if(minHeapSize>0&&minHeapSize<=(minHeap.length-1)/4)
+				minHeap=resize(minHeap.length/2,minHeap);
 		}
 		
 		return result;
@@ -103,21 +110,102 @@ public class MinMaxPQMedian<T extends Comparable<T>>
 	
 	private void maxSwim(int index)
 	{
+		T key=maxHeap[index];
+		int parent=index/2;
+		while(parent>=1&&maxHeap[parent].compareTo(key)<0)
+		{	
+			maxHeap[index]=maxHeap[parent];
+			index=parent;
+			parent/=2;
+		}
+		maxHeap[index]=key;
+		if(index==1&&isInMaxHeap)
+			median=key;
 	}
 	
 	private int minSwim(int index)
 	{
+		T key=minHeap[index];
+		int parent=index/2;
+		while(parent>=1&&minHeap[parent].compareTo(key)>0)
+		{
+			minHeap[index]=minHeap[parent];
+			index=parent;
+			parent/=2;
+		}
+		minHeap[index]=key;
+		if(index==1&&!isInMaxHeap)
+			median=key;
 	}
 	
 	private void maxSink(int index)
 	{
+		T key=maxHeap[index];
+		int child=2*index;
+		if(child<=maxHeapSize&&child+1<=maxHeapSize&&maxHeap[child].compareTo(maxHeap[child+1])<0)
+			child++;
+		while(child<=maxHeapSize&&key.compareTo(maxHeap[child])<0)
+		{
+			if(index==1&&isInMaxHeap)
+				median=maxHeap[child];
+		
+			maxHeap[index]=maxHeap[child];
+			index=child;
+			child=2*index;
+			if(child<=maxHeapSize&&child+1<=maxHeapSize&&maxHeap[child].compareTo(maxHeap[child+1])<0)
+				child++;
+		}
+		maxHeap[index]=key;
 	}
 	
 	private void minSink(int index)
 	{
+		T key=minHeap[index];
+		int child=2*index;
+		if(child<=minHeapSize&&index+1<=minHeapSize&&minHeap[child].compareTo(minHeap[child+1])>0)
+			child++;
+		while(child<=minHeapSize&&key.compareTo(minHeap[child])>0)
+		{
+			if(index==1&&!isInMaxHeap)
+				median=minHeap[child];
+				
+			minHeap[index]=minHeap[child];
+			index=child;
+			child=2*index;
+			if(child<=minHeapSize&&index+1<=minHeapSize&&minHeap[child].compareTo(minHeap[child+1])>0)
+				child++;
+		}
+		minHeap[index]=key;
 	}
 	
 	private void rebalance()
 	{
+		if(maxHeapSize-minHeapSize>1)
+		{
+			minHeap[++minHeapSize]=maxHeap[1];
+			minSwim(minHeapSize);
+			maxHeap[1]=maxHeap[maxHeapSize--];
+			maxSink(1);
+			maxHeap[maxHeapSize+1]=null;
+		}
+		else if(maxHeapSize-minHeapSize<-1)
+		{
+			maxHeap[++maxHeapSize]=minHeap[1];
+			maxSwim(maxHeapSize);
+			minHeap[1]=minHeap[minHeapSize--];
+			minSink(1);
+			minHeap[minHeapSize+1]=null;
+		}
+	}
+	
+	public static void main(String[] args)
+	{
+		MinMaxPQMedian<String> pq = new MinMaxPQMedian<String>();
+        while (!StdIn.isEmpty()) {
+            String item = StdIn.readString();
+            if (!item.equals("-")) pq.insert(item);
+            else if (!pq.isEmpty()) StdOut.print(pq.deleteMedian() + " ");
+        }
+        StdOut.println("(" + pq.size() + " left on pq)");
 	}
 }
