@@ -10,7 +10,7 @@ public class MinMaxPQMedian<T extends Comparable<T>>
 	private int maxHeapSize;
 	private int minHeapSize;
 	
-	public MinMaxPQWithMedian()
+	public MinMaxPQMedian()
 	{
 		maxHeap=(T[])new Comparable[2];
 		minHeap=(T[])new Comparable[2];
@@ -33,15 +33,15 @@ public class MinMaxPQMedian<T extends Comparable<T>>
 		if(item.compareTo(median)<=0)
 		{
 			if(maxHeapSize>=maxHeap.length-1)
-				maxHeap=resize(2*maxHeap.length,maxHeap);
+				maxHeap=resize(2*maxHeap.length,maxHeapSize,maxHeap);
 			maxHeap[++maxHeapSize]=item;
 			maxSwim(maxHeapSize);
-			rebalance;
+			rebalance();
 		}
 		else
 		{
 			if(minHeapSize>=minHeap.length-1)
-				minHeap=resize(2*minHeap.length,minHeap);
+				minHeap=resize(2*minHeap.length,minHeapSize,minHeap);
 			minHeap[++minHeapSize]=item;
 			minSwim(minHeapSize);
 			rebalance();
@@ -60,11 +60,11 @@ public class MinMaxPQMedian<T extends Comparable<T>>
 			maxHeap[1]=maxHeap[maxHeapSize--];
 			median=maxHeap[1];
 			maxSink(1);
-			maxHeap[size+1]=null;
+			maxHeap[maxHeapSize+1]=null;
 			rebalance();
 			
 			if(maxHeapSize>0&&maxHeapSize<=(maxHeap.length-1)/4)
-				maxHeap=resize(maxHeap.length/2,maxHeap);
+				maxHeap=resize(maxHeap.length/2,maxHeapSize,maxHeap);
 		}
 		else
 		{
@@ -75,7 +75,7 @@ public class MinMaxPQMedian<T extends Comparable<T>>
 			rebalance();
 			
 			if(minHeapSize>0&&minHeapSize<=(minHeap.length-1)/4)
-				minHeap=resize(minHeap.length/2,minHeap);
+				minHeap=resize(minHeap.length/2,minHeapSize,minHeap);
 		}
 		
 		return result;
@@ -100,7 +100,7 @@ public class MinMaxPQMedian<T extends Comparable<T>>
 	}
 	
 	//private methods
-	private T[] resize(int newSize,T[] heap)
+	private T[] resize(int newSize,int size,T[] heap)
 	{
 		T[] newHeap=(T[])new Comparable[newSize];
 		for(int i=0;i<=size;i++)
@@ -123,7 +123,7 @@ public class MinMaxPQMedian<T extends Comparable<T>>
 			median=key;
 	}
 	
-	private int minSwim(int index)
+	private void minSwim(int index)
 	{
 		T key=minHeap[index];
 		int parent=index/2;
