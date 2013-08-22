@@ -196,6 +196,11 @@ public class MinMaxPQMedian<T extends Comparable<T>>
 			minSink(1);
 			minHeap[minHeapSize+1]=null;
 		}
+		if(maxHeapSize>minHeapSize)
+			isInMaxHeap=true;
+		else
+			if(maxHeapSize<minHeapSize)
+				isInMaxHeap=false;
 	}
 	
 	public static void main(String[] args)
