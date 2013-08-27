@@ -2,6 +2,7 @@
 //using http://www.cs.princeton.edu/courses/archive/spr08/cos226/assignments/8puzzle.html
 
 import java.util.Arrays;
+import java.util.Collections;
 
 public class Puzzle
 {
@@ -73,7 +74,44 @@ public class Puzzle
 		
 		public Iterable<Board> neighbors()
 		{
-			//return iterable 
+			List<Board> neighbors=new ArrayList<Board>();
+			for(int i=0;i<dimension;i++)
+				for(int j=0;j<dimension;j++)
+					if(tiles[i][j]==0)
+					{
+						Board neighbor;
+						if(i>0)
+						{
+							neighbor=new Board(tiles);
+							int temp=neighbor.tiles[i-1][j];
+							neighbor.tiles[i-1][j]=0;
+							neighbor[i][j]=temp;
+							neighbors.add(neighbor);
+						}
+						if(i<dimension-1)
+						{
+							neighbor=new Board(tiles);
+							int temp=neighbor.tiles[i+1][j];
+							neighbor.tiles[i+1][j]=0;
+							neighbor[i][j]=temp;
+							neighbors.add(neighbor);
+						}
+						if(j>0)
+						{
+							int temp=neighbor.tiles[i][j-1];
+							neighbor.tiles[i][j-1]=0;
+							neighbor[i][j]=temp;
+							neighbors.add(neighbor);
+						}
+						if(j<dimension-1)
+						{
+							int temp=neighbor.tiles[i][j+1];
+							neighbor.tiles[i][j+1]=0;
+							neighbor[i][j]=temp;
+							neighbors.add(neighbor);
+						}
+					}
+			return Collections.unmodifiableList(neighbors);
 		}
 		
 		public String toString()
