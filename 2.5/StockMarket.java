@@ -32,7 +32,7 @@ public class StockMarket
 			if(buyers.isEmpty()||sellers.isEmpty()) return;
 			
 			Order maxBuyer=buyers.max();
-			Order minSeller=sellers.max();
+			Order minSeller=sellers.min();
 			if(maxBuyer.getPrice()>=minSeller.getPrice())
 			{
 				maxBuyer=buyers.removeMax();

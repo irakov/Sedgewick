@@ -36,7 +36,7 @@ public class MinPQ<Key extends Comparable<Key>>
 		swim(size);
 	}
 	
-	public Key max()
+	public Key min()
 	{	
 		if(isEmpty())
 			throw new NoSuchElementException();
