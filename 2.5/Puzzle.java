@@ -4,10 +4,10 @@
 
 public class Puzzle
 {
-	int inversionsCount=0;
+	static int inversionsCount=0;
 	
 	//an odd number of inversions => not solvable
-	private boolean isSolvable(int[][] tiles)
+	private static boolean isSolvable(int[][] tiles)
 	{
 		int[] unsortedInput=new int[tiles.length*tiles.length-1];
 		int counter=0;
@@ -15,12 +15,12 @@ public class Puzzle
 			for(int j=0;j<tiles.length;j++)
 				if(tiles[i][j]!=0)
 					unsortedInput[counter++]=tiles[i][j];
-		int[] aux=new int[counter-1];
+		int[] aux=new int[counter];
 		mergeSort(unsortedInput,aux,0,counter-1);
 		return inversionsCount%2==0;
 	}
 	
-	private void mergeSort(int[] input,int[] aux,int left,int right)
+	private static void mergeSort(int[] input,int[] aux,int left,int right)
 	{
 		if(left<right)
 		{
@@ -31,7 +31,7 @@ public class Puzzle
 		}
 	}
 	
-	private void merge(int[] input,int[] aux,int left,int middle,int right)
+	private static void merge(int[] input,int[] aux,int left,int middle,int right)
 	{
 		for(int i=left;i<=right;i++)
 			aux[i]=input[i];
@@ -45,16 +45,16 @@ public class Puzzle
 				if(j>right)
 				{
 					input[k]=aux[i++];
-					inversionCount++;
+					inversionsCount+=right-middle;
 				}
 				else
 					if(aux[i]<=aux[j])
-						input[k]=aux[i++];
-					else
 					{
-						input[k]=aux[j++];
+						input[k]=aux[i++];
 						inversionsCount+=j-middle-1;
 					}
+					else
+						input[k]=aux[j++];
 		}
 	}
 
@@ -65,6 +65,12 @@ public class Puzzle
 		for(int i=0;i<dimension;i++)
 			for(int j=0;j<dimension;j++)
 				tiles[i][j]=StdIn.readInt();
+				
+		if(!isSolvable(tiles))
+		{
+			StdOut.println("not solvable");
+			return;
+		}
 		
 		State initialState=new State(new Board(tiles),null);
 		
