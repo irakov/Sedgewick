@@ -1,12 +1,61 @@
 //2.5.32
+//partially solves 2.5.19 (isSolvable)
 //using http://www.cs.princeton.edu/courses/archive/spr08/cos226/assignments/8puzzle.html
 
 public class Puzzle
 {
-	private boolean isSolvable()
+	int inversionsCount=0;
+	
+	//an odd number of inversions => not solvable
+	private boolean isSolvable(int[][] tiles)
 	{
-		//count number of inversions - if it's odd - no solution, similar to 2.5.19
-		return true;
+		int[] unsortedInput=new int[tiles.length*tiles.length-1];
+		int counter=0;
+		for(int i=0;i<tiles.length;i++)
+			for(int j=0;j<tiles.length;j++)
+				if(tiles[i][j]!=0)
+					unsortedInput[counter++]=tiles[i][j];
+		int[] aux=new int[counter-1];
+		mergeSort(unsortedInput,aux,0,counter-1);
+		return inversionsCount%2==0;
+	}
+	
+	private void mergeSort(int[] input,int[] aux,int left,int right)
+	{
+		if(left<right)
+		{
+			int middle=left+(right-left)/2;
+			mergeSort(input,aux,left,middle);
+			mergeSort(input,aux,middle+1,right);
+			merge(input,aux,left,middle,right);
+		}
+	}
+	
+	private void merge(int[] input,int[] aux,int left,int middle,int right)
+	{
+		for(int i=left;i<=right;i++)
+			aux[i]=input[i];
+		int i=left;
+		int j=middle+1;
+		for(int k=left;k<=right;k++)
+		{
+			if(i>middle)
+				input[k]=aux[j++];
+			else
+				if(j>right)
+				{
+					input[k]=aux[i++];
+					inversionCount++;
+				}
+				else
+					if(aux[i]<=aux[j])
+						input[k]=aux[i++];
+					else
+					{
+						input[k]=aux[j++];
+						inversionsCount+=j-middle-1;
+					}
+		}
 	}
 
 	public static void main(String[] args)
