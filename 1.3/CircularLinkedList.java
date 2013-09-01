@@ -40,6 +40,21 @@ public class CircularLinkedList<Item extends Comparable<Item>> implements Iterab
 		return result;
 	}
 	
+	public void insertLast(Item item)
+	{
+		if(last==null)
+			insertFirst(item);
+		else
+		{
+			Node newLast=new Node();
+			newLast.item=item;
+			newLast.next=last.next;
+			last.next=newLast;
+			last=newLast;
+			size++;
+		}
+	}	
+	
 	public Node getLast()
 	{
 		return last;
