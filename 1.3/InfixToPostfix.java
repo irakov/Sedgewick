@@ -11,78 +11,13 @@ public class InfixToPostfix
 		while(!StdIn.isEmpty())
 		{
 			String s=StdIn.readString();
-			if(s.equals("+"))
-			{
-				if(!operators.isEmpty())
-				{
-					String p=operators.peek();
-					if(p.equals("("));
-					else
-						if(p.equals("+")||p.equals("-")||p.equals("*")||p.equals("/"))
-							StdOut.print(operators.pop()+" ");
-				}
-				operators.push(s);
-			}
-			else if(s.equals("-"))
-			{
-				if(!operators.isEmpty())
-				{
-					String p=operators.peek();
-					if(p.equals("("));
-					else
-						if(p.equals("+")||p.equals("-")||p.equals("*")||p.equals("/"))
-							StdOut.print(operators.pop()+" ");
-				}
-				operators.push(s);
-			}
-			else if(s.equals("*"))
-			{	
-				if(!operators.isEmpty())
-				{
-					String p=operators.peek();
-					if(p.equals("("));
-					else
-						if(p.equals("*")||p.equals("/"))
-							StdOut.print(operators.pop()+" ");
-				}
-				operators.push(s);
-			}
-			else if(s.equals("/"))
-			{
-				if(!operators.isEmpty())
-				{
-					String p=operators.peek();
-					if(p.equals("("));
-					else
-						if(p.equals("*")||p.equals("/"))
-							StdOut.print(operators.pop()+" ");
-				}
-				operators.push(s);
-			}
-			else if(s.equals("("))
-			{
-				operators.push(s);
-			}
-			else if(s.equals(")"))
-			{
-				boolean shouldStop=false;
-				do
-				{
-					String p=operators.pop();
-					if(!p.equals("("))
-						StdOut.print(p+" ");
-					else shouldStop = true;
-				}
-				while(!shouldStop);
-			}
-			else
-			{
-				//we have values
-				StdOut.print(s+" ");
-			}
-		}
-		
-		while(!operators.isEmpty())
-			StdOut.print(operators.pop()+" ");
+			if(s.equals("+")) operators.push(s);
+			else if(s.equals("-")) operators.push(s);
+			else if(s.equals("*")) operators.push(s);
+			else if(s.equals("/")) operators.push(s);
+			else if(s.equals(")")) StdOut.print(operators.pop()+" ");
+			else if(s.equals("(")) StdOut.print("");
+			else { StdOut.print(s+" ");	}
+		}	
 	}
 }
