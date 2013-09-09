@@ -59,7 +59,7 @@ public class MaxPQWithLinks<Item extends Comparable<Item>>
 		}
 		
 		size++;
-		}
+	}
 	
 	public Item max()
 	{
