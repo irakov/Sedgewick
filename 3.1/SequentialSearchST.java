@@ -1,5 +1,5 @@
-//algorithm 3.1
-//page 375
+//algorithm 3.1 + 3.1.5
+//page 375+page 389
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,5 +1,5 @@
-//algorithm 3.2
-//page 379+381+382
+//algorithm 3.2 + 3.1.16+3.1.17
+//page 379+381+382+390
 
 import java.util.NoSuchElementException;
 import java.util.List;
