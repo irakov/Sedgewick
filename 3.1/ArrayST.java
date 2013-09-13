@@ -38,7 +38,11 @@ public class ArrayST<Key,Value>
 		
 		for(int i=0;i<size;i++)
 			if(keys[i]==key)
-				return values[i];
+				{
+					Value result=values[i];
+					moveToFront(i);
+					return result;
+				}
 		return null;
 	}
 	
@@ -103,6 +107,19 @@ public class ArrayST<Key,Value>
 		values=newValues;
 	}
 	
+	private void moveToFront(int position)
+	{
+		Key key=keys[position];
+		Value value=values[position];
+		for(int i=position;i>=1;i--)
+		{
+			keys[i]=keys[i-1];
+			values[i]=values[i-1];
+		}
+		keys[0]=key;
+		values[0]=value;
+	}
+	
 	public static void main(String[] args)
 	{	
 		ArrayST<String,Integer> st=new ArrayST<String,Integer>(5);
@@ -111,6 +128,8 @@ public class ArrayST<Key,Value>
 			String s=StdIn.readString();
 			st.put(s,i);
 		}
+		for(String s:st.keys())
+			StdOut.println(s+" "+st.get(s));
 		for(String s:st.keys())
 			StdOut.println(s+" "+st.get(s));
 	}
