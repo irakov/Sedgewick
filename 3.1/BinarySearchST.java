@@ -1,5 +1,5 @@
-//algorithm 3.2 + 3.1.16+3.1.17
-//page 379+381+382+390
+//algorithm 3.2 + 3.1.16+3.1.17+3.1.28
+//page 379+381+382+390+392
 
 import java.util.NoSuchElementException;
 import java.util.List;
@@ -22,21 +22,31 @@ public class BinarySearchST<Key extends Comparable<Key>,Value>
 		if(value==null) delete(key);
 		else
 		{
-			int rank=rank(key);
-			if(rank<size&&keys[rank].compareTo(key)==0)
-				values[rank]=value;
-			else
+			if(max()==null||key.compareTo(max())>0)
 			{
 				if(keys.length==size) resize(2*size);
-			
-				for(int i=size;i>rank;i--)
-				{
-					keys[i]=keys[i-1];
-					values[i]=values[i-1];
-				}
-				keys[rank]=key;
-				values[rank]=value;
+				keys[size]=key;
+				values[size]=value;
 				size++;
+			}
+			else
+			{
+				int rank=rank(key);
+				if(rank<size&&keys[rank].compareTo(key)==0)
+					values[rank]=value;
+				else
+				{	
+					if(keys.length==size) resize(2*size);
+				
+					for(int i=size;i>rank;i--)
+					{
+						keys[i]=keys[i-1];
+						values[i]=values[i-1];
+					}
+					keys[rank]=key;
+					values[rank]=value;
+					size++;
+				}
 			}
 		}
 	}
