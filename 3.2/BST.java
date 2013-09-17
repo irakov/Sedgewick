@@ -1,5 +1,8 @@
 //algorithm 3.3 (398+399+407+409+411+413)
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class BST<Key extends Comparable<Key>,Value>
 {
 	private Node root;
@@ -180,7 +183,14 @@ public class BST<Key extends Comparable<Key>,Value>
 		return node.key;
 	}
 	
-	private Key
+	private Node select(Node node,int k)
+	{
+		if(node==null) return null;
+		int temp=size(node.left);
+		if(temp<k) return select(node.right,k-temp-1);
+		if(temp>k) return select(node.left,k);
+		return node;
+	}
 	
 	public void deleteMin()
 	{
@@ -210,13 +220,35 @@ public class BST<Key extends Comparable<Key>,Value>
 	
 	public int size(Key lo,Key hi)
 	{
+		if(lo.compareTo(hi)>0) return 0;
+		if(contains(hi)) return rank(hi)-rank(lo)+1;
+		else return rank(hi)-rank(lo);
 	}
 	
 	public Iterable<Key> keys(Key lo,Key hi)
 	{
+		List<Key> list=new ArrayList<Key>();
+		keys(root,list,lo,hi);
+		return list;
+	}
+	
+	private void keys(Node root,List<Key> list,Key lo,Key hi)
+	{
+		if(node==null) return;
+		int compLo=lo.compareTo(node.key);
+		if(compLo<0) keys(node.left,list,lo,hi);
+		int compHi=hi.compareTo(node.key);
+		if(compLo<=0&&compHi>=0) list.add(node.key);
+		if(compHi>0) keys(node.right,list,lo,hi);
+		
 	}
 	
 	public Iterable<Key> keys()
+	{
+		return keys(min(),max());
+	}
+	
+	public static void main(String[] args)
 	{
 	}
 }
