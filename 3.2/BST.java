@@ -42,7 +42,6 @@ public class BST<Key extends Comparable<Key>,Value>
 	
 	public Value get(Key key)
 	{
-		if(isEmpty()) return null;
 		return get(root, key);
 	}
 	
@@ -155,10 +154,13 @@ public class BST<Key extends Comparable<Key>,Value>
 		if(node==null) return null;
 		int comp=key.compareTo(node.key);
 		if(comp==0) return node;
-		if(comp>0) return ceiling(node.right,key);
-		Node temp=ceiling(node.left,key);
-		if(temp!=null) return temp;
-		return node;
+		if(comp<0)
+		{
+			Node temp=ceiling(node.left,key);
+			if(temp!=null) return temp;
+			return temp;
+		}
+		return ceiling(node.right,key);
 	}
 	
 	public int rank(Key key)
@@ -177,8 +179,8 @@ public class BST<Key extends Comparable<Key>,Value>
 	
 	public Key select(int k)
 	{
+		if(k<0||k>=size()) return null;
 		Node node=select(root,k);
-		if(node==null) return null;
 		return node.key;
 	}
 	
