@@ -26,12 +26,12 @@ public class BST<Key extends Comparable<Key>,Value>
 	public void put(Key key,Value value)
 	{
 		if(value==null) delete(key);
-		else root=put(rot,key,value);
+		else root=put(root,key,value);
 	}
 	
 	private Node put(Node node,Key key,Value value)
 	{
-		if(node==null) return new Node(node,key,1);
+		if(node==null) return new Node(key,value,1);
 		int comp=key.compareTo(node.key);
 		if(comp<0) node.left=put(node.left,key,value);
 		else if(comp>0) node.right=put(node.right,key,value);
@@ -57,7 +57,6 @@ public class BST<Key extends Comparable<Key>,Value>
 	
 	public void delete(Key key)
 	{
-		if(isEmpty()) return null;
 		root=delete(root,key);
 	}
 	
@@ -232,7 +231,7 @@ public class BST<Key extends Comparable<Key>,Value>
 		return list;
 	}
 	
-	private void keys(Node root,List<Key> list,Key lo,Key hi)
+	private void keys(Node node,List<Key> list,Key lo,Key hi)
 	{
 		if(node==null) return;
 		int compLo=lo.compareTo(node.key);
