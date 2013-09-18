@@ -251,5 +251,14 @@ public class BST<Key extends Comparable<Key>,Value>
 	
 	public static void main(String[] args)
 	{
+		BST<String,Integer> bst=new BST<String,Integer>();
+		for(int i=0;!StdIn.isEmpty();i++)
+		{
+			String s=StdIn.readString();
+			bst.put(s,i);
+		}
+		
+		for(String s:bst.keys())
+			StdOut.println(s+" "+bst.get(s));
 	}
 }
