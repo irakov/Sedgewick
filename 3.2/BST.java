@@ -1,5 +1,5 @@
 //algorithm 3.3 (398+399+407+409+411+413)
-
+//with 3.2.6(416)
 import java.util.List;
 import java.util.ArrayList;
 
@@ -247,6 +247,17 @@ public class BST<Key extends Comparable<Key>,Value>
 	public Iterable<Key> keys()
 	{
 		return keys(min(),max());
+	}
+	
+	public int height()
+	{
+		return height(root);
+	}
+	
+	private int height(Node node)
+	{
+		if(node==null) return -1;
+		return 1+Math.max(height(node.left),height(node.right));
 	}
 	
 	public static void main(String[] args)
