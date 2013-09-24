@@ -65,76 +65,50 @@ public class BSTNonRec<Key extends Comparable<Key>,Value>
 	
 	public void delete(Key key)
 	{
-		if(isEmpty()) return;
-		if(size()==1) 
-		{
-			root=null;
-			return;
-		}
-		
 		Node parent=null;
 		Node currentNode=root;
-		boolean isLeftChild=true;
 		
 		while(currentNode!=null)
 		{
-			int comp=key.compareTo(currentNode.key);
-			if(comp<0) 
-			{
-				currentNode=currentNode.left;
-				isLeftChild=true;
-			}
-			else if(comp>0)
-			{
-				currentNode=currentNode.right;
-				isLeftChild=true;
-			}
-			else break;
 			parent=currentNode;
+			int comp=key.compareTo(currentNode.key);
+			if(comp<0) currentNode=currentNode.left;
+			else if(comp>0) currentNode=currentNode.right;
+			else break;
 		}
 		
-		if(currentNode!=null)
+		if(currentNode==null) return;
+		if(currentNode.left==null&&currentNode.right==null)
 		{
-			if(currentNode.left==null)
-			{
-				if(isLeftChild) 
-				{
-					parent.left=currentNode.right;
-					return;
-				}
-				else
-				{
-					parent.right=currentNode.right;
-					return;
-				}
-			}
-			if(currentNode.right==null)
-			{
-				if(isLeftChild)
-				{
-					parent.left=currentNode.left;
-					return;
-				}
-				else
-				{
-					parent.right=currentNode.left;
-					return;
-				}
-			}
+			if(parent==null) root=null;
+			else if(key.compareTo(parent.key)<0) parent.left=null;
+			else parent.right=null;
 		}
-		
-		Node newNode=null;
-		if(isLeftChild)
+		else if(currentNode.left==null)
 		{
-			parent.left=min(currentNode.right);
-			parent.left.right=deleteMin(currentNode.right);
-			parent.left.left=currentNode.left;
+			if(key.compareTo(parent.key)<0) parent.left=currentNode.right;
+			else parent.right=currentNode.right;
+		}
+		else if(currentNode.right==null)
+		{
+			if(key.compareTo(parent.key)<0) parent.left=currentNode.left;
+			else parent.right=currentNode.left;
 		}
 		else
 		{
-			parent.right=min(currentNode.right);
-			parent.right.right=deleteMin(currentNode.right);
-			parent.right.left=currentNode.left;
+			Node temp=currentNode;
+			if(key.compareTo(parent.key)<0)
+			{
+				parent.left=min(temp.right);
+				parent.left.right=deleteMin(temp.right);
+				parent.left.left=temp.left;
+			}
+			else
+			{
+				parent.right=min(temp.right);
+				parent.right.right=deleteMin(temp.right);
+				parent.right.left=temp.left;
+			}
 		}
 	}
 	
@@ -270,10 +244,19 @@ public class BSTNonRec<Key extends Comparable<Key>,Value>
 		queue.enqueue(node);
 		while(queue.size()!=0)
 		{
-			result++;
 			Node innerNode=queue.dequeue();
-			result+=size(innerNode.left);
-			if(innerNode.right!=null) queue.enqueue(innerNode.right);
+			int comp=key.compareTo(innerNode.key);
+			if(comp<0&&innerNode.left!=null) queue.enqueue(innerNode.left);
+			else if(comp>0)
+			{
+				result+=1+size(innerNode.left);
+				if(innerNode.right!=null) queue.enqueue(innerNode.right);
+			}
+			else
+			{
+				result+=size(innerNode.left);
+				break;
+			}
 		}
 		
 		return result;
@@ -295,18 +278,14 @@ public class BSTNonRec<Key extends Comparable<Key>,Value>
 			int leftSize=size(temp.left);
 			if(leftSize<k)
 			{
-				k-=(leftSize+1);
+				k=k-leftSize-1;
 				temp=temp.right;
 			}
 			else if(leftSize>k) temp=temp.left;
-			else
-			{
-				temp=node;
-				break;
-			}
+			else return temp;
 		}
 		
-		return temp;
+		return null;
 	}
 	
 	public void deleteMin()
@@ -317,8 +296,9 @@ public class BSTNonRec<Key extends Comparable<Key>,Value>
 	private Node deleteMin(Node node)
 	{
 		Node temp=node;
-		while(temp.left!=null) temp=temp.left;
-		temp=temp.right;
+		while(temp.left!=null&&temp.left.left!=null) temp=temp.left;
+		if(temp.left!=null)
+			temp.left=temp.left.right;
 		return node;
 	}
 	
@@ -360,10 +340,10 @@ public class BSTNonRec<Key extends Comparable<Key>,Value>
 		{
 			Node tempNode=queue.dequeue();
 			int compLo=lo.compareTo(tempNode.key);
-			if(compLo<0) queue.enqueue(tempNode.left);
+			if(compLo<0&&tempNode.left!=null) queue.enqueue(tempNode.left);
 			int compHi=hi.compareTo(tempNode.key);
 			if(compLo<=0&&compHi>=0) list.add(tempNode.key);
-			if(compHi>0) queue.enqueue(tempNode.right);
+			if(compHi>0&&tempNode.right!=null) queue.enqueue(tempNode.right);
 		}
 	}
 	
