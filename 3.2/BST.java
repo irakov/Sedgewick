@@ -70,8 +70,8 @@ public class BST<Key extends Comparable<Key>,Value>
 			if(node.left==null) return node.right;
 			if(node.right==null) return node.left;
 			Node temp=node;
-			node=min(node.right);
-			node.right=deleteMin(node.right);
+			node=min(temp.right);
+			node.right=deleteMin(temp.right);
 			node.left=temp.left;
 		}
 		
@@ -172,7 +172,7 @@ public class BST<Key extends Comparable<Key>,Value>
 	{
 		if(node==null) return 0;
 		int comp=key.compareTo(node.key);
-		if(comp<0) return rank(node,key);
+		if(comp<0) return rank(node.left,key);
 		if(comp>0) return 1+size(node.left)+rank(node.right,key);
 		return size(node.left);
 	}
