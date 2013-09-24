@@ -7,7 +7,7 @@ public class BSTNonRec<Key extends Comparable<Key>,Value>
 {
 	private Node root;
 	
-	private class Node
+	private class Node implements Comparable<Node>
 	{
 		private Key key;
 		private Value value;
@@ -18,6 +18,11 @@ public class BSTNonRec<Key extends Comparable<Key>,Value>
 		{
 			this.key=key;
 			this.value=value;
+		}
+		
+		public int compareTo(Node other)
+		{
+			return this.key.compareTo(other.key);
 		}
 	}
 	
@@ -60,7 +65,7 @@ public class BSTNonRec<Key extends Comparable<Key>,Value>
 	
 	public void delete(Key key)
 	{
-		if(isEmpty() return;
+		if(isEmpty()) return;
 		if(size()==1) 
 		{
 			root=null;
@@ -81,7 +86,7 @@ public class BSTNonRec<Key extends Comparable<Key>,Value>
 			}
 			else if(comp>0)
 			{
-				currentNode=currenyNode.right;
+				currentNode=currentNode.right;
 				isLeftChild=true;
 			}
 			else break;
@@ -122,14 +127,14 @@ public class BSTNonRec<Key extends Comparable<Key>,Value>
 		if(isLeftChild)
 		{
 			parent.left=min(currentNode.right);
-			parent.left.rightChild=deleteMin(currentNode.right);
-			parent.left.leftChild=currentNode.left;
+			parent.left.right=deleteMin(currentNode.right);
+			parent.left.left=currentNode.left;
 		}
 		else
 		{
 			parent.right=min(currentNode.right);
-			parent.right.rightChild=deleteMin(currentNode.right);
-			parent.right.leftChild=currentNode.left;
+			parent.right.right=deleteMin(currentNode.right);
+			parent.right.left=currentNode.left;
 		}
 	}
 	
@@ -155,7 +160,7 @@ public class BSTNonRec<Key extends Comparable<Key>,Value>
 		int result=0;
 		Queue<Node> queue=new Queue<Node>();
 		queue.enqueue(node);
-		while(queue.result()!=0)
+		while(queue.size()!=0)
 		{
 			result++;
 			Node innerNode=queue.dequeue();
@@ -262,8 +267,8 @@ public class BSTNonRec<Key extends Comparable<Key>,Value>
 		
 		int result=0;
 		Queue<Node> queue=new Queue<Node>();
-		queue.enqueue(node)
-		while(queue.result()!=0)
+		queue.enqueue(node);
+		while(queue.size()!=0)
 		{
 			result++;
 			Node innerNode=queue.dequeue();
@@ -383,16 +388,16 @@ public class BSTNonRec<Key extends Comparable<Key>,Value>
 		{
 			NodeHeight temp=queue.dequeue();
 			int tempHeight=temp.getHeight()+1;
-			Node node=temp.getNode();
+			Node innerNode=temp.getNode();
 			if(maxHeight<tempHeight)
 				maxHeight=tempHeight;
-			if(node.left!=null) queue.enqueue(new NodeHeight(node.left,tempHeight));
-			if(node.right!=null) queue.enqueue(new NodeHeight(node.right,tempHeight));
+			if(innerNode.left!=null) queue.enqueue(new NodeHeight(innerNode.left,tempHeight));
+			if(innerNode.right!=null) queue.enqueue(new NodeHeight(innerNode.right,tempHeight));
 		}
 		return maxHeight;
 	}
 	
-	private class NodeHeight
+	private class NodeHeight implements Comparable<NodeHeight>
 	{
 		private Node node;
 		private int height;
@@ -405,6 +410,11 @@ public class BSTNonRec<Key extends Comparable<Key>,Value>
 		
 		public Node getNode(){return node;}
 		public int getHeight(){return height;}
+		
+		public int compareTo(NodeHeight other)
+		{
+			return this.node.key.compareTo(other.node.key);
+		}
 	}
 	
 	public static void main(String[] args)
