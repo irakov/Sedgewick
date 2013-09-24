@@ -158,7 +158,7 @@ public class BST<Key extends Comparable<Key>,Value>
 		{
 			Node temp=ceiling(node.left,key);
 			if(temp!=null) return temp;
-			return temp;
+			return node;
 		}
 		return ceiling(node.right,key);
 	}
