@@ -318,7 +318,7 @@ public class BSTNonRec<Key extends Comparable<Key>,Value>
 	{
 		root=deleteMin(root);
 	}
-	//to fix
+	
 	private Node deleteMin(Node node)
 	{
 		Node temp=node;
@@ -340,12 +340,21 @@ public class BSTNonRec<Key extends Comparable<Key>,Value>
 	{
 		root=deleteMax(root);
 	}
-	//to fix too
+	
 	private Node deleteMax(Node node)
 	{
 		Node temp=node;
-		while(temp.right!=null) temp=temp.right;
-		temp=temp.left;
+		int counter=0;
+		while(temp.right!=null&&temp.right.right!=null)
+		{
+			temp=temp.right;
+			counter++;
+		}
+		if(temp.right!=null)
+			temp.right=temp.right.left;
+			else temp=temp.left;
+			
+		if(counter==0) return temp;
 		return node;
 	}
 	
