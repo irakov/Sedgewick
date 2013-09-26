@@ -70,13 +70,21 @@ public class BSTNonRec<Key extends Comparable<Key>,Value>
 		
 		while(currentNode!=null)
 		{
-			parent=currentNode;
 			int comp=key.compareTo(currentNode.key);
-			if(comp<0) currentNode=currentNode.left;
-			else if(comp>0) currentNode=currentNode.right;
+			if(comp<0)
+			{
+				parent=currentNode;
+				currentNode=currentNode.left;
+			}
+			else 
+				if(comp>0) 
+				{
+					parent=currentNode;
+					currentNode=currentNode.right;
+				}
 			else break;
 		}
-		
+		 
 		if(currentNode==null) return;
 		if(currentNode.left==null&&currentNode.right==null)
 		{
@@ -86,28 +94,46 @@ public class BSTNonRec<Key extends Comparable<Key>,Value>
 		}
 		else if(currentNode.left==null)
 		{
-			if(key.compareTo(parent.key)<0) parent.left=currentNode.right;
-			else parent.right=currentNode.right;
+			if(parent==null) root=root.right;
+			else
+			{
+				if(key.compareTo(parent.key)<0) parent.left=currentNode.right;
+				else parent.right=currentNode.right;
+			}
 		}
 		else if(currentNode.right==null)
 		{
-			if(key.compareTo(parent.key)<0) parent.left=currentNode.left;
-			else parent.right=currentNode.left;
+			if(parent==null) root=root.left;
+			else
+			{
+				if(key.compareTo(parent.key)<0) parent.left=currentNode.left;
+				else parent.right=currentNode.left;
+			}
 		}
 		else
 		{
-			Node temp=currentNode;
-			if(key.compareTo(parent.key)<0)
+			if(parent==null)
 			{
-				parent.left=min(temp.right);
-				parent.left.right=deleteMin(temp.right);
-				parent.left.left=temp.left;
+				Node temp=min(root.right);
+				root.key=temp.key;
+				root.value=temp.value;
+				root.right=deleteMin(root.right);
 			}
 			else
 			{
-				parent.right=min(temp.right);
-				parent.right.right=deleteMin(temp.right);
-				parent.right.left=temp.left;
+				Node temp=currentNode;
+				if(key.compareTo(parent.key)<0)
+				{
+					parent.left=min(temp.right);
+					parent.left.right=deleteMin(temp.right);
+					parent.left.left=temp.left;
+				}
+				else
+				{
+					parent.right=min(temp.right);
+					parent.right.right=deleteMin(temp.right);
+					parent.right.left=temp.left;
+				}
 			}
 		}
 	}
@@ -292,13 +318,21 @@ public class BSTNonRec<Key extends Comparable<Key>,Value>
 	{
 		root=deleteMin(root);
 	}
-	
+	//to fix
 	private Node deleteMin(Node node)
 	{
 		Node temp=node;
-		while(temp.left!=null&&temp.left.left!=null) temp=temp.left;
+		int counter=0;
+		while(temp.left!=null&&temp.left.left!=null)
+		{
+			temp=temp.left;
+			counter++;
+		}
 		if(temp.left!=null)
 			temp.left=temp.left.right;
+		else temp=temp.right;
+		
+		if(counter==0) return temp;
 		return node;
 	}
 	
@@ -306,7 +340,7 @@ public class BSTNonRec<Key extends Comparable<Key>,Value>
 	{
 		root=deleteMax(root);
 	}
-	
+	//to fix too
 	private Node deleteMax(Node node)
 	{
 		Node temp=node;
