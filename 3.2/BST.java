@@ -1,5 +1,5 @@
 //algorithm 3.3 (398+399+407+409+411+413)
-//with 3.2.6(416)
+//with 3.2.6,3.2.29(1st print),3.2.30(1st print),3.2.31(1st print),3.2.32(1st print)(416+419+420)
 import java.util.List;
 import java.util.ArrayList;
 
@@ -260,6 +260,39 @@ public class BST<Key extends Comparable<Key>,Value>
 		return 1+Math.max(height(node.left),height(node.right));
 	}
 	
+	private boolean isBinaryTree(Node node)
+	{
+		if(node==null) return true;
+		if(node.left!=null&&node.nodesCount<=node.left.nodesCount) return false;
+		if(node.right!=null&&node.nodesCount<=node.right.nodesCount) return false;
+		return isBinaryTree(node.left)&&isBinaryTree(node.right);
+	}
+	
+	private boolean isOrdered(Node node,Key min,Key max)
+	{
+		if(node==null) return true;
+		if(node.key.compareTo(min)<0||node.key.compareTo(max)>0) return false;
+		if(node.left!=null&&node.left.key.compareTo(node.key)>=0) return false;
+		if(node.right!=null&&node.right.key.compareTo(node.key)<=0) return false;
+		return isOrdered(node.left,min,max)&&isOrdered(node.right,min,max);
+	}
+	
+	private boolean hasNoDuplicates(Node node)
+	{
+		if(node==null) return true;
+		if(node.left!=null&&node.left.key==node.key) return false;
+		if(node.right!=null&&node.right.key==node.key) return false;
+		return hasNoDuplicates(node.left)&&hasNoDuplicates(node.right);
+	}
+	
+	public boolean isBST()
+	{
+		if(!isBinaryTree(root)) return false;
+		if(!isOrdered(root,min(),max())) return false;
+		if(!hasNoDuplicates(root)) return false;
+		return true;
+	}
+	
 	public static void main(String[] args)
 	{
 		BST<String,Integer> bst=new BST<String,Integer>();
@@ -271,5 +304,7 @@ public class BST<Key extends Comparable<Key>,Value>
 		
 		for(String s:bst.keys())
 			StdOut.println(s+" "+bst.get(s));
+			
+		StdOut.println(bst.isBST());
 	}
 }
