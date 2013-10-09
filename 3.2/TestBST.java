@@ -1,9 +1,10 @@
+//taken from http://algs4.cs.princeton.edu/32bst/TestBST.java.html
 public class TestBST {
     public static void main(String[] args) { 
         String test = "S E A R C H E X A M P L E"; 
         String[] keys = test.split(" "); 
         int N = keys.length; 
-        BSTNonRec<String, Integer> st = new BSTNonRec<String, Integer>();
+        BSTThreading<String, Integer> st = new BSTThreading<String, Integer>();
         for (int i = 0; i < N; i++) 
             st.put(keys[i], i); 
 
@@ -77,6 +78,7 @@ public class TestBST {
         for (String s : st.keys()) 
             StdOut.println(s + " " + st.get(s)); 
         StdOut.println();
-
+		
+		StdOut.println(st.next("C".intern()));
     }
 }
