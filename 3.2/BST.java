@@ -299,7 +299,7 @@ public class BST<Key extends Comparable<Key>,Value>
 		return true;
 	}
 	
-	public void printLevel(Key key)
+	public void printLevel(Key key) //bread first traversal
 	{
 		StdOut.println("printLevel for "+key);
 		Node node=root;
@@ -324,6 +324,78 @@ public class BST<Key extends Comparable<Key>,Value>
 		StdOut.println();
 	}
 	
+	public void preOrderTraversal(Key key)
+	{
+		StdOut.println("preOrder traversal for "+key);
+		Node node=root;
+		while(node!=null)
+		{
+			int comp=key.compareTo(node.key);
+			if(comp==0) break;
+			else if(comp<0) node=node.left;
+			else node=node.right;
+		}
+		
+		preOrder(node);
+		StdOut.println();
+	}
+	
+	private void preOrder(Node node)
+	{
+		if(node==null) return;
+		StdOut.print(node.key+" ");
+		preOrder(node.left);
+		preOrder(node.right);
+	}
+	
+	public void inOrderTraversal(Key key)
+	{
+		StdOut.println("inOrder traversal for "+key);
+		Node node=root;
+		while(node!=null)
+		{
+			int comp=key.compareTo(node.key);
+			if(comp==0) break;
+			else if(comp<0) node=node.left;
+			else node=node.right;
+		}
+		
+		inOrder(node);
+		StdOut.println();
+	}
+	
+	private void inOrder(Node node)
+	{
+		if(node==null) return;
+		inOrder(node.left);
+		StdOut.print(node.key+" ");
+		inOrder(node.right);
+	}
+	
+	public void postOrderTraversal(Key key)
+	{
+		StdOut.println("postOrder traversal for "+key);
+		Node node=root;
+		while(node!=null)
+		{
+			int comp=key.compareTo(node.key);
+			if(comp==0) break;
+			else if(comp<0) node=node.left;
+			else node=node.right;
+		}
+	
+		postOrder(node);
+		StdOut.println();
+	}
+	
+	private void postOrder(Node node)
+	{
+		if(node==null) return;
+		postOrder(node.left);
+		postOrder(node.right);
+		StdOut.print(node.key+" ");
+	}
+	
 	public static void main(String[] args)
 	{
 		BST<String,Integer> bst=new BST<String,Integer>();
@@ -339,5 +411,8 @@ public class BST<Key extends Comparable<Key>,Value>
 		StdOut.println(bst.isBST());
 		
 		bst.printLevel("S".intern());
+		bst.preOrderTraversal("S".intern());
+		bst.inOrderTraversal("S".intern());
+		bst.postOrderTraversal("S".intern());
 	}
 }
