@@ -1,5 +1,6 @@
 //algorithm 3.3 (398+399+407+409+411+413)
 //with 3.2.6,3.2.29(1st print),3.2.30(1st print),3.2.31(1st print),3.2.32(1st print)(416+419+420)
+//with 3.2.37(420)
 import java.util.List;
 import java.util.ArrayList;
 
@@ -7,7 +8,7 @@ public class BST<Key extends Comparable<Key>,Value>
 {
 	private Node root;
 	
-	private class Node
+	private class Node implements Comparable<Node>
 	{
 		private Key key;
 		private Value value;
@@ -20,6 +21,11 @@ public class BST<Key extends Comparable<Key>,Value>
 			this.key=key;
 			this.value=value;
 			this.nodesCount=nodesCount;
+		}
+		
+		public int compareTo(Node other)
+		{
+			return this.key.compareTo(other.key);
 		}
 	}
 	
@@ -293,6 +299,31 @@ public class BST<Key extends Comparable<Key>,Value>
 		return true;
 	}
 	
+	public void printLevel(Key key)
+	{
+		StdOut.println("printLevel for "+key);
+		Node node=root;
+		while(node!=null)
+		{
+			int comp=key.compareTo(node.key);
+			if(comp==0) break;
+			else if(comp<0) node=node.left;
+			else node=node.right;
+		}
+		
+		if(node==null) return;
+		Queue<Node> queue=new Queue<Node>();
+		queue.enqueue(node);
+		while(!queue.isEmpty())
+		{
+			node=queue.dequeue();
+			StdOut.print(node.key+" ");
+			if(node.left!=null) queue.enqueue(node.left);
+			if(node.right!=null) queue.enqueue(node.right);
+		}
+		StdOut.println();
+	}
+	
 	public static void main(String[] args)
 	{
 		BST<String,Integer> bst=new BST<String,Integer>();
@@ -306,5 +337,7 @@ public class BST<Key extends Comparable<Key>,Value>
 			StdOut.println(s+" "+bst.get(s));
 			
 		StdOut.println(bst.isBST());
+		
+		bst.printLevel("S".intern());
 	}
 }
