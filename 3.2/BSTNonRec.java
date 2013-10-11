@@ -1,5 +1,5 @@
 //3.2.6+3.2.13+3.2.14 (417,418)
-
+//with 3.2.37(420)
 import java.util.List;
 import java.util.ArrayList;
 
@@ -440,6 +440,127 @@ public class BSTNonRec<Key extends Comparable<Key>,Value>
 		}
 	}
 	
+	public void printLevel(Key key) //bread first traversal
+	{
+		StdOut.println("printLevel for "+key);
+		Node node=root;
+		while(node!=null)
+		{
+			int comp=key.compareTo(node.key);
+			if(comp==0) break;
+			else if(comp<0) node=node.left;
+			else node=node.right;
+		}
+		
+		if(node==null) return;
+		Queue<Node> queue=new Queue<Node>();
+		queue.enqueue(node);
+		while(!queue.isEmpty())
+		{
+			node=queue.dequeue();
+			StdOut.print(node.key+" ");
+			if(node.left!=null) queue.enqueue(node.left);
+			if(node.right!=null) queue.enqueue(node.right);
+		}
+		StdOut.println();
+	}
+	
+	public void preOrderTraversal(Key key)
+	{
+		StdOut.println("preOrder traversal for "+key);
+		Node node=root;
+		while(node!=null)
+		{
+			int comp=key.compareTo(node.key);
+			if(comp==0) break;
+			else if(comp<0) node=node.left;
+			else node=node.right;
+		}
+		
+		Stack<Node> stack=new Stack<Node>();
+		while(!stack.isEmpty()||node!=null)
+		{
+			if(node!=null)
+			{
+				StdOut.print(node.key+" ");
+				if(node.right!=null) stack.push(node.right);
+				node=node.left;
+			}
+			else node=stack.pop();
+		}
+		
+		StdOut.println();
+	}
+	
+	public void inOrderTraversal(Key key)
+	{
+		StdOut.println("inOrder traversal for "+key);
+		Node node=root;
+		while(node!=null)
+		{
+			int comp=key.compareTo(node.key);
+			if(comp==0) break;
+			else if(comp<0) node=node.left;
+			else node=node.right;
+		}
+		
+		Stack<Node> stack=new Stack<Node>();
+		while(!stack.isEmpty()||node!=null)
+		{
+			if(node!=null)
+			{
+				stack.push(node);
+				node=node.left;
+			}
+			else
+			{
+				node=stack.pop();
+				StdOut.print(node.key+" ");
+				node=node.right;
+			}
+		}
+		
+		StdOut.println();
+	}
+	
+	public void postOrderTraversal(Key key)
+	{
+		StdOut.println("postOrder traversal for "+key);
+		Node node=root;
+		while(node!=null)
+		{
+			int comp=key.compareTo(node.key);
+			if(comp==0) break;
+			else if(comp<0) node=node.left;
+			else node=node.right;
+		}
+		
+		if(node==null) return;
+		
+		Stack<Node> stack=new Stack<Node>();
+		Node prevNode=null;
+		stack.push(node);
+		while(!stack.isEmpty())
+		{
+			node=stack.peek();
+			if(prevNode==null||prevNode.left==node||prevNode.right==node)
+				if(node.left!=null) stack.push(node.left);
+				else if(node.right!=null) stack.push(node.right);
+				else;
+			else if(node.left==prevNode)
+				if(node.right!=null) stack.push(node.right);
+				else;
+			else
+			{
+				StdOut.print(node.key+" ");
+				stack.pop();
+			}
+			prevNode=node;
+		}
+		
+		StdOut.println();
+	}
+	
 	public static void main(String[] args)
 	{
 		BSTNonRec<String,Integer> bst=new BSTNonRec<String,Integer>();
@@ -451,5 +572,10 @@ public class BSTNonRec<Key extends Comparable<Key>,Value>
 		
 		for(String s:bst.keys())
 			StdOut.println(s+" "+bst.get(s));
+			
+		bst.printLevel("S".intern());
+		bst.preOrderTraversal("S".intern());
+		bst.inOrderTraversal("S".intern());
+		bst.postOrderTraversal("S".intern());
 	}
 }
