@@ -201,6 +201,7 @@ public class BST<Key extends Comparable<Key>,Value>
 	
 	public void deleteMin()
 	{
+		if(isEmpty()) return;
 		root=deleteMin(root);
 	}
 	
@@ -214,6 +215,7 @@ public class BST<Key extends Comparable<Key>,Value>
 	
 	public void deleteMax()
 	{
+		if(isEmpty()) return;
 		root=deleteMax(root);
 	}
 	
