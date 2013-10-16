@@ -1,5 +1,6 @@
 //algorithm 3.4(439)
 //3.3.39,3.3.40,3.3.41(453-455)
+//3.3.33(452)
 
 import java.util.List;
 import java.util.ArrayList;
@@ -376,6 +377,73 @@ public class RedBlackBST<Key extends Comparable<Key>,Value>
 		return node;
 	}
 	
+	private boolean isBinaryTree(Node node)
+	{
+		if(node==null) return true;
+		if(node.left!=null&&node.nodesCount<=node.left.nodesCount) return false;
+		if(node.right!=null&&node.nodesCount<=node.right.nodesCount) return false;
+		return isBinaryTree(node.left)&&isBinaryTree(node.right);
+	}
+	
+	private boolean isOrdered(Node node,Key min,Key max)
+	{
+		if(node==null) return true;
+		if(node.key.compareTo(min)<0||node.key.compareTo(max)>0) return false;
+		if(node.left!=null&&node.left.key.compareTo(node.key)>=0) return false;
+		if(node.right!=null&&node.right.key.compareTo(node.key)<=0) return false;
+		return isOrdered(node.left,min,max)&&isOrdered(node.right,min,max);
+	}
+	
+	private boolean hasNoDuplicates(Node node)
+	{
+		if(node==null) return true;
+		if(node.left!=null&&node.left.key==node.key) return false;
+		if(node.right!=null&&node.right.key==node.key) return false;
+		return hasNoDuplicates(node.left)&&hasNoDuplicates(node.right);
+	}
+	
+	private boolean isBST()
+	{
+		if(!isBinaryTree(root)) return false;
+		if(!isOrdered(root,min(),max())) return false;
+		if(!hasNoDuplicates(root)) return false;
+		return true;
+	}
+	
+	private boolean is23(Node node)
+	{
+		if(node==null) return true;
+		if(isRed(node.right)) return false;
+		if(isRed(node)&&isRed(node.left)) return false;
+		return is23(node.left)&&is23(node.right);		
+	}
+	
+	private boolean isBalanced()
+	{
+		int black=0;
+		Node node=root;
+		while(node!=null)
+		{
+			if(!isRed(node)) black++;
+			node=node.left;
+		}
+		return isBalanced(root,black);
+	}
+	
+	private boolean isBalanced(Node node,int black)
+	{
+		if(node==null) return black==0;
+		if(!isRed(node)) black--;
+		return isBalanced(node.left,black)&&isBalanced(node.right,black);
+	}
+	
+	public boolean isRedBlackBST()
+	{
+		if(!isBST()) return false;
+		if(!is23(root)) return false;
+		return isBalanced();
+	}
+	
 	public static void main(String[] args)
 	{
 		RedBlackBST<String,Integer> bst=new RedBlackBST<String,Integer>();
@@ -386,5 +454,6 @@ public class RedBlackBST<Key extends Comparable<Key>,Value>
 		}
 		for(String s:bst.keys()) StdOut.println(s+" "+bst.get(s));
 		StdOut.println();
+		StdOut.println(bst.isRedBlackBST());
 	}
 }
