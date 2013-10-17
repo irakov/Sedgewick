@@ -10,7 +10,7 @@ public class RedBlackBST<Key extends Comparable<Key>,Value>
 	private static final boolean RED=true;
 	private static final boolean BLACK=false;
 	
-	public Node root;
+	private Node root;
 	
 	private class Node
 	{
