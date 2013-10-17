@@ -8,21 +8,24 @@ public class AVLTree<Key extends Comparable<Key>,Value>
 {
 	private Node root;
 	
-	private class Node
+	private class Node implements Comparable<Node>
 	{
 		private Key key;
 		private Value value;
 		private Node left;
 		private Node right;
 		private int nodesCount;
-		private int height;
 	
-		public Node(Key key,Value value,int height,int nodesCount)
+		public Node(Key key,Value value,int nodesCount)
 		{
 			this.key=key;
 			this.value=value;
-			this.height=height;
 			this.nodesCount=nodesCount;
+		}
+		
+		public int compareTo(Node other)
+		{
+			return this.key.compareTo(other.key);
 		}
 	}
 		
@@ -34,7 +37,7 @@ public class AVLTree<Key extends Comparable<Key>,Value>
 	
 	private Node put(Node node,Key key,Value value)
 	{
-		if(node==null) return new Node(key,value,0,1);
+		if(node==null) return new Node(key,value,1);
 		
 		int comp=key.compareTo(node.key);
 		if(comp==0) node.value=value;
@@ -80,7 +83,8 @@ public class AVLTree<Key extends Comparable<Key>,Value>
 			node.value=temp.value;
 			node.right=deleteMin(node.right);
 		}
-		
+		preOrderTraversal();
+		StdOut.println(node.key);
 		return balance(node);
 	}
 	
@@ -273,15 +277,15 @@ public class AVLTree<Key extends Comparable<Key>,Value>
 		
 		int leftHeight=-1;
 		int rightHeight=-1;
-		if(node.left!=null) leftHeight=node.left.height;
-		if(node.right!=null) rightHeight=node.right.height;
+		if(node.left!=null) leftHeight=height(node.left);
+		if(node.right!=null) rightHeight=height(node.right);
 		return leftHeight-rightHeight;
 	}
 	
 	private Node balance(Node node)
 	{
-		node.height=height(node);
 		int balance=balanceFactor(node);
+		StdOut.println("balance "+balance);
 		if(balance>1)
 		{
 			if(balanceFactor(node.left)<0) node.left=rotateLeft(node.left);
@@ -313,16 +317,33 @@ public class AVLTree<Key extends Comparable<Key>,Value>
 		return temp;
 	}
 	
+	public void preOrderTraversal()
+	{
+		preOrder(root);
+		StdOut.println();
+	}
+	
+	private void preOrder(Node node)
+	{
+		if(node==null) return;
+		StdOut.print(node.key+" ");
+		preOrder(node.left);
+		preOrder(node.right);
+	}
+	
 	public static void main(String[] args)
 	{
-		AVLTree<String,Integer> tree=new AVLTree<String,Integer>();
+		AVLTree<Integer,Integer> tree=new AVLTree<Integer,Integer>();
 		for(int i=0;!StdIn.isEmpty();i++)
 		{
-			String s=StdIn.readString();
+			Integer s=StdIn.readInt();
 			tree.put(s,i);
 		}
 		
-		for(String s:tree.keys())
-			StdOut.println(s+" "+tree.get(s));
+		StdOut.println("preorder after inserting keys");		
+		tree.preOrderTraversal();
+		tree.delete(76);
+		StdOut.println("preorder after deleting key 76");
+		tree.preOrderTraversal();
 	}
 }
