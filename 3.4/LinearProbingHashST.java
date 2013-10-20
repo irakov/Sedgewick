@@ -24,35 +24,42 @@ public class LinearProbingHashST<Key extends Comparable<Key>,Value>
 		this(INITIAL_CAPACITY,INITIAL_LOG_CAPACITY);
 	}
 	
-	public LinearProbingHashST(int tableSize)
+	public LinearProbingHashST(int capacity,int logCapacity)
 	{
-		this.tableSize=tableSize;
-		keys=(Key[])new Comparable[tableSize];
-		values=(Value[])new Object[tableSize];
+		this.capacity=capacity;
+		this.logCapacity=logCapacity;
+		keys=(Key[])new Comparable[capacity];
+		values=(Value[])new Object[capacity];
 	}
 	
 	private int hash(Key key)
 	{
-		return (key.hashCode()&0x7fffffff)%tableSize;
+		//to ensure all bits are taken into consideration
+		return (key.hashCode()&0x7fffffff)%PRIMES[logCapacity-3];
 	}
 	
-	private void resize(int newTableSize)
+	private void resize(int newCapacity)
 	{
-		LinearProbingHashST<Key,Value> temp=new LinearProbingHashST<Key,Value>(newTableSize);
+		int newLogCapacity;
+		if(newCapacity<capacity) newLogCapacity=logCapacity-1;
+		else newLogCapacity=logCapacity+1;
+		
+		LinearProbingHashST<Key,Value> temp=new LinearProbingHashST<Key,Value>(newCapacity,newLogCapacity);
 		for(int i=0;i<keys.length;i++)
 			if(keys[i]!=null) temp.put(keys[i],values[i]);
 		keys=temp.keys;
 		values=temp.values;
-		tableSize=newTableSize;
+		capacity=newCapacity;
+		logCapacity=newLogCapacity;
 	}
 	
 	public void put(Key key,Value value)
 	{
 		if(value==null) delete(key);
-		if(keyCount>=tableSize/2) resize(tableSize*2);
+		if(keyCount>=capacity/2) resize(capacity*2);
 		
 		int i=0;
-		for(i=hash(key);keys[i]!=null;i=(i+1)%tableSize)
+		for(i=hash(key);keys[i]!=null;i=(i+1)%capacity)
 			if(keys[i].equals(key))
 			{
 				values[i]=value;
@@ -65,7 +72,7 @@ public class LinearProbingHashST<Key extends Comparable<Key>,Value>
 	
 	public Value get(Key key)
 	{
-		for(int i=hash(key);keys[i]!=null;i=(i+1)%tableSize)
+		for(int i=hash(key);keys[i]!=null;i=(i+1)%capacity)
 			if(keys[i].equals(key)) return values[i];
 		return null;
 	}
@@ -75,12 +82,12 @@ public class LinearProbingHashST<Key extends Comparable<Key>,Value>
 		if(!contains(key)) return;
 		
 		int i=hash(key);
-		while(!keys[i].equals(key)) i=(i+1)%tableSize;
+		while(!keys[i].equals(key)) i=(i+1)%capacity;
 		keys[i]=null;
 		values[i]=null;
 		keyCount --;
 		
-		i=(i+1)%tableSize;
+		i=(i+1)%capacity;
 		while(keys[i]!=null)
 		{
 			Key tempKey=keys[i];
@@ -90,9 +97,9 @@ public class LinearProbingHashST<Key extends Comparable<Key>,Value>
 			keyCount--;
 		
 			put(tempKey,tempValue);
-			i=(i+1)%tableSize;
+			i=(i+1)%capacity;
 		}
-		if(keyCount<=tableSize/8) resize(tableSize/2);
+		if(keyCount>INITIAL_CAPACITY&&logCapacity>INITIAL_LOG_CAPACITY&&keyCount<=capacity/8) resize(capacity/2);
 	}
 	
 	public int size() {return keyCount; }
