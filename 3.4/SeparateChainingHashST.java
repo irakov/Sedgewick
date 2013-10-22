@@ -1,5 +1,5 @@
 //algorithm 3.5(465)
-//3.4.19(482)
+//3.4.9(480),3.3.418(482),3.4.19(482)
 //with resizing
 
 public class SeparateChainingHashST<Key extends Comparable<Key>,Value>
