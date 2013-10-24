@@ -11,31 +11,46 @@ public class SET<Key extends Comparable<Key>>
 	
 	public void add(Key key)
 	{
-		//todo
+		bst.put(key,1);
 	}
 	
 	public void delete(Key key)
 	{
-		//todo
+		bst.delete(key);
 	}
 	
 	public boolean contains(Key key)
 	{
-		//todo
+		return bst.contains(key);
 	}
 	
 	public boolean isEmpty()
 	{
-		//todo
+		return bst.isEmpty();
 	}
 	
 	public int size()
 	{
-		//todo
+		return bst.size();
 	}
 	
 	public String toString()
 	{
-		//todo
+		for(Key key:bst.keys())
+		{
+			StdOut.print(key+" ");
+		}
+		StdOut.println();
+	}
+	
+	public static void main(String[] args)
+	{
+		SET<String> set= new Set<String>();
+		while(!StdIn.isEmpty())
+			set.add(StdIn.readString());
+			
+		set.delete("S".intern());
+		
+		StdOu.println(set.toString());
 	}
 }
