@@ -42,7 +42,7 @@ public class HashSET<Key extends Comparable<Key>>
 			builder.append(key);
 			builder.append(" ");
 		}
-		return builđer.toString();
+		return builder.toString();
 	}
 	
 	public static void main(String[] args)
