@@ -36,21 +36,23 @@ public class SET<Key extends Comparable<Key>>
 	
 	public String toString()
 	{
+		StringBuilder builder=new StringBuilder();
 		for(Key key:bst.keys())
 		{
-			StdOut.print(key+" ");
+			builder.append(key);
+			builder.append(" ");
 		}
-		StdOut.println();
+		return builder.toString();
 	}
 	
 	public static void main(String[] args)
 	{
-		SET<String> set= new Set<String>();
+		SET<String> set= new SET<String>();
 		while(!StdIn.isEmpty())
 			set.add(StdIn.readString());
 			
 		set.delete("S".intern());
 		
-		StdOu.println(set.toString());
+		StdOut.println(set.toString());
 	}
 }
