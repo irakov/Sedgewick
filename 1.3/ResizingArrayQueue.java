@@ -3,6 +3,10 @@
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 
 public class ResizingArrayQueue<Item> implements Iterable<Item>
 {
@@ -84,19 +88,23 @@ public class ResizingArrayQueue<Item> implements Iterable<Item>
 	
 	public static void main(String[] args) throws EmptyQueueException
 	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		ResizingArrayQueue<String> s=new ResizingArrayQueue<String>();
 
-		while(!StdIn.isEmpty())
+		while(input.hasNext())
 		{
-			String item=StdIn.readString();
+			String item=input.next();
 			if(!item.equals("-"))
 				s.enqueue(item);
 			else if(!s.isEmpty())
-				StdOut.print(s.dequeue()+" ");
+				output.print(s.dequeue()+" ");
 		}
 		
-		StdOut.println("("+s.size()+" left in queue)");
+		output.println("("+s.size()+" left in queue)");
 		for(String st:s)
-			StdOut.print(st+" ");
+			output.print(st+" ");
+		output.println();
 	}
 }

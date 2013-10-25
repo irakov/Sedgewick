@@ -4,17 +4,24 @@
 //Ctrl+z
 
 import java.util.Stack;
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 
 public class DjikstraExpressionEvaluation
 {
 	public static void main(String[] args)
 	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		Stack<String> operators=new Stack<String>();
 		Stack<Double> values=new Stack<Double>();
 		
-		while(!StdIn.isEmpty())
+		while(input.hasNext())
 		{
-			String s=StdIn.readString();
+			String s=input.next();
 			if(s.equals("("))
 				;
 			else if(s.equals("+"))
@@ -46,6 +53,6 @@ public class DjikstraExpressionEvaluation
 			else values.push(Double.parseDouble(s));
 		}
 		
-		StdOut.println(values.pop());
+		output.println(values.pop());
 	}
 }

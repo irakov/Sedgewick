@@ -1,6 +1,11 @@
 //page 167
 //1.3.32
 import java.util.Iterator;
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
+
 
 public class Steque<Item extends Comparable<Item>> implements Iterable<Item>
 {
@@ -32,22 +37,26 @@ public class Steque<Item extends Comparable<Item>> implements Iterable<Item>
 	
 	public static void main(String[] args)
 	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+
 		Steque<String> s=new Steque<String>();
 
-		while(!StdIn.isEmpty())
+		while(input.hasNext())
 		{
-			String item=StdIn.readString();
+			String item=input.next();
 			if(item.substring(0,1).equals("+"))
 				s.enqueue(item.substring(1,item.length()));
 			else if(!item.equals("-"))
 				s.push(item);
 			else if(!s.isEmpty())
-				StdOut.print(s.pop()+" ");
+				output.print(s.pop()+" ");
 		}
 		
-		StdOut.println("("+s.size()+" left on steque)");
+		output.println("("+s.size()+" left on steque)");
 		
 		for(String st:s)
-			StdOut.print(st+" ");
+			output.print(st+" ");
+		output.println();
 	}
 }

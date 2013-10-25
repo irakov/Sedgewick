@@ -3,6 +3,10 @@
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 
 public class ResizingArrayStack<Item> implements Iterable<Item>
 {
@@ -68,18 +72,21 @@ public class ResizingArrayStack<Item> implements Iterable<Item>
 	
 	public static void main(String[] args) throws EmptyStackException
 	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		ResizingArrayStack<String> stack=new ResizingArrayStack<String>();
-		while(!StdIn.isEmpty())
+		while(input.hasNext())
 		{
-			String s=StdIn.readString();
+			String s=input.next();
 			if(!s.equals("-"))
 				stack.push(s);
 			else
 				if(!stack.isEmpty())
-					StdOut.println(stack.pop());
+					output.println(stack.pop());
 		}
-		StdOut.println("stack contains "+stack.size()+" items");
+		output.println("stack contains "+stack.size()+" items");
 		for(String s:stack)
-			StdOut.println(s);
+			output.println(s);
 	}
 }

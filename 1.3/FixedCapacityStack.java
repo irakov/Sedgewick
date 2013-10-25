@@ -1,5 +1,10 @@
 //page 135
 
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
+
 public class FixedCapacityStack<Item>
 {
 	private Item[] stack;
@@ -38,16 +43,19 @@ public class FixedCapacityStack<Item>
 	
 	public static void main(String[] args) throws FullStackException, EmptyStackException
 	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+		
 		FixedCapacityStack<String> stack=new FixedCapacityStack<String>(100);
-		while(!StdIn.isEmpty())
+		while(input.hasNext())
 		{
-			String s=StdIn.readString();
+			String s=input.next();
 			if(!s.equals("-"))
 				stack.push(s);
 			else
 				if(!stack.isEmpty())
-					StdOut.println(stack.pop());
+					output.println(stack.pop());
 		}
-		StdOut.println("stack contains "+stack.size()+" items");
+		output.println("stack contains "+stack.size()+" items");
 	}
 }

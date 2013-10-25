@@ -1,16 +1,24 @@
 //page 162
 //1.3.9
 
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
+
 public class LeftParentheses
 {
 	public static void main(String[] args)
 	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		Stack<String> reversedInputStack=new Stack<String>();
 		Stack<String> correctedStack=new Stack<String>();
 	
-		while(!StdIn.isEmpty())
+		while(input.hasNext())
 		{
-			String s=StdIn.readString();
+			String s=input.next();
 			reversedInputStack.push(s);
 		}
 		
@@ -78,7 +86,8 @@ public class LeftParentheses
 		while(!correctedStack.isEmpty())
 		{
 			String s=correctedStack.pop();
-			StdOut.print(s+" ");
+			output.print(s+" ");
 		}
+		output.println();
 	}
 }
