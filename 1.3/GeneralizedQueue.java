@@ -2,6 +2,8 @@
 //page 169
 
 import java.util.Iterator;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 
 public class GeneralizedQueue<Item extends Comparable<Item>> implements Iterable<Item>
 {
@@ -26,16 +28,19 @@ public class GeneralizedQueue<Item extends Comparable<Item>> implements Iterable
 	
 	public static void main(String[] args)
 	{
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		GeneralizedQueue<String> queue=new GeneralizedQueue<String>();
 
 		queue.insert("1");queue.insert("2");queue.insert("3");
-		StdOut.println(queue.delete(1));
+		output.println(queue.delete(1));
 		queue.insert("4");queue.insert("5");
 		queue.insert("6");queue.insert("7");
-		StdOut.println(queue.delete(4));
+		output.println(queue.delete(4));
 		queue.insert("8");queue.insert("9");queue.insert("10");
-		StdOut.println(queue.delete(6));
+		output.println(queue.delete(6));
 		for(String st:queue)
-			StdOut.print(st+" ");
+			output.print(st+" ");
+		output.println();
 	}
 }

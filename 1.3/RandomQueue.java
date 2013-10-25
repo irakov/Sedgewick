@@ -4,11 +4,23 @@
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
+import java.util.Random;
 
 public class RandomQueue<Item> implements Iterable<Item>
 {
+	private static Random random;
+
 	private Item[] queue=(Item[])new Object[1];
 	private int leftIndex,rightIndex;
+	
+	static
+	{
+		random=new Random(System.currentTimeMillis());
+	}
 	
 	private void resize(int newSize)
 	{
@@ -42,7 +54,7 @@ public class RandomQueue<Item> implements Iterable<Item>
 	{
 		if(isEmpty())
 			return null;
-		int position=leftIndex+StdRandom.uniform(rightIndex-leftIndex);
+		int position=leftIndex+random.nextInt(rightIndex-leftIndex);
 		Item result = queue[position];
 		queue[position]=queue[leftIndex];
 		queue[leftIndex]=null;
@@ -56,7 +68,7 @@ public class RandomQueue<Item> implements Iterable<Item>
 	{
 		if(isEmpty())
 			return null;
-		int position=leftIndex+StdRandom.uniform(rightIndex-leftIndex);
+		int position=leftIndex+random.nextInt(rightIndex-leftIndex);
 		Item result = queue[position];
 		queue[position]=queue[leftIndex];
 		queue[leftIndex]=result;
@@ -77,7 +89,7 @@ public class RandomQueue<Item> implements Iterable<Item>
 		{
 			for(int i=leftIndex;i<rightIndex;i++)
 			{
-				int j=i+StdRandom.uniform(rightIndex-i);
+				int j=i+random.nextInt(rightIndex-i);
 				Item temp=items[j];
 				items[j]=items[i];
 				items[i]=temp;
@@ -106,19 +118,23 @@ public class RandomQueue<Item> implements Iterable<Item>
 	
 	public static void main(String[] args) throws EmptyQueueException
 	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		RandomQueue<String> s=new RandomQueue<String>();
 
-		while(!StdIn.isEmpty())
+		while(input.hasNext())
 		{
-			String item=StdIn.readString();
+			String item=input.next();
 			if(!item.equals("-"))
 				s.enqueue(item);
 			else if(!s.isEmpty())
-				StdOut.print(s.dequeue()+" ");
+				output.print(s.dequeue()+" ");
 		}
 		
-		StdOut.println("sample from queue:"+s.sample());
+		output.println("sample from queue:"+s.sample());
 		for(String st:s)
-			StdOut.print(st+" ");
+			output.print(st+" ");
+		output.println();
 	}
 }

@@ -4,9 +4,21 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.lang.reflect.Array;
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
+import java.util.Random;
 
 public class RandomBag<Item extends Comparable<Item>> implements Iterable<Item>
 {
+	private static Random random;
+	
+	static
+	{
+		random=new Random(System.currentTimeMillis());
+	}
+	
 	private LinkedList<Item> list=new LinkedList<Item>();
 	
 	public boolean isEmpty(){return list.size()==0;}
@@ -35,7 +47,7 @@ public class RandomBag<Item extends Comparable<Item>> implements Iterable<Item>
 			}
 			for(i=0;i<items.length;i++)
 			{
-				int j=i+StdRandom.uniform(items.length-i);
+				int j=i+random.nextInt(items.length-i);
 				Item temp=items[i];
 				items[i]=items[j];
 				items[j]=temp;
@@ -64,14 +76,18 @@ public class RandomBag<Item extends Comparable<Item>> implements Iterable<Item>
 	
 	public static void main(String[] args)
 	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+		
 		RandomBag<String> b=new RandomBag<String>();
 
-		while(!StdIn.isEmpty())
-			b.add(StdIn.readString());
+		while(input.hasNext())
+			b.add(input.next());
 		
-		StdOut.println("("+b.size()+" items in bag)");
+		output.println("("+b.size()+" items in bag)");
 		
 		for(String s:b)
-			StdOut.print(s+" ");
+			output.print(s+" ");
+		output.println();
 	}
 }

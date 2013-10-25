@@ -2,6 +2,8 @@
 //1.3.31
 
 import java.util.Iterator; 
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 
 public class DoubleLinkedList<Item extends Comparable<Item>> implements Iterable<Item>
 {
@@ -172,22 +174,26 @@ public class DoubleLinkedList<Item extends Comparable<Item>> implements Iterable
 	
 	public static void main(String[] args)
 	{
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		DoubleLinkedList<Integer> list=new DoubleLinkedList<Integer>();
+		
+		
 		list.insertFirst(8);
 		list.insertFirst(1);
 		list.insertFirst(2);
 		list.insertFirst(3);
-		StdOut.println("list size "+list.size());
+		output.println("list size "+list.size());
 		for(Integer i:list)
 		{
-			StdOut.println("item "+i);
+			output.println("item "+i);
 		}
-		StdOut.println("popped first "+list.removeFirst());
-		StdOut.println("list size "+list.size());
-		StdOut.println("popped first "+list.removeFirst());
-		StdOut.println("list size "+list.size());
-		StdOut.println("popped first "+list.removeFirst());
-		StdOut.println("list size "+list.size());
+		output.println("popped first "+list.removeFirst());
+		output.println("list size "+list.size());
+		output.println("popped first "+list.removeFirst());
+		output.println("list size "+list.size());
+		output.println("popped first "+list.removeFirst());
+		output.println("list size "+list.size());
 		list.insertLast(4);
 		list.insertLast(5);
 		list.insertLast(8);
@@ -201,20 +207,20 @@ public class DoubleLinkedList<Item extends Comparable<Item>> implements Iterable
 		list.insertAfter(7,12);
 		list.insertFirst(10);
 		list.insertLast(8);
-		StdOut.println("list size "+list.size());
+		output.println("list size "+list.size());
 		for(Integer i:list)
 		{
-			StdOut.println("item "+i);
+			output.println("item "+i);
 		}
-		StdOut.println("popped last "+list.removeLast());
-		StdOut.println("popped last "+list.removeLast());
-		StdOut.println("popped first "+list.removeFirst());
-		StdOut.println("popped first "+list.remove(0));
-		StdOut.println("popped 2nd "+list.remove(1));
-		StdOut.println("list size "+list.size());
+		output.println("popped last "+list.removeLast());
+		output.println("popped last "+list.removeLast());
+		output.println("popped first "+list.removeFirst());
+		output.println("popped first "+list.remove(0));
+		output.println("popped 2nd "+list.remove(1));
+		output.println("list size "+list.size());
 		for(Integer i:list)
 		{
-			StdOut.println("item "+i);
+			output.println("item "+i);
 		}
 	}
 }

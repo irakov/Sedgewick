@@ -1,6 +1,9 @@
 //1.3.44
 //page 170
 
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
+
 public class TextEditorBuffer
 {
 	private int size;
@@ -63,6 +66,8 @@ public class TextEditorBuffer
 	
 	public static void main(String[] args)
 	{
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		TextEditorBuffer buffer=new TextEditorBuffer();
 		buffer.insert("a");
 		buffer.insert("b");
@@ -70,7 +75,7 @@ public class TextEditorBuffer
 		buffer.insert("d");
 		buffer.insert("e");
 		buffer.left(2);
-		StdOut.println(buffer.delete());
-		StdOut.println(buffer.size());
+		output.println(buffer.delete());
+		output.println(buffer.size());
 	}
 }

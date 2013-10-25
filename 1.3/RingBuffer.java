@@ -2,6 +2,10 @@
 //page 169
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 
 public class RingBuffer<Item> implements Iterable<Item>
 {
@@ -82,18 +86,23 @@ public class RingBuffer<Item> implements Iterable<Item>
 	
 	public static void main(String[] args)
 	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		RingBuffer<String> ring=new RingBuffer<String>(5);
 		
-		while(!StdIn.isEmpty())
+		while(input.hasNext())
 		{
-			String item=StdIn.readString();
+			String item=input.next();
 			if(!item.equals("-"))
 				ring.enqueue(item);
 			else if(!ring.isEmpty())
-				StdOut.print(ring.dequeue()+" ");
+				output.print(ring.dequeue()+" ");
 		}
-		
+		output.println();
 		for(String st:ring)
-			StdOut.print(st+" ");
+			output.print(st+" ");
+			
+		output.println();
 	}
 }

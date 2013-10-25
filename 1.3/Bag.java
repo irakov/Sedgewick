@@ -2,6 +2,10 @@
 //algorithm 1.4
 
 import java.util.Iterator;
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 
 public class Bag<Item extends Comparable<Item>> implements Iterable<Item>
 {
@@ -23,14 +27,19 @@ public class Bag<Item extends Comparable<Item>> implements Iterable<Item>
 	
 	public static void main(String[] args)
 	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		Bag<String> b=new Bag<String>();
 
-		while(!StdIn.isEmpty())
-			b.add(StdIn.readString());
+		while(input.hasNext())
+			b.add(input.next());
 		
-		StdOut.println("("+b.size()+" items in bag)");
+		output.println("("+b.size()+" items in bag)");
 		
 		for(String s:b)
-			StdOut.print(s+" ");
+			output.print(s+" ");
+			
+		output.println();
 	}
 }

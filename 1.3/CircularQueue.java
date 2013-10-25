@@ -2,6 +2,10 @@
 //1.3.29
 
 import java.util.Iterator;
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 
 public class CircularQueue<Item extends Comparable<Item>> implements Iterable<Item>
 {
@@ -28,17 +32,19 @@ public class CircularQueue<Item extends Comparable<Item>> implements Iterable<It
 	
 	public static void main(String[] args)
 	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		CircularQueue<String> s=new CircularQueue<String>();
-
-		while(!StdIn.isEmpty())
+		while(input.hasNext())
 		{
-			String item=StdIn.readString();
+			String item=input.next();
 			if(!item.equals("-"))
 				s.enqueue(item);
 			else if(!s.isEmpty())
-				StdOut.print(s.dequeue()+" ");
+				output.print(s.dequeue()+" ");
 		}
 		
-		StdOut.println("("+s.size()+" left in queue)");
+		output.println("("+s.size()+" left in queue)");
 	}
 }
