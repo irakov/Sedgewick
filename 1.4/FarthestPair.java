@@ -1,6 +1,9 @@
 //1.4.17
 //page 210
 
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
+
 public class FarthestPair
 {
 	public PairResult find(int[] a)
@@ -49,9 +52,11 @@ public class FarthestPair
 	
 	public static void main(String[] args)
 	{
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		FarthestPair fp=new FarthestPair();
 		int[] a={-11,12,113,0,29,7,2,22};
 		PairResult result=fp.find(a);
-		StdOut.println(result.value1+" "+result.value2+" "+result.difference);
+		output.println(result.value1+" "+result.value2+" "+result.difference);
 	}
 }

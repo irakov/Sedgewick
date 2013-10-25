@@ -1,5 +1,9 @@
 //1.4.22
 //page 211
+
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
+
 public class BinarySearchWithAdditionAndSubstraction
 {
 	public boolean isInArray(int[] a,int term)
@@ -56,8 +60,10 @@ public class BinarySearchWithAdditionAndSubstraction
 	
 	public static void main(String[] args)
 	{
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		BinarySearchWithAdditionAndSubstraction bs=new BinarySearchWithAdditionAndSubstraction();
 		int a[]={1,2,4,5,6,7,8,9,10,11,14,15,16,18};
-		StdOut.println(bs.isInArray(a,14));
+		output.println(bs.isInArray(a,14));
 	}
 }

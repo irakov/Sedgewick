@@ -1,6 +1,9 @@
 //1.4.18
 //page 210
 
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
+
 public class LocalMinInArray
 {
 	public Result find(int[] a)
@@ -40,12 +43,14 @@ public class LocalMinInArray
 	
 	public static void main(String[] args)
 	{	
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		LocalMinInArray l=new LocalMinInArray();
 		int[] a={-5,-1,1,9,10,7,11};
 		Result res=l.find(a);
 		if(res==null)
-			StdOut.println("none found");
+			output.println("none found");
 		else
-			StdOut.println(a[res.position]);
+			output.println(a[res.position]);
 	}
 }

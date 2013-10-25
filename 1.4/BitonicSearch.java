@@ -1,5 +1,9 @@
 //1.4.20
 //page 210
+
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
+
 public class BitonicSearch
 {
 	public boolean isInArray(int[] a,int term)
@@ -69,8 +73,10 @@ public class BitonicSearch
 	
 	public static void main(String[] args)
 	{
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		BitonicSearch s=new BitonicSearch();
 		int[] a={0,2,4,6,10,12,9,7,5,3,2,-1};
-		StdOut.println(s.isInArray(a,8));
+		output.println(s.isInArray(a,8));
 	}
 }

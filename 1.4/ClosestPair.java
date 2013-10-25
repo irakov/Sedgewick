@@ -2,6 +2,8 @@
 //page 210
 
 import java.util.Arrays;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 
 public class ClosestPair
 {
@@ -62,9 +64,11 @@ public class ClosestPair
 	
 	public static void main(String[] args)
 	{
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		ClosestPair cp=new ClosestPair();
 		int[] a={-11,12,113,0,29,7,2,22};
 		PairResult result=cp.find(a);
-		StdOut.println(result.value1+" "+result.value2+" "+result.difference);
+		output.println(result.value1+" "+result.value2+" "+result.difference);
 	}
 }

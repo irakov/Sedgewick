@@ -1,6 +1,9 @@
 //1.4.19
 //page 210
 
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
+
 public class LocalMinInMatrix
 {
 //assuming we can also use the margins, we have a guaranteed local minimum
@@ -72,9 +75,11 @@ public class LocalMinInMatrix
 	
 	public static void main(String[] args)
 	{
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		LocalMinInMatrix l=new LocalMinInMatrix();
 		int[][] a={{1,2,3,4},{5,6,7,8},{9,-1,11,12},{13,14,15,16}};
 		Coords result=l.find(a,4);
-		StdOut.println(result.line+" "+result.col);
+		output.println(result.line+" "+result.col);
 	}
 }
