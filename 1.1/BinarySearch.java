@@ -1,5 +1,4 @@
 //page 9
-//run with C:\java\Sedgewick\1.1>javac BinarySearch.java -Xlint:deprecation
 
 import java.util.Arrays;
 import java.io.File;

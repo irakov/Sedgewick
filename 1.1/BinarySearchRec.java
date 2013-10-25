@@ -1,6 +1,14 @@
 //page 25
 
 import java.util.Arrays;
+import java.io.File;
+import java.io.IOException;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class BinarySearchRec
 {
@@ -25,15 +33,48 @@ public class BinarySearchRec
 	
 	public static void main(String[] args)
 	{
-		int[] whitelist=In.readInts(args[0]);
-		
+		int[] whitelist=readInts(args[0]);
 		Arrays.sort(whitelist);
 		
-		while(!StdIn.isEmpty())
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+		
+		while(input.hasNext())
 		{
-			int key=StdIn.readInt();
+			int key=input.nextInt();
 			if(rank(key,whitelist)==-1)
-				StdOut.println(key);
+				output.println(key);
+		}
+	}
+	
+	private static int[] readInts(String fileName)
+	{
+		Pattern whitespacePattern=Pattern.compile("\\p{javaWhitespace}+");
+		Pattern everythingPattern=Pattern.compile("\\A");
+	
+		File file=new File(fileName);
+		try
+		{
+			int[] result = null;
+			Scanner scanner=new Scanner(file);
+			while(scanner.hasNextLine())
+			{
+				String input=scanner.useDelimiter(everythingPattern).next();
+				scanner.useDelimiter(whitespacePattern);
+				
+				ArrayList<String> tokens=new ArrayList<String>(Arrays.asList(whitespacePattern.split(input)));
+				if(tokens.get(0).length()==0) tokens.remove(0);
+				
+				result=new int[tokens.size()];
+				for(int i=0;i<result.length;i++) result[i]=Integer.parseInt(tokens.get(i));
+			}
+			
+			return result;
+		}
+		catch(IOException ex)
+		{
+			System.err.println("Cannot open "+fileName);
+			return null;
 		}
 	}
 }
