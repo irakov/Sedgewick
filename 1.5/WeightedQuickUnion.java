@@ -1,6 +1,11 @@
 //algorithm 1.5
 //page 228
 
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+
 public class WeightedQuickUnion
 {
 	private int[] id;
@@ -57,18 +62,21 @@ public class WeightedQuickUnion
 	
 	public static void main(String[] args)
 	{
-		int size=StdIn.readInt();
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
+		int size=input.nextInt();
 		WeightedQuickUnion wqu=new WeightedQuickUnion(size);
-		while(!StdIn.isEmpty())
+		while(input.hasNext())
 		{
-			int p=StdIn.readInt();
-			int q=StdIn.readInt();
+			int p=input.nextInt();
+			int q=input.nextInt();
 			if(wqu.connected(p,q))
 				continue;
 			wqu.union(p,q);
-			StdOut.println(p+" "+q);
+			output.println(p+" "+q);
 		}
 		
-		StdOut.println("There are "+wqu.count()+" components");
+		output.println("There are "+wqu.count()+" components");
 	}
 }

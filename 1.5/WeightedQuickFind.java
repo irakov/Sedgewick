@@ -1,6 +1,11 @@
 //1.5.11
 //page 236
 
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+
 public class WeightedQuickFind
 {
 	private int[] id;
@@ -59,18 +64,21 @@ public class WeightedQuickFind
 	
 	public static void main(String[] args)
 	{
-		int size=StdIn.readInt();
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
+		int size=input.nextInt();
 		WeightedQuickFind wqf=new WeightedQuickFind(size);
-		while(!StdIn.isEmpty())
+		while(input.hasNext())
 		{
-			int p=StdIn.readInt();
-			int q=StdIn.readInt();
+			int p=input.nextInt();
+			int q=input.nextInt();
 			if(wqf.connected(p,q))
 				continue;
 			wqf.union(p,q);
-			StdOut.println(p+" "+q);
+			output.println(p+" "+q);
 		}
 		
-		StdOut.println("There are "+wqf.count()+" components");
+		output.println("There are "+wqf.count()+" components");
 	}
 }

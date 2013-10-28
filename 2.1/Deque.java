@@ -1,5 +1,9 @@
 //1.3.33
 import java.util.Iterator;
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 
 public class Deque<Item extends Comparable<Item>> implements Iterable<Item>
 {
@@ -24,22 +28,26 @@ public class Deque<Item extends Comparable<Item>> implements Iterable<Item>
 	
 	public static void main(String[] args)
 	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		Deque<String> deque=new Deque<String>();
-		while(!StdIn.isEmpty())
+		while(input.hasNext())
 		{
-			String s=StdIn.readString();
+			String s=input.next();
 			if(s.substring(0,2).equals(">|"))
 				deque.pushLeft(s.substring(2,s.length()));
 			else if(s.substring(0,2).equals("<|"))
-				StdOut.print(deque.popLeft()+" ");
+				output.print(deque.popLeft()+" ");
 			else if(s.substring(0,2).equals("|<"))
 				deque.pushRight(s.substring(2,s.length()));
 			else if(s.substring(0,2).equals("|>"))
-				StdOut.print(deque.popRight()+" ");
+				output.print(deque.popRight()+" ");
 		}
 		
-		StdOut.println("("+deque.size()+" items left in deque)");
+		output.println("("+deque.size()+" items left in deque)");
 		for(String s:deque)
-			StdOut.print(s+" ");
+			output.print(s+" ");
+		output.println();
 	}
 }

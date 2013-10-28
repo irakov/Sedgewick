@@ -1,6 +1,11 @@
 //1.5.14
 //page 237
 
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
+
 public class WeightedQuickUnionByHeight
 {
 	private int[] id;
@@ -59,18 +64,21 @@ public class WeightedQuickUnionByHeight
 	
 	public static void main(String[] args)
 	{
-		int height=StdIn.readInt();
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+		
+		int height=input.nextInt();
 		WeightedQuickUnionByHeight wqu=new WeightedQuickUnionByHeight(height);
-		while(!StdIn.isEmpty())
+		while(input.hasNext())
 		{
-			int p=StdIn.readInt();
-			int q=StdIn.readInt();
+			int p=input.nextInt();
+			int q=input.nextInt();
 			if(wqu.connected(p,q))
 				continue;
 			wqu.union(p,q);
-			StdOut.println(p+" "+q);
+			output.println(p+" "+q);
 		}
 		
-		StdOut.println("There are "+wqu.count()+" components");
+		output.println("There are "+wqu.count()+" components");
 	}
 }

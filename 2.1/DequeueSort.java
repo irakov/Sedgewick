@@ -1,6 +1,14 @@
 //algorithm 2.1.14
 //page 265
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.regex.Pattern;
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
+
 public class DequeueSort<Item extends Comparable<Item>>
 {
 	public void sort(Deque<Item> deque)
@@ -33,13 +41,37 @@ public class DequeueSort<Item extends Comparable<Item>>
 	
 	public static void main(String[] args)
 	{
-		String[] a=In.readStrings();
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+		
+		String[] a=readStrings();
 		DequeueSort<String> ds=new DequeueSort<String>();
 		Deque<String> deque=new Deque<String>();
 		for(int i=0;i<a.length;i++)
 			deque.pushRight(a[i]);
 		ds.sort(deque);
 		for(int i=0;i<a.length;i++)
-			StdOut.print(deque.popLeft()+" ");
+			output.print(deque.popLeft()+" ");
+			
+		output.println();
+	}
+	
+	private static String[] readStrings()
+	{
+		Pattern everythingPattern=Pattern.compile("\\A");
+		Pattern whitespacePattern=Pattern.compile("\\p{javaWhitespace}+");
+		
+		Scanner scanner=new Scanner(new BufferedInputStream(System.in));
+		String input="";
+		
+		if(scanner.hasNextLine())
+		{
+			input=scanner.useDelimiter(everythingPattern).next();
+			scanner.useDelimiter(whitespacePattern);
+		}
+		
+		ArrayList<String> tokens=new ArrayList<String>(Arrays.asList(whitespacePattern.split(input)));
+		if(tokens.get(0).length()==0) tokens.remove(0);
+		
+		return tokens.toArray(new String[tokens.size()]);
 	}
 }
