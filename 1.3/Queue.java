@@ -25,6 +25,12 @@ public class Queue<Item extends Comparable<Item>> implements Iterable<Item>
 		return list.removeFirst();
 	}
 	
+	public Item peek()
+	{
+		return list.getFirst().item;
+	}
+
+	
 	public Iterator<Item> iterator()
 	{
 		return new LinkedListIterator<Item>(list);

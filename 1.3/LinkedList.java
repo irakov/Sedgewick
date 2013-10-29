@@ -163,6 +163,37 @@ public class LinkedList<Item extends Comparable<Item>> implements Iterable<Item>
 		}
 	}
 	
+	public void insert(Item item, int k)
+	{
+		if(first==null || last==null)
+			return;
+		if(k==0)
+		{
+			insertFirst(item);
+			return;
+		}
+		if(k==size)
+		{
+			insertLast(item);
+			return;
+		}
+		if(k>size)
+			return;
+		
+		Node currentNode=first;
+		for(int i=0;i<k;i++)
+			currentNode=currentNode.next;
+		
+		Node node=new Node();
+		node.item=item;
+		Node nextNode=currentNode.next;
+		
+		currentNode.next=node;
+		node.next=nextNode;
+		size++;
+	}
+
+	
 	public void removeAll(Item item)
 	{
 		if(first==null||last==null)

@@ -2,6 +2,13 @@
 //page 286
 
 import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.regex.Pattern;
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 
 public class SortableLinkedList<Item extends Comparable<Item>> implements Iterable<Item>
 {
@@ -208,12 +215,34 @@ public class SortableLinkedList<Item extends Comparable<Item>> implements Iterab
 
 	public static void main(String[] args)
 	{
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		SortableLinkedList<String> list=new SortableLinkedList<String>();
-		String[] a=In.readStrings();
+		String[] a=readStrings();
 		for(String s:a)
 			list.insertLast(s);
 		list.sort();
 		for(String str:list)
-			StdOut.print(str);
+			output.print(str);
+	}
+	
+	private static String[] readStrings()
+	{
+		Pattern everythingPattern=Pattern.compile("\\A");
+		Pattern whitespacePattern=Pattern.compile("\\p{javaWhitespace}+");
+		
+		Scanner scanner=new Scanner(new BufferedInputStream(System.in));
+		String input="";
+		
+		if(scanner.hasNextLine())
+		{
+			input=scanner.useDelimiter(everythingPattern).next();
+			scanner.useDelimiter(whitespacePattern);
+		}
+		
+		ArrayList<String> tokens=new ArrayList<String>(Arrays.asList(whitespacePattern.split(input)));
+		if(tokens.get(0).length()==0) tokens.remove(0);
+		
+		return tokens.toArray(new String[tokens.size()]);
 	}
 }
