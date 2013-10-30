@@ -2,6 +2,11 @@
 //partially solves 2.5.19 (isSolvable)
 //using http://www.cs.princeton.edu/courses/archive/spr08/cos226/assignments/8puzzle.html
 
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
+
 public class Puzzle
 {
 	static int inversionsCount=0;
@@ -60,15 +65,18 @@ public class Puzzle
 
 	public static void main(String[] args)
 	{
-		int dimension=StdIn.readInt();
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
+		int dimension=input.nextInt();
 		int[][] tiles=new int[dimension][dimension];
 		for(int i=0;i<dimension;i++)
 			for(int j=0;j<dimension;j++)
-				tiles[i][j]=StdIn.readInt();
+				tiles[i][j]=input.nextInt();
 				
 		if(!isSolvable(tiles))
 		{
-			StdOut.println("not solvable");
+			output.println("not solvable");
 			return;
 		}
 		
@@ -96,6 +104,6 @@ public class Puzzle
 			}
 		}
 		
-		StdOut.println(solution.min().toString());
+		output.println(solution.min().toString());
 	}
 }

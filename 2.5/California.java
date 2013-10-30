@@ -2,6 +2,11 @@
 
 import java.util.Comparator;
 import java.util.Arrays;
+import java.util.Scanner;
+import java.util.regex.Pattern;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 
 public class California
 {
@@ -28,10 +33,23 @@ public class California
 	
 	public static void main(String[] args)
 	{
-		String[] candidates=StdIn.readAll().toUpperCase().split("\\n+");
+		Pattern everythingPattern=Pattern.compile("\\A");
+		Pattern whitespacePattern=Pattern.compile("\\p{javaWhitespace}+");
+		
+		Scanner scanner=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+		
+		String input="";
+		while(scanner.hasNext())
+		{
+			input=scanner.useDelimiter(everythingPattern).next();
+			scanner.useDelimiter(whitespacePattern);
+		}
+		
+		String[] candidates=input.toUpperCase().split("\\n+");
 		int count=candidates.length;
 		Arrays.sort(candidates,California.CANDIDATES_ORDER);
 		for(int i=0;i<count;i++)
-			StdOut.println(candidates[i]);
+			output.println(candidates[i]);
 	}
 }

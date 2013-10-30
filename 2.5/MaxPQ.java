@@ -1,6 +1,11 @@
 //algorithm 2.6 (+2.4.22+2.4.26)
 //page 309+318
+
 import java.util.NoSuchElementException;
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 
 public class MaxPQ<Key extends Comparable<Key>>
 {
@@ -110,12 +115,16 @@ public class MaxPQ<Key extends Comparable<Key>>
 	
 	public static void main(String[] args) 
 	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
         MaxPQ<String> pq = new MaxPQ<String>();
-        while (!StdIn.isEmpty()) {
-            String item = StdIn.readString();
+        while (input.hasNext()) 
+		{
+            String item = input.next();
             if (!item.equals("-")) pq.insert(item);
-            else if (!pq.isEmpty()) StdOut.print(pq.removeMax() + " ");
+            else if (!pq.isEmpty()) output.print(pq.removeMax() + " ");
         }
-        StdOut.println("(" + pq.size() + " left on pq)");
+        output.println("(" + pq.size() + " left on pq)");
     }
 }

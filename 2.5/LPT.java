@@ -1,19 +1,26 @@
 //2.5.13
 
 import java.util.Arrays;
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 
 public class LPT
 {
 	public static void main(String[] args)
 	{
-		int cpuCount=StdIn.readInt();
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
 	
-		int size=StdIn.readInt();
+		int cpuCount=input.nextInt();
+	
+		int size=input.nextInt();
 		Job[] jobs=new Job[size];
 		for(int i=0;i<size;i++)
 		{
-			String jobName=StdIn.readString();
-			double jobDuration=StdIn.readDouble();
+			String jobName=input.next();
+			double jobDuration=input.nextDouble();
 			jobs[i]=new Job(jobName,jobDuration);
 		}
 		
@@ -31,6 +38,6 @@ public class LPT
 		}
 		
 		for(int i=0;i<cpuCount;i++)
-			StdOut.println(procs.removeMin());
+			output.println(procs.removeMin());
 	}
 }

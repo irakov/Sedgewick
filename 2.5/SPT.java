@@ -1,25 +1,34 @@
 //2.5.12
 
 import java.util.Arrays;
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 
 public class SPT
 {
 	public static void main(String[] args)
 	{
-		int size=StdIn.readInt();
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
+		int size=input.nextInt();
 		Job[] jobs=new Job[size];
 		for(int i=0;i<size;i++)
 		{
-			String jobName=StdIn.readString();
-			double jobDuration=StdIn.readDouble();
+			String jobName=input.next();
+			double jobDuration=input.nextDouble();
 			jobs[i]=new Job(jobName,jobDuration);
 		}
 		
 		Arrays.sort(jobs);
 		
-		StdOut.println();
-		StdOut.println("sorted jobs");
+		output.println();
+		output.println("sorted jobs");
 		for(int i=0;i<size;i++)
-			StdOut.print(jobs[i]+" ");
+			output.print(jobs[i]+" ");
+		
+		output.println();
 	}
 }
