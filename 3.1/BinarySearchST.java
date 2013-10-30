@@ -4,6 +4,10 @@
 import java.util.NoSuchElementException;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 
 public class BinarySearchST<Key extends Comparable<Key>,Value>
 {
@@ -203,15 +207,18 @@ public class BinarySearchST<Key extends Comparable<Key>,Value>
 	
 	public static void main(String[] args)
 	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+		
 		BinarySearchST<String, Integer> bs=new BinarySearchST<String, Integer>(5);
-		for(int i=0;!StdIn.isEmpty();i++)
+		for(int i=0;input.hasNext();i++)
 		{
-			String s=StdIn.readString();
+			String s=input.next();
 			bs.put(s,i);
 		}
-		StdOut.println(bs.size());
+		output.println(bs.size());
 		for(String s:bs.keys())
-			StdOut.println(s+" "+bs.get(s));
+			output.println(s+" "+bs.get(s));
 	}
 }
 

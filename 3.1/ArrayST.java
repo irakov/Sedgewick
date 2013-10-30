@@ -3,6 +3,10 @@
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 
 public class ArrayST<Key,Value>
 {
@@ -122,15 +126,18 @@ public class ArrayST<Key,Value>
 	
 	public static void main(String[] args)
 	{	
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		ArrayST<String,Integer> st=new ArrayST<String,Integer>(5);
-		for(int i=0;!StdIn.isEmpty();i++)
+		for(int i=0;input.hasNext();i++)
 		{
-			String s=StdIn.readString();
+			String s=input.next();
 			st.put(s,i);
 		}
 		for(String s:st.keys())
-			StdOut.println(s+" "+st.get(s));
+			output.println(s+" "+st.get(s));
 		for(String s:st.keys())
-			StdOut.println(s+" "+st.get(s));
+			output.println(s+" "+st.get(s));
 	}
 }
