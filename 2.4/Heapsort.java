@@ -1,6 +1,14 @@
 //page 324
 //algorithm 2.7
 
+import java.util.Scanner;
+import java.util.regex.Pattern;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
+
 public class Heapsort
 { 
 	private static <T extends Comparable<T>> void sink(T[] items,int position,int size)
@@ -38,10 +46,32 @@ public class Heapsort
 	
 	public static void main(String[] args)
 	{
-		String[] items = StdIn.readStrings();
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
+		String[] items = readStrings();
 		sort(items);
 		for(int i=0;i<items.length;i++)
-			StdOut.print(items[i]+" ");
-		StdOut.println();
+			output.print(items[i]+" ");
+		output.println();
+	}
+	
+	private static String[] readStrings()
+	{
+		Pattern everythingPattern=Pattern.compile("\\A");
+		Pattern whitespacePattern=Pattern.compile("\\p{javaWhitespace}+");
+		
+		Scanner scanner=new Scanner(new BufferedInputStream(System.in));
+		String input="";
+		
+		if(scanner.hasNextLine())
+		{
+			input=scanner.useDelimiter(everythingPattern).next();
+			scanner.useDelimiter(whitespacePattern);
+		}
+		
+		ArrayList<String> tokens=new ArrayList<String>(Arrays.asList(whitespacePattern.split(input)));
+		if(tokens.get(0).length()==0) tokens.remove(0);
+		
+		return tokens.toArray(new String[tokens.size()]);
 	}
 }

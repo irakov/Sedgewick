@@ -2,6 +2,10 @@
 //page 331
 
 import java.util.NoSuchElementException;
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 
 public class MaxPQWithLinks<Item extends Comparable<Item>>
 {
@@ -262,12 +266,15 @@ public class MaxPQWithLinks<Item extends Comparable<Item>>
 	
 	public static void main(String[] args) throws InvalidOperationException
 	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+		
         MaxPQWithLinks<String> pq = new MaxPQWithLinks<String>();
-        while (!StdIn.isEmpty()) {
-            String item = StdIn.readString();
+        while (input.hasNext()) {
+            String item = input.next();
             if (!item.equals("-")) pq.insert(item);
-            else if (!pq.isEmpty()) StdOut.print(pq.removeMax() + " ");
+            else if (!pq.isEmpty()) output.print(pq.removeMax() + " ");
         }
-        StdOut.println("(" + pq.size() + " left on pq)");
+        output.println("(" + pq.size() + " left on pq)");
     }
 }

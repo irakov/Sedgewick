@@ -1,6 +1,11 @@
 //page 311
 //+2.4.26
+
 import java.util.NoSuchElementException;
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 
 public class MinPQ<Key extends Comparable<Key>>
 {
@@ -110,12 +115,16 @@ public class MinPQ<Key extends Comparable<Key>>
 	
 	public static void main(String[] args) 
 	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
         MinPQ<String> pq = new MinPQ<String>();
-        while (!StdIn.isEmpty()) {
-            String item = StdIn.readString();
+        while (input.hasNext())
+		{
+            String item = input.next();
             if (!item.equals("-")) pq.insert(item);
-            else if (!pq.isEmpty()) StdOut.print(pq.removeMin() + " ");
+            else if (!pq.isEmpty()) output.print(pq.removeMin() + " ");
         }
-        StdOut.println("(" + pq.size() + " left on pq)");
+        output.println("(" + pq.size() + " left on pq)");
     }
 }

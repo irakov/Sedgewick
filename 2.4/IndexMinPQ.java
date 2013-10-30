@@ -3,6 +3,11 @@
 //+2.4.33+2.4.34+2.4.26
 
 import java.util.NoSuchElementException;
+import java.util.Scanner;
+import java.io.File;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
+import java.io.IOException;
 
 public class IndexMinPQ<Item extends Comparable<Item>>
 {
@@ -140,27 +145,42 @@ public class IndexMinPQ<Item extends Comparable<Item>>
 	public static void main(String[] args)
 	{
 		int n=args.length;
-		In[] streams=new In[n];
-		for(int i=0;i<n;i++)
-			streams[i]=new In(args[i]);
+		
+		Scanner[] streams=new Scanner[n];
+		try
+		{
+			for(int i=0;i<n;i++)
+			{
+				File file=new File(args[i]);
+				streams[i]=new Scanner(file);
+			}
+		}
+		catch(IOException ex)
+		{
+			System.err.println("Cannot open file");
+			return;
+		}
 		merge(streams);
 	}
 	
-	private static void merge(In[] streams)
+	private static void merge(Scanner[] streams)
 	{
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		int n=streams.length;
 		IndexMinPQ<String> pq=new IndexMinPQ<String>(n);
-		
 		for(int i=0;i<n;i++)
-			if(!streams[i].isEmpty())
-				pq.insert(i,streams[i].readString());
+		{
+			if(streams[i].hasNext())
+				pq.insert(i,streams[i].next());
+		}
 		
 		while(!pq.isEmpty())
 		{
-			StdOut.println(pq.min());
+			output.println(pq.min());
 			int i=pq.delMin();
-			if(!streams[i].isEmpty())
-				pq.insert(i,streams[i].readString());
+			if(streams[i].hasNext())
+				pq.insert(i,streams[i].next());
 		}
 	}
 }
