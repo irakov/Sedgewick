@@ -9,6 +9,8 @@
 //with 1.3.30
 
 import java.util.Iterator;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 
 public class LinkedList<Item extends Comparable<Item>> implements Iterable<Item>
 {
@@ -161,6 +163,37 @@ public class LinkedList<Item extends Comparable<Item>> implements Iterable<Item>
 		}
 	}
 	
+	public void insert(Item item, int k)
+	{
+		if(first==null || last==null)
+			return;
+		if(k==0)
+		{
+			insertFirst(item);
+			return;
+		}
+		if(k==size)
+		{
+			insertLast(item);
+			return;
+		}
+		if(k>size)
+			return;
+		
+		Node currentNode=first;
+		for(int i=0;i<k;i++)
+			currentNode=currentNode.next;
+		
+		Node node=new Node();
+		node.item=item;
+		Node nextNode=currentNode.next;
+		
+		currentNode.next=node;
+		node.next=nextNode;
+		size++;
+	}
+
+	
 	public void removeAll(Item item)
 	{
 		if(first==null||last==null)
@@ -244,22 +277,24 @@ public class LinkedList<Item extends Comparable<Item>> implements Iterable<Item>
 
 	public static void main(String[] args)
 	{
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		LinkedList<Integer> list=new LinkedList<Integer>();
 		list.insertFirst(8);
 		list.insertFirst(1);
 		list.insertFirst(2);
 		list.insertFirst(3);
-		StdOut.println("list size "+list.size());
+		output.println("list size "+list.size());
 		for(Integer i:list)
 		{
-			StdOut.println("item "+i);
+			output.println("item "+i);
 		}
-		StdOut.println("popped first "+list.removeFirst());
-		StdOut.println("list size "+list.size());
-		StdOut.println("popped first "+list.removeFirst());
-		StdOut.println("list size "+list.size());
-		StdOut.println("popped first "+list.removeFirst());
-		StdOut.println("list size "+list.size());
+		output.println("popped first "+list.removeFirst());
+		output.println("list size "+list.size());
+		output.println("popped first "+list.removeFirst());
+		output.println("list size "+list.size());
+		output.println("popped first "+list.removeFirst());
+		output.println("list size "+list.size());
 		list.insertLast(4);
 		list.insertLast(5);
 		list.insertLast(8);
@@ -273,37 +308,37 @@ public class LinkedList<Item extends Comparable<Item>> implements Iterable<Item>
 		list.insertAfter(7,12);
 		list.insertFirst(10);
 		list.insertLast(8);
-		StdOut.println("list size "+list.size());
-		StdOut.println("finding 9 "+list.find(9));
-		StdOut.println("finding 2 "+list.find(2));
-		StdOut.println("max item is "+list.max());
+		output.println("list size "+list.size());
+		output.println("finding 9 "+list.find(9));
+		output.println("finding 2 "+list.find(2));
+		output.println("max item is "+list.max());
 		for(Integer i:list)
 		{
-			StdOut.println("item "+i);
+			output.println("item "+i);
 		}
-		StdOut.println("reverse!");
+		output.println("reverse!");
 		LinkedList<Integer> reverse=list.reverse();
 		for(Integer i:reverse)
 		{
-			StdOut.println("item "+i);
+			output.println("item "+i);
 		}
-		StdOut.println("popped last "+list.removeLast());
-		StdOut.println("popped last "+list.removeLast());
-		StdOut.println("popped first "+list.removeFirst());
-		StdOut.println("popped after 8 ");
+		output.println("popped last "+list.removeLast());
+		output.println("popped last "+list.removeLast());
+		output.println("popped first "+list.removeFirst());
+		output.println("popped after 8 ");
 		list.removeAfter(8);
-		StdOut.println("popped first "+list.remove(0));
-		StdOut.println("popped 2nd "+list.remove(1));
-		StdOut.println("list size "+list.size());
+		output.println("popped first "+list.remove(0));
+		output.println("popped 2nd "+list.remove(1));
+		output.println("list size "+list.size());
 		for(Integer i:list)
 		{
-			StdOut.println("item "+i);
+			output.println("item "+i);
 		}
 		list.removeAll(8);
-		StdOut.println("list size "+list.size());
+		output.println("list size "+list.size());
 		for(Integer i:list)
 		{
-			StdOut.println("item "+i);
+			output.println("item "+i);
 		}
 	}
 }

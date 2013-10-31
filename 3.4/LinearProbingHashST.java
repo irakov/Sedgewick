@@ -1,6 +1,11 @@
 //algorithm 3.6(470)
 //3.4.19(482)
 
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
+
 public class LinearProbingHashST<Key extends Comparable<Key>,Value>
 {
 	private int keyCount;
@@ -119,19 +124,22 @@ public class LinearProbingHashST<Key extends Comparable<Key>,Value>
 	
 	public static void main(String[] args)
 	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		LinearProbingHashST<String,Integer> hash=new LinearProbingHashST<String,Integer>();
-		for(int i=0;!StdIn.isEmpty();i++)
+		for(int i=0;input.hasNext();i++)
 		{
-			String s=StdIn.readString();
+			String s=input.next();
 			hash.put(s,i);
 		}
 		
 		for(String s:hash.keys())
-			StdOut.println(s+" "+hash.get(s));
+			output.println(s+" "+hash.get(s));
 			
-		StdOut.println("deleting S");
+		output.println("deleting S");
 		hash.delete("S".intern());
 		for(String s:hash.keys())
-			StdOut.println(s+" "+hash.get(s));
+			output.println(s+" "+hash.get(s));
 	}
 }

@@ -1,5 +1,10 @@
 //3.5.1 (507)
 
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
+
 public class HashSET<Key extends Comparable<Key>>
 {
 	private LinearProbingHashST<Key,Integer> hash;
@@ -47,12 +52,15 @@ public class HashSET<Key extends Comparable<Key>>
 	
 	public static void main(String[] args)
 	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		HashSET<String> hash=new HashSET<String>();
-		while(!StdIn.isEmpty())
-			hash.add(StdIn.readString());
+		while(input.hasNext())
+			hash.add(input.next());
 			
 		hash.delete("S".intern());
 		
-		StdOut.println(hash.toString());
+		output.println(hash.toString());
 	}
 }

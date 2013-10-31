@@ -2,6 +2,11 @@
 //3.4.9(480),3.3.418(482),3.4.19(482)
 //with resizing
 
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
+
 public class SeparateChainingHashST<Key extends Comparable<Key>,Value>
 {
 	private int keyCount;
@@ -96,19 +101,22 @@ public class SeparateChainingHashST<Key extends Comparable<Key>,Value>
 	
 	public static void main(String[] args)
 	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		SeparateChainingHashST<String,Integer> hash=new SeparateChainingHashST<String,Integer>();
-		for(int i=0;!StdIn.isEmpty();i++)
+		for(int i=0;input.hasNext();i++)
 		{
-			String s=StdIn.readString();
+			String s=input.next();
 			hash.put(s,i);
 		}
 		
 		for(String s:hash.keys())
-			StdOut.println(s+" "+hash.get(s));
+			output.println(s+" "+hash.get(s));
 			
-		StdOut.println("deleting S");
+		output.println("deleting S");
 		hash.delete("S".intern());
 		for(String s:hash.keys())
-			StdOut.println(s+" "+hash.get(s));
+			output.println(s+" "+hash.get(s));
 	}
 }

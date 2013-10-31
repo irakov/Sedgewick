@@ -1,5 +1,10 @@
 //3.5.1 (507)
 
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
+
 public class SET<Key extends Comparable<Key>>
 {
 	private RedBlackBST<Key,Integer> bst;
@@ -47,12 +52,15 @@ public class SET<Key extends Comparable<Key>>
 	
 	public static void main(String[] args)
 	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		SET<String> set= new SET<String>();
-		while(!StdIn.isEmpty())
-			set.add(StdIn.readString());
+		while(input.hasNext())
+			set.add(input.next());
 			
 		set.delete("S".intern());
 		
-		StdOut.println(set.toString());
+		output.println(set.toString());
 	}
 }

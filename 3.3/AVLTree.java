@@ -3,6 +3,10 @@
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 
 public class AVLTree<Key extends Comparable<Key>,Value>
 {
@@ -84,7 +88,6 @@ public class AVLTree<Key extends Comparable<Key>,Value>
 			node.right=deleteMin(node.right);
 		}
 		preOrderTraversal();
-		StdOut.println(node.key);
 		return balance(node);
 	}
 	
@@ -285,7 +288,6 @@ public class AVLTree<Key extends Comparable<Key>,Value>
 	private Node balance(Node node)
 	{
 		int balance=balanceFactor(node);
-		StdOut.println("balance "+balance);
 		if(balance>1)
 		{
 			if(balanceFactor(node.left)<0) node.left=rotateLeft(node.left);
@@ -319,31 +321,35 @@ public class AVLTree<Key extends Comparable<Key>,Value>
 	
 	public void preOrderTraversal()
 	{
-		preOrder(root);
-		StdOut.println();
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+		preOrder(root,output);
+		output.println();
 	}
 	
-	private void preOrder(Node node)
+	private void preOrder(Node node,PrintWriter output)
 	{
 		if(node==null) return;
-		StdOut.print(node.key+" ");
-		preOrder(node.left);
-		preOrder(node.right);
+		output.print(node.key+" ");
+		preOrder(node.left,output);
+		preOrder(node.right,output);
 	}
 	
 	public static void main(String[] args)
 	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		AVLTree<Integer,Integer> tree=new AVLTree<Integer,Integer>();
-		for(int i=0;!StdIn.isEmpty();i++)
+		for(int i=0;input.hasNext();i++)
 		{
-			Integer s=StdIn.readInt();
+			Integer s=input.nextInt();
 			tree.put(s,i);
 		}
 		
-		StdOut.println("preorder after inserting keys");		
+		output.println("preorder after inserting keys");		
 		tree.preOrderTraversal();
 		tree.delete(76);
-		StdOut.println("preorder after deleting key 76");
+		output.println("preorder after deleting key 76");
 		tree.preOrderTraversal();
 	}
 }

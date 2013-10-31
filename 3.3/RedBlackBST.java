@@ -4,6 +4,10 @@
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 
 public class RedBlackBST<Key extends Comparable<Key>,Value>
 {
@@ -446,14 +450,17 @@ public class RedBlackBST<Key extends Comparable<Key>,Value>
 	
 	public static void main(String[] args)
 	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		RedBlackBST<String,Integer> bst=new RedBlackBST<String,Integer>();
-		for(int i=0;!StdIn.isEmpty();i++)
+		for(int i=0;input.hasNext();i++)
 		{
-			String key=StdIn.readString();
+			String key=input.next();
 			bst.put(key,i);
 		}
-		for(String s:bst.keys()) StdOut.println(s+" "+bst.get(s));
-		StdOut.println();
-		StdOut.println(bst.isRedBlackBST());
+		for(String s:bst.keys()) output.println(s+" "+bst.get(s));
+		output.println();
+		output.println(bst.isRedBlackBST());
 	}
 }

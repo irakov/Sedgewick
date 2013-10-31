@@ -2,6 +2,10 @@
 //algorithm 1.3
 
 import java.util.Iterator;
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 
 public class Queue<Item extends Comparable<Item>> implements Iterable<Item>
 {
@@ -21,6 +25,12 @@ public class Queue<Item extends Comparable<Item>> implements Iterable<Item>
 		return list.removeFirst();
 	}
 	
+	public Item peek()
+	{
+		return list.getFirst().item;
+	}
+
+	
 	public Iterator<Item> iterator()
 	{
 		return new LinkedListIterator<Item>(list);
@@ -28,17 +38,20 @@ public class Queue<Item extends Comparable<Item>> implements Iterable<Item>
 	
 	public static void main(String[] args)
 	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		Queue<String> s=new Queue<String>();
 
-		while(!StdIn.isEmpty())
+		while(input.hasNext())
 		{
-			String item=StdIn.readString();
+			String item=input.next();
 			if(!item.equals("-"))
 				s.enqueue(item);
 			else if(!s.isEmpty())
-				StdOut.print(s.dequeue()+" ");
+				output.print(s.dequeue()+" ");
 		}
 		
-		StdOut.println("("+s.size()+" left in queue)");
+		output.println("("+s.size()+" left in queue)");
 	}
 }

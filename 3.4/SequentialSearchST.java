@@ -3,6 +3,10 @@
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 
 public class SequentialSearchST<Key,Value>
 {
@@ -96,13 +100,16 @@ public class SequentialSearchST<Key,Value>
 	
 	public static void main(String[] args)
 	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		SequentialSearchST<String,Integer> st=new SequentialSearchST<String,Integer>();
-		for(int i=0;!StdIn.isEmpty();i++)
+		for(int i=0;input.hasNext();i++)
 		{
-			String key=StdIn.readString();
+			String key=input.next();
 			st.put(key,i);
 		}
 		for(String s:st.keys())
-			StdOut.println(s+" "+st.get(s));
+			output.println(s+" "+st.get(s));
 	}
 }
