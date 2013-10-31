@@ -1,8 +1,13 @@
 //algorithm 3.3 (398+399+407+409+411+413)
 //with 3.2.6,3.2.29(1st print),3.2.30(1st print),3.2.31(1st print),3.2.32(1st print)(416+419+420)
 //with 3.2.37(420)
+
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 
 public class BST<Key extends Comparable<Key>,Value>
 {
@@ -303,7 +308,9 @@ public class BST<Key extends Comparable<Key>,Value>
 	
 	public void printLevel(Key key) //bread first traversal
 	{
-		StdOut.println("printLevel for "+key);
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
+		output.println("printLevel for "+key);
 		Node node=root;
 		while(node!=null)
 		{
@@ -319,16 +326,18 @@ public class BST<Key extends Comparable<Key>,Value>
 		while(!queue.isEmpty())
 		{
 			node=queue.dequeue();
-			StdOut.print(node.key+" ");
+			output.print(node.key+" ");
 			if(node.left!=null) queue.enqueue(node.left);
 			if(node.right!=null) queue.enqueue(node.right);
 		}
-		StdOut.println();
+		output.println();
 	}
 	
 	public void preOrderTraversal(Key key)
 	{
-		StdOut.println("preOrder traversal for "+key);
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
+		output.println("preOrder traversal for "+key);
 		Node node=root;
 		while(node!=null)
 		{
@@ -338,21 +347,23 @@ public class BST<Key extends Comparable<Key>,Value>
 			else node=node.right;
 		}
 		
-		preOrder(node);
-		StdOut.println();
+		preOrder(node,output);
+		output.println();
 	}
 	
-	private void preOrder(Node node)
+	private void preOrder(Node node,PrintWriter output)
 	{
 		if(node==null) return;
-		StdOut.print(node.key+" ");
-		preOrder(node.left);
-		preOrder(node.right);
+		output.print(node.key+" ");
+		preOrder(node.left,output);
+		preOrder(node.right,output);
 	}
 	
 	public void inOrderTraversal(Key key)
 	{
-		StdOut.println("inOrder traversal for "+key);
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+		
+		output.println("inOrder traversal for "+key);
 		Node node=root;
 		while(node!=null)
 		{
@@ -362,21 +373,23 @@ public class BST<Key extends Comparable<Key>,Value>
 			else node=node.right;
 		}
 		
-		inOrder(node);
-		StdOut.println();
+		inOrder(node,output);
+		output.println();
 	}
 	
-	private void inOrder(Node node)
+	private void inOrder(Node node,PrintWriter output)
 	{
 		if(node==null) return;
-		inOrder(node.left);
-		StdOut.print(node.key+" ");
-		inOrder(node.right);
+		inOrder(node.left,output);
+		output.print(node.key+" ");
+		inOrder(node.right,output);
 	}
 	
 	public void postOrderTraversal(Key key)
 	{
-		StdOut.println("postOrder traversal for "+key);
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
+		output.println("postOrder traversal for "+key);
 		Node node=root;
 		while(node!=null)
 		{
@@ -386,31 +399,34 @@ public class BST<Key extends Comparable<Key>,Value>
 			else node=node.right;
 		}
 	
-		postOrder(node);
-		StdOut.println();
+		postOrder(node,output);
+		output.println();
 	}
 	
-	private void postOrder(Node node)
+	private void postOrder(Node node,PrintWriter output)
 	{
 		if(node==null) return;
-		postOrder(node.left);
-		postOrder(node.right);
-		StdOut.print(node.key+" ");
+		postOrder(node.left,output);
+		postOrder(node.right,output);
+		output.print(node.key+" ");
 	}
 	
 	public static void main(String[] args)
 	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+
 		BST<String,Integer> bst=new BST<String,Integer>();
-		for(int i=0;!StdIn.isEmpty();i++)
+		for(int i=0;input.hasNext();i++)
 		{
-			String s=StdIn.readString();
+			String s=input.next();
 			bst.put(s,i);
 		}
 		
 		for(String s:bst.keys())
-			StdOut.println(s+" "+bst.get(s));
+			output.println(s+" "+bst.get(s));
 			
-		StdOut.println(bst.isBST());
+		output.println(bst.isBST());
 		
 		bst.printLevel("S".intern());
 		bst.preOrderTraversal("S".intern());

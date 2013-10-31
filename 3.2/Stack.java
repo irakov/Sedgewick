@@ -3,6 +3,10 @@
 //with 1.3.7.
 
 import java.util.Iterator;
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 
 public class Stack<Item extends Comparable<Item>> implements Iterable<Item>
 {
@@ -36,19 +40,22 @@ public class Stack<Item extends Comparable<Item>> implements Iterable<Item>
 	
 	public static void main(String[] args)
 	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		Stack<String> s=new Stack<String>();
 
-		while(!StdIn.isEmpty())
+		while(input.hasNext())
 		{
-			String item=StdIn.readString();
+			String item=input.next();
 			if(!item.equals("-"))
 				s.push(item);
 			else if(!s.isEmpty())
-				StdOut.print(s.pop()+" ");
+				output.print(s.pop()+" ");
 		}
 		
-		StdOut.println("("+s.size()+" left on stack)");
+		output.println("("+s.size()+" left on stack)");
 		if(!s.isEmpty())
-			StdOut.println("peeking top item: "+s.peek());
+			output.println("peeking top item: "+s.peek());
 	}
 }

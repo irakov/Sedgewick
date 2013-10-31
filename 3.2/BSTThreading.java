@@ -2,6 +2,10 @@
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 
 public class BSTThreading<Key extends Comparable<Key>,Value>
 {
@@ -350,16 +354,19 @@ public class BSTThreading<Key extends Comparable<Key>,Value>
 	
 	public static void main(String[] args)
 	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+	
 		BSTThreading<String,Integer> bst=new BSTThreading<String,Integer>();
-		for(int i=0;!StdIn.isEmpty();i++)
+		for(int i=0;input.hasNext();i++)
 		{
-			String s=StdIn.readString();
+			String s=input.next();
 			bst.put(s,i);
 		}
 		
 		for(String s:bst.keys())
-			StdOut.println(s+" "+bst.get(s));
+			output.println(s+" "+bst.get(s));
 			
-		StdOut.println(bst.isBST());
+		output.println(bst.isBST());
 	}
 }

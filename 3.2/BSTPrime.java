@@ -1,6 +1,11 @@
 //3.2.12 (page 417)
+
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 
 public class BSTPrime<Key extends Comparable<Key>,Value>
 {
@@ -232,14 +237,17 @@ public class BSTPrime<Key extends Comparable<Key>,Value>
 	
 	public static void main(String[] args)
 	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+		
 		BSTPrime<String,Integer> bst=new BSTPrime<String,Integer>();
-		for(int i=0;!StdIn.isEmpty();i++)
+		for(int i=0;input.hasNext();i++)
 		{
-			String s=StdIn.readString();
+			String s=input.next();
 			bst.put(s,i);
 		}
 		
 		for(String s:bst.keys())
-			StdOut.println(s+" "+bst.get(s));
+			output.println(s+" "+bst.get(s));
 	}
 }
