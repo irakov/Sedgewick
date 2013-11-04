@@ -66,5 +66,27 @@ public class SequentialSearchSET<Key>
 	{
 		return size;
 	}
+
+	public Iterable<Key> KEYS()
+	{
+		List<Key> keys=new ArrayList<Key>();
+		for(Node node=first;node!=null;node=node.next)
+			keys.add(node.key);
+		return keys;
+	}
 	
+	public static void main(String[] args)
+	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+
+		SequentialSearchSET<String> set=new SequentialSearchSET<String>();
+		while(input.hasNext())
+			set.put(input.next());
+
+		for(String s:set.keys())
+			output.print(s+" ");
+		output.println();
+	}
+
 }
