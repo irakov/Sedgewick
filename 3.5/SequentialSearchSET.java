@@ -1,5 +1,12 @@
 //3.5.2 (page 507)
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
+
 public class SequentialSearchSET<Key>
 {
 	private class Node
@@ -10,7 +17,7 @@ public class SequentialSearchSET<Key>
 		public Node(Key key, Node node)
 		{
 			this.key=key;
-			this.node=node;
+			this.next=node;
 		}
 	}
 	
@@ -67,7 +74,7 @@ public class SequentialSearchSET<Key>
 		return size;
 	}
 
-	public Iterable<Key> KEYS()
+	public Iterable<Key> keys()
 	{
 		List<Key> keys=new ArrayList<Key>();
 		for(Node node=first;node!=null;node=node.next)
