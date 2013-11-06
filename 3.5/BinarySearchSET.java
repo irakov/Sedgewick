@@ -109,4 +109,52 @@ public class BinarySearchSET<Key extends Comparable<Key>>
 			return keys[rank];
 		return null;
 	}
+
+	public int rank(Key key)
+	{
+		int left=0;
+		int right=size-1;
+		while(left<=right)
+		{
+			int middle=(right-left)/2+left;
+			int comp=keys[middle].compareTo(key);
+			if(comp==0) return middle;
+			if(comp<0) right=middle-1;
+			else left=middle+1;
+		}
+		return left;
+	}
+
+	public Key select(int k)
+	{
+		if(k<0||k>=size) return null;
+		return keys[k];
+	}
+
+	public void deleteMin()
+	{
+		if(isEmpty()) throw new NoSuchElementException();
+		delete(min());
+	}
+
+	public void deleteMax()
+	{
+		if(isEmpty()) throw new NoSuchElementException();
+		delete(max());
+	}
+
+	public int size(Key lo,Key hi)
+	{
+		if(isEmpty()) return 0;
+		if(lo.compareTo(hi)>0) return 0;
+		if(contains(hi)) return rank(hi)-rank(lo)+1;
+		return rank(hi)-rank(lo);
+	}
+
+	public Iterable<Key> keys(Key lo,Key hi)
+	{
+		List<Key> result=new ArrayList<Key>();
+		if(lo.compareTo(hi)>0) return result;
+		for(
+	}
 }
