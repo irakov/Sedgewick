@@ -1,8 +1,11 @@
 //3.5.3 (page 507)
 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.NoSuchElementException;
 import java.io.BufferedInputStream;
-import java.io.PrintWritter;
+import java.io.PrintWriter;
 import java.io.OutputStreamWriter;
 
 public class BinarySearchSET<Key extends Comparable<Key>>
@@ -17,7 +20,7 @@ public class BinarySearchSET<Key extends Comparable<Key>>
 
 	public void put(Key key)
 	{
-		if(max()==null||key.compareTo(max)>0)
+		if(max()==null||key.compareTo(max())>0)
 		{
 			if(keys.length==size) resize(2*size);
 			keys[size]=key;
@@ -40,11 +43,11 @@ public class BinarySearchSET<Key extends Comparable<Key>>
 
 	public Key get(Key key)
 	{
-		if(isEmpty()) return;
+		if(isEmpty()) return null;
 
 		int rank=rank(key);
 		if(rank<size&&keys[rank].compareTo(key)==0) return key;
-		return;
+		return null;
 	}
 
 	public void delete(Key key)
@@ -119,7 +122,7 @@ public class BinarySearchSET<Key extends Comparable<Key>>
 			int middle=(right-left)/2+left;
 			int comp=keys[middle].compareTo(key);
 			if(comp==0) return middle;
-			if(comp<0) right=middle-1;
+			if(comp>0) right=middle-1;
 			else left=middle+1;
 		}
 		return left;
@@ -155,6 +158,35 @@ public class BinarySearchSET<Key extends Comparable<Key>>
 	{
 		List<Key> result=new ArrayList<Key>();
 		if(lo.compareTo(hi)>0) return result;
-		for(
+		for(int i=rank(lo);i<rank(hi);i++)
+			result.add(keys[i]);
+		if(contains(hi)) result.add(hi);
+		return result;
+	}
+	
+	public Iterable<Key> keys()
+	{
+		return keys(min(),max());
+	}
+	
+	private void resize(int newSize)
+	{
+		Key[] newKeys=(Key[])new Comparable[newSize];
+		for(int i=0;i<size;i++)
+			newKeys[i]=keys[i];
+		keys=newKeys;
+	}
+	
+	public static void main(String[] args)
+	{
+		Scanner input=new Scanner(new BufferedInputStream(System.in));
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+		
+		BinarySearchSET<String> set=new BinarySearchSET<String>(5);
+		while(input.hasNext())
+			set.put(input.next());
+		output.println(set.size());
+		for(String s:set.keys())
+			output.println(s+" "+set.get(s));
 	}
 }
