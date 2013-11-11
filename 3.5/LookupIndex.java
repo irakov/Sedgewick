@@ -48,10 +48,10 @@ public class LookupIndex
 			String query=input.nextLine();
 			if(index.contains(query))
 				for(String s:index.get(query))
-					output.println(s+" ");
+					output.println(s);
 			if(invertedIndex.contains(query))
 				for(String s:invertedIndex.get(query))
-					output.println(s+" ");
+					output.println(s);
 		}
 	}
 }
