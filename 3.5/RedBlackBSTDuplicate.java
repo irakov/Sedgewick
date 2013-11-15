@@ -1,6 +1,4 @@
-/"/algorithm 3.4(439)
-//3.3.39,3.3.40,3.3.41(453-455)
-//3.3.33(452)
+//3.5.10(507)
 
 import java.util.List;
 import java.util.ArrayList;
@@ -9,7 +7,7 @@ import java.io.BufferedInputStream;
 import java.io.PrintWriter;
 import java.io.OutputStreamWriter;
 
-public class RedBlackBST<Key extends Comparable<Key>,Value>
+public class RedBlackBSTDuplicate<Key extends Comparable<Key>,Value>
 {
 	private static final boolean RED=true;
 	private static final boolean BLACK=false;
@@ -399,19 +397,10 @@ public class RedBlackBST<Key extends Comparable<Key>,Value>
 		return isOrdered(node.left,min,max)&&isOrdered(node.right,min,max);
 	}
 	
-	private boolean hasNoDuplicates(Node node)
-	{
-		if(node==null) return true;
-		if(node.left!=null&&node.left.key==node.key) return false;
-		if(node.right!=null&&node.right.key==node.key) return false;
-		return hasNoDuplicates(node.left)&&hasNoDuplicates(node.right);
-	}
-	
 	private boolean isBST()
 	{
 		if(!isBinaryTree(root)) return false;
 		if(!isOrdered(root,min(),max())) return false;
-		if(!hasNoDuplicates(root)) return false;
 		return true;
 	}
 	
@@ -454,7 +443,7 @@ public class RedBlackBST<Key extends Comparable<Key>,Value>
 		Scanner input=new Scanner(new BufferedInputStream(System.in));
 		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
 	
-		RedBlackBST<String,Integer> bst=new RedBlackBST<String,Integer>();
+		RedBlackBSTDuplicate<String,Integer> bst=new RedBlackBSTDuplicate<String,Integer>();
 		for(int i=0;input.hasNext();i++)
 		{
 			String key=input.next();
