@@ -58,7 +58,8 @@ public class MultiSET<Key extends Comparable<Key>>
 		MultiSET<String> set=new MultiSET<String>();
 		while(input.hasNext())
 			set.add(input.next());
-			
+		output.println(set.toString());
+		output.println("deleting E");
 		set.delete("E".intern());
 		
 		output.println(set.toString());
