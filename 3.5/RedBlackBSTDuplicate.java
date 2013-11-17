@@ -392,8 +392,8 @@ public class RedBlackBSTDuplicate<Key extends Comparable<Key>,Value>
 	{
 		if(node==null) return true;
 		if(node.key.compareTo(min)<0||node.key.compareTo(max)>0) return false;
-		if(node.left!=null&&node.left.key.compareTo(node.key)>=0) return false;
-		if(node.right!=null&&node.right.key.compareTo(node.key)<=0) return false;
+		if(node.left!=null&&node.left.key.compareTo(node.key)>0) return false;
+		if(node.right!=null&&node.right.key.compareTo(node.key)<0) return false;
 		return isOrdered(node.left,min,max)&&isOrdered(node.right,min,max);
 	}
 	
@@ -449,6 +449,9 @@ public class RedBlackBSTDuplicate<Key extends Comparable<Key>,Value>
 			String key=input.next();
 			bst.put(key,i);
 		}
+		for(String s:bst.keys()) output.println(s+" "+bst.get(s));
+		output.println("deleting E");
+		bst.delete("E".intern());
 		for(String s:bst.keys()) output.println(s+" "+bst.get(s));
 		output.println();
 		output.println(bst.isRedBlackBST());
