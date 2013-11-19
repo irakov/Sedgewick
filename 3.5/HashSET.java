@@ -50,6 +50,11 @@ public class HashSET<Key extends Comparable<Key>>
 		return builder.toString();
 	}
 	
+	public Iterable<Key> keys()
+	{
+		return hash.keys();
+	}
+	
 	public static void main(String[] args)
 	{
 		Scanner input=new Scanner(new BufferedInputStream(System.in));
