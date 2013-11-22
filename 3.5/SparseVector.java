@@ -3,6 +3,7 @@ import java.io.OutputStreamWriter;
 
 public class SparseVector
 {
+	private static final double ERROR = 0.000001;
 	private LinearProbingHashST<Integer,Double> st;
 	private int size;
 	
@@ -20,7 +21,16 @@ public class SparseVector
 	public void put(int i,double x)
 	{
 		if(i<0||i>=size) throw new IndexOutOfBoundsException();
-		st.put(i,x);
+		if(Math.abs(x)<ERROR) 
+			st.delete(i);
+		else
+			st.put(i,x);
+	}
+	
+	public void delete(int i)
+	{
+		if(i<0||i>=size) throw new IndexOutOfBoundsException();
+		st.delete(i);
 	}
 	
 	public double get(int i)
@@ -32,10 +42,45 @@ public class SparseVector
 	
 	public double dot(double[] that)
 	{
+		if (that.length!=size) throw new IllegalArgumentException();
 		double sum=0;
 		for(int i:st.keys())
 			sum+=that[i]*st.get(i);
 		return sum;
+	}
+	
+	public double dot(SparseVector that)
+	{
+		if(that.size!=size) throw new IllegalArgumentException();
+		double sum=0;
+		for(int i:st.keys())
+			sum+=this.get(i)*that.get(i);
+		if(Math.abs(sum)<ERROR) return 0;
+		return sum;
+	}
+	
+	public SparseVector plus(SparseVector that)
+	{
+		if(size!=that.size) throw new IllegalArgumentException();
+		SparseVector result=new SparseVector(size);
+		for(int i:st.keys()) result.put(i,st.get(i));
+		for(int i:that.st.keys())
+		{
+			double sum=that.st.get(i)+result.get(i);
+			if(Math.abs(sum)<ERROR) 
+				result.delete(i);
+			else 
+				result.put(i, that.st.get(i)+result.get(i));
+		}
+		return result;
+	}
+	
+	public String toString()
+	{
+		String s="";
+		for(int i:st.keys())
+			s+="("+i+","+st.get(i)+") ";
+		return s;
 	}
 	
 	public static void main(String[] args)
