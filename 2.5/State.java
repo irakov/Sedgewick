@@ -1,4 +1,4 @@
-//2.5.32
+//2.5.32(page 352)
 //using http://www.cs.princeton.edu/courses/archive/spr08/cos226/assignments/8puzzle.html
 
 public class State implements Comparable<State>

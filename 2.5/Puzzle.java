@@ -1,4 +1,4 @@
-//2.5.32
+//2.5.32(page 358)
 //partially solves 2.5.19 (isSolvable)
 //using http://www.cs.princeton.edu/courses/archive/spr08/cos226/assignments/8puzzle.html
 
