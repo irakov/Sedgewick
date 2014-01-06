@@ -1,4 +1,5 @@
 //page 547
+//with 4.1.29 (page 561)
 
 import java.io.*;
 
@@ -9,10 +10,46 @@ public class Cycle
 	
 	public Cycle(Graph g)
 	{
+		detectSelfLoops(g);
+		if(hasCycle) return;
+		
+		detectParallelEdges(g);
+		if(hasCycle) return;
+		
 		marked=new boolean[g.V()];
 		for(int i=0;i<g.V();i++)
 			if(!marked[i])
 				dfs(g,i,i);
+	}
+	
+	private void detectSelfLoops(Graph g)
+	{
+		for(int i=0;i<g.V();i++)
+			for(int j:g.adj(i))
+				if(i==j)
+				{
+					hasCycle=true;
+					return;
+				}
+	}
+	
+	private void detectParallelEdges(Graph g)
+	{
+		marked=new boolean[g.V()];
+	
+		for(int i=0;i<g.V();i++)
+		{
+			for(int j:g.adj(i))
+			{
+				if(marked[j])
+				{
+					hasCycle=true;
+					return;
+				}
+				marked[j]=true;
+			}
+			for(int j:g.adj(i)) marked[j]=false;
+		}
 	}
 
 	private void dfs(Graph g,int v,int u)
@@ -20,7 +57,12 @@ public class Cycle
 		marked[v]=true;
 		for(int i:g.adj(v))
 			if(!marked[i]) dfs(g,i,v);
-			else if(i!=u) hasCycle=true;
+			else 
+				if(i!=u)
+				{
+					hasCycle=true;
+					return;
+				}
 	}
 
 	public boolean hasCycle()
