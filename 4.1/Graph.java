@@ -1,4 +1,5 @@
 //page 526
+//with 4.1.3+4.1.4(558)
 
 import java.io.*;
 import java.util.*;
@@ -12,6 +13,22 @@ public class Graph
 	public Graph(int V)
 	{
 		buildGraph(V);
+	}
+	
+	public Graph(Graph g)
+	{
+		this.vertices=g.vertices;
+		this.edges=g.edges;
+		
+		Stack<Integer> stack=null;
+		for(int i=0;i<g.V();i++)
+		{
+			stack=new Stack<Integer>();
+			for(int j:g.adj(i))
+				stack.push(j);
+			for(int k:stack)
+				adjency[i].add(k);
+		}
 	}
 	
 	public Graph(String fileName)
@@ -70,6 +87,15 @@ public class Graph
 		edges++;
 		adjency[v].add(w);
 		adjency[w].add(v);
+	}
+	
+	public boolean hasEdge(int v,int w)
+	{
+		if(v<0||v>=vertices) throw new IndexOutOfBoundsException();
+		if(w<0||w>=vertices) throw new IndexOutOfBoundsException();
+		for(int i:this.adj(v))
+			if(i==w) return true;
+		return false;
 	}
 	
 	public Iterable<Integer> adj(int v)
