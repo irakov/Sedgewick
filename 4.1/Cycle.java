@@ -10,11 +10,18 @@ public class Cycle
 	
 	public Cycle(Graph g)
 	{
-		detectSelfLoops(g);
+		if(Cycle.detectSelfLoops(g))
+		{
+			hasCycle=true;
+			return;
+		}
 		if(hasCycle) return;
 		
-		detectParallelEdges(g);
-		if(hasCycle) return;
+		if(Cycle.detectParallelEdges(g))
+		{
+			hasCycle=true;
+			return;
+		};
 		
 		marked=new boolean[g.V()];
 		for(int i=0;i<g.V();i++)
@@ -22,36 +29,31 @@ public class Cycle
 				dfs(g,i,i);
 	}
 	
-	private void detectSelfLoops(Graph g)
+	public static boolean detectSelfLoops(Graph g)
 	{
 		for(int i=0;i<g.V();i++)
 			for(int j:g.adj(i))
-				if(i==j)
-				{
-					hasCycle=true;
-					return;
-				}
+				if(i==j) return true;
+		return false;
 	}
 	
-	private void detectParallelEdges(Graph g)
+	public static boolean detectParallelEdges(Graph g)
 	{
-		marked=new boolean[g.V()];
+		boolean[] marked=new boolean[g.V()];
 	
 		for(int i=0;i<g.V();i++)
 		{
 			for(int j:g.adj(i))
 			{
-				if(marked[j])
-				{
-					hasCycle=true;
-					return;
-				}
+				if(marked[j]) return true;
 				marked[j]=true;
 			}
 			for(int j:g.adj(i)) marked[j]=false;
 		}
+		
+		return false;
 	}
-
+	
 	private void dfs(Graph g,int v,int u)
 	{
 		marked[v]=true;

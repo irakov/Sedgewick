@@ -1,5 +1,5 @@
 //page 526
-//with 4.1.3+4.1.4(558)
+//with 4.1.3+4.1.4+4.1.5(558)
 
 import java.io.*;
 import java.util.*;
@@ -17,6 +17,9 @@ public class Graph
 	
 	public Graph(Graph g)
 	{
+		if(Cycle.detectSelfLoops(g)) throw new IllegalArgumentException();
+		if(Cycle.detectParallelEdges(g)) throw new IllegalArgumentException();
+		
 		this.vertices=g.vertices;
 		this.edges=g.edges;
 		
@@ -58,6 +61,9 @@ public class Graph
 			int w=fileInput.nextInt();
 			addEdge(v,w);
 		}
+		
+		if(Cycle.detectSelfLoops(this)) throw new IllegalArgumentException();
+		if(Cycle.detectParallelEdges(this)) throw new IllegalArgumentException();
 	}
 	
 	private void buildGraph(int V)
