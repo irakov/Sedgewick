@@ -1,17 +1,20 @@
 //algorithm 4.2(540)
-
+//with 4.1.13(559)
 import java.io.*;
 
 public class BreadthFirstPaths
 {
 	private boolean[] marked;
 	private int[] edgeTo;
+	private int[] distTo;
 	private int source;
 	
 	public BreadthFirstPaths(Graph g,int s)
 	{
 		marked=new boolean[g.V()];
 		edgeTo=new int[g.V()];
+		distTo=new int[g.V()];
+		for(int i=0;i<g.V();i++) distTo[i]=Integer.MIN_VALUE;
 		source=s;
 		bfs(g,s);
 	}
@@ -19,7 +22,7 @@ public class BreadthFirstPaths
 	private void bfs(Graph g,int v)
 	{
 		marked[v]=true;
-		
+		distTo[v]=0;
 		Queue<Integer> queue=new Queue<Integer>();
 		queue.enqueue(v);
 		
@@ -32,6 +35,7 @@ public class BreadthFirstPaths
 				{
 					marked[j]=true;
 					edgeTo[j]=i;
+					distTo[j]=distTo[i]+1;
 					queue.enqueue(j);
 				}
 			}  
@@ -41,6 +45,11 @@ public class BreadthFirstPaths
 	public boolean hasPathTo(int v)
 	{
 		return marked[v];
+	}
+	
+	public int distTo(int v)
+	{
+		return distTo[v];
 	}
 	
 	public Iterable<Integer> pathTo(int v)
@@ -66,7 +75,7 @@ public class BreadthFirstPaths
 		{
 			if(bfp.hasPathTo(i))
 			{
-				output.printf("from %d to %d: ",s,i);
+				output.printf("from %d to %d - distance %d: ",s,i,bfp.distTo(i));
 				for(int j:bfp.pathTo(i))
 					output.print(j+" ");
 				output.println();
