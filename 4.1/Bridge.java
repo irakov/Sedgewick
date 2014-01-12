@@ -1,6 +1,8 @@
 //4.1.36(page 562)
 
-public class Brigde
+import java.io.*;
+
+public class Bridge
 {
 	Queue<Pair> bridges;
 	private int[] order;
@@ -34,37 +36,52 @@ public class Brigde
 			if(order[w]==-1)
 			{
 				dfs(g,v,w);
-				lowest[v]=Math.Min(lowest[v],lowest[w]);
-				if(lowest[w]=order[w])
+				lowest[v]=Math.min(lowest[v],lowest[w]);
+				if(lowest[w]==order[w])
 					bridges.enqueue(new Pair(v,w));
 			}
 			else
 			if(w!=u)
-				lowest[v]=Math.Min(lowest[v],order[w]);
+				lowest[v]=Math.min(lowest[v],order[w]);
 		}
 	}
 	
 	public Iterable<Pair> bridges()
 	{
-	
+		return bridges;
 	}
 	
-	public class Pair
+	public class Pair implements Comparable<Pair>
 	{
-		private int first;
-		private int second;
+		private Integer first;
+		private Integer second;
 		
-		public Pair(int first,int second)
+		public Pair(Integer first,Integer second)
 		{
 			this.first=first;
 			this.second=second;
 		}
 		
-		public int getFirst(){return first;}
-		public int getSecond(){return second;}
+		public Integer getFirst(){return first;}
+		public Integer getSecond(){return second;}
+		
+		public int compareTo(Pair other)
+		{
+			int result=this.first.compareTo(other.first);
+			if(result!=0) return result;
+			return this.second.compareTo(other.second);
+		}
 	}
 	
 	public static void main(String[] args)
 	{
+		String fileName=args[0];
+		Graph g=new Graph(fileName);
+		Bridge bridge=new Bridge(g);
+		
+		PrintWriter output=new PrintWriter(new OutputStreamWriter(System.out),true);
+		output.println("bridges...");
+		for(Pair pair:bridge.bridges())
+			output.println(pair.getFirst()+" - "+pair.getSecond());
 	}
 }
