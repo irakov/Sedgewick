@@ -1,4 +1,4 @@
-//page 568
+//page 568+569
 
 import java.io.*;
 import java.util.*;
@@ -52,19 +52,14 @@ public class Digraph
 		}
 	}
 	
-	private void addEdge(Integer v,Integer w)
-	{
-		
-	}
-	
 	public int V()
 	{
-		...
+		return vertices;
 	}
 	
 	public int E()
 	{
-		...
+		return edges;
 	}
 	
 	public void addEdge(int v,int w)
@@ -74,11 +69,15 @@ public class Digraph
 	
 	public Iterable<Integer> adj(int v)
 	{
-		...
+		if(v<0||v>=vertices) throw new IndexOutOfBoundsException();
+		if(w<0||w>=vertices) throw new IndexOutOfBoundsException();
+		edges++;
+		adjency[v].add(w);
 	}
 	
 	public Digraph reverse()
 	{
+		Graph reverse=
 	}
 	
 	public String toString()
