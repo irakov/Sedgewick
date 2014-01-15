@@ -1,7 +1,6 @@
 //page 570 (algorithm 4.4)
 
 import java.io.*;
-import java.util.*;
 
 public class DirectedDFS
 {	
