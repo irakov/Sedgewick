@@ -1,5 +1,5 @@
 //page 568+569
-//with 4.2.3 (596)
+//with 4.2.3,4.2.4 (596)
 
 import java.io.*;
 import java.util.*;
@@ -80,6 +80,15 @@ public class Digraph
 		adjency[v].add(w);
 	}
 	
+	public boolean hasEdge(int v,int w)
+	{
+		if(v<0||v>=vertices) throw new IndexOutOfBoundsException();
+		if(w<0||w>=vertices) throw new IndexOutOfBoundsException();
+		for(int i:adjency[v])
+			if(i==w) return true;
+		return false;
+	}
+
 	public Iterable<Integer> adj(int v)
 	{
 		if(v<0||v>=vertices) throw new IndexOutOfBoundsException();
