@@ -1,4 +1,5 @@
 //page 568+569
+//with 4.2.3 (596)
 
 import java.io.*;
 import java.util.*;
@@ -21,6 +22,16 @@ public class Digraph
 		edges=0;
 		adjency=(Bag<Integer>[])new Bag[vertices];
 		for(int i=0;i<vertices;i++) adjency[i]=new Bag<Integer>();
+	}
+
+	public Digraph(Digraph d)
+	{
+		buildGraph(d.vertices);
+		edges=d.edges;
+		for(int i=0;i<vertices;i++)
+			for(int j:d.adjency[i])
+				adjency[i].add(j);
+		
 	}
 	
 	public Digraph(String fileName)
