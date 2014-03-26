@@ -43,7 +43,6 @@ public class Digraph
 		buildGraph(V);
 		int E=fileInput.nextInt();
 		if(E<0) throw new IllegalArgumentException();
-		edges=E;
 		for(int i=0;i<E;i++)
 		{
 			int v=fileInput.nextInt();
