@@ -1,4 +1,4 @@
-//algorithm 4.6
+//algorithm 4.6 (page 587)
 
 import java.io.*;
 
