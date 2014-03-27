@@ -1,4 +1,5 @@
 //page 576+577
+//with 4.2.5 (596)
 
 import java.io.*;
 
@@ -40,6 +41,29 @@ public class DirectedCycle
 		onStack[s]=false;
 	}
 	
+	public static boolean hasParallelEdges(Digraph d)
+	{
+		boolean[] marked=new boolean[d.V()];
+		for(int i=0;i<d.V();i++)
+		{
+			for(int j:d.adj(i))
+			{
+				if(marked[j]==true) return true;
+				marked[j]=true;
+			}
+			for(int j:d.adj(i)) marked[j]=true;
+		}
+		return false;
+	}
+
+	public static boolean hasSelfLoops(Digraph d)
+	{
+		for(int i=0;i<d.V();i++)
+			for(int j:d.adj(i))
+				if(i==j) return true;
+		return false;
+	}
+
 	public boolean hasCycle()
 	{
 		return cycle!=null;
