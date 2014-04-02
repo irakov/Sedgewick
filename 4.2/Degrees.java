@@ -14,11 +14,9 @@ public class Degrees
 
 	public int indegree(int v)
 	{
-		int indeg=0;
-		for(int i=0;i<d.V();i++)
-			for(int j:d.adj(i))
-				if(j==v) indeg++;
-		return indeg;
+		Digraph reverse=d.reverse();
+		Degrees deg=new Degrees(reverse);
+		return deg.outdegree(v);
 	}
 
 	public int outdegree(int v)
