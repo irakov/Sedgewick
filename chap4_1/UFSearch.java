@@ -1,5 +1,6 @@
 package chap4_1;//4.1.8(page 558)
 
+import chap1_5.WeightedQuickUnionWithPathCompression;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 

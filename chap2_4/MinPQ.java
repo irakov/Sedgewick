@@ -33,7 +33,7 @@ public class MinPQ<Key extends Comparable<Key>> {
         Scanner input = new Scanner(new BufferedInputStream(System.in));
         PrintWriter output = new PrintWriter(new OutputStreamWriter(System.out), true);
 
-        chap2_5.MinPQ<String> pq = new chap2_5.MinPQ<String>();
+        MinPQ<String> pq = new MinPQ<String>();
         while (input.hasNext()) {
             String item = input.next();
             if (!item.equals("-")) pq.insert(item);

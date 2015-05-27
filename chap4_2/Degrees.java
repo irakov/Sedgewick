@@ -1,7 +1,7 @@
 package chap4_2;
 //4.2.7 (page 596)
 
-import chap4_1.Bag;
+import chap1_3.Bag;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 

@@ -26,7 +26,7 @@ public class WeightedQuickUnionWithPathCompression {
         PrintWriter output = new PrintWriter(new OutputStreamWriter(System.out), true);
 
         int size = input.nextInt();
-        chap4_1.WeightedQuickUnionWithPathCompression wqu = new chap4_1.WeightedQuickUnionWithPathCompression(size);
+        WeightedQuickUnionWithPathCompression wqu = new WeightedQuickUnionWithPathCompression(size);
         while (input.hasNext()) {
             int p = input.nextInt();
             int q = input.nextInt();
@@ -41,6 +41,14 @@ public class WeightedQuickUnionWithPathCompression {
 
     public int count() {
         return count;
+    }
+
+    public int count(int v) {
+        int result = 0;
+        int i = find(v);
+        for (int j = 0; j < id.length; j++)
+            if (id[j] == i) result++;
+        return result;
     }
 
     public boolean connected(int p, int q) {

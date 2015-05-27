@@ -1,5 +1,7 @@
 package chap2_5;//2.5.22(page 356)
 
+import chap2_4.MaxPQ;
+import chap2_4.MinPQ;
 import java.io.BufferedInputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;

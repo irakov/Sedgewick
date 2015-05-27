@@ -33,7 +33,7 @@ public class MaxPQ<Key extends Comparable<Key>> {
         Scanner input = new Scanner(new BufferedInputStream(System.in));
         PrintWriter output = new PrintWriter(new OutputStreamWriter(System.out), true);
 
-        chap2_5.MaxPQ<String> pq = new chap2_5.MaxPQ<String>();
+        MaxPQ<String> pq = new MaxPQ<String>();
         while (input.hasNext()) {
             String item = input.next();
             if (!item.equals("-")) pq.insert(item);
