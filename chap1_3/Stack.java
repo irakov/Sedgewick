@@ -1,9 +1,6 @@
 package chap1_3;//page 149
 //algorithm chap1.chap1_1.2
-//with chap1.chap1_1.3.7.
-
-import chap4_2.LinkedList;
-import chap4_2.LinkedListIterator;
+//with 1.3.7.
 
 import java.io.BufferedInputStream;
 import java.io.OutputStreamWriter;
@@ -12,13 +9,13 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 public class Stack<Item extends Comparable<Item>> implements Iterable<Item> {
-    private chap4_2.LinkedList<Item> list = new LinkedList<Item>();
+    private LinkedList<Item> list = new LinkedList<Item>();
 
     public static void main(String[] args) {
         Scanner input = new Scanner(new BufferedInputStream(System.in));
         PrintWriter output = new PrintWriter(new OutputStreamWriter(System.out), true);
 
-        chap4_2.Stack<String> s = new chap4_2.Stack<String>();
+        Stack<String> s = new Stack<String>();
 
         while (input.hasNext()) {
             String item = input.next();

@@ -1,8 +1,6 @@
 package chap4_1;//algorithm 4.2(540)
 //with 4.chap1.chap1_1.13(559)
 
-import chap4_2.Queue;
-import chap4_2.Stack;
 
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -43,7 +41,7 @@ public class BreadthFirstPaths {
     private void bfs(Graph g, int v) {
         marked[v] = true;
         distTo[v] = 0;
-        chap4_2.Queue<Integer> queue = new Queue<Integer>();
+        Queue<Integer> queue = new Queue<Integer>();
         queue.enqueue(v);
 
         while (!queue.isEmpty()) {

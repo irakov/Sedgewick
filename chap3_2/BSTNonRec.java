@@ -1,9 +1,6 @@
 package chap3_2;//3.2.6+3.2.13+3.2.14 (417,418)
 //with 3.2.37(420)
 
-import chap4_2.Queue;
-import chap4_2.Stack;
-
 import java.io.BufferedInputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -134,7 +131,7 @@ public class BSTNonRec<Key extends Comparable<Key>, Value> {
         if (node == null) return 0;
 
         int result = 0;
-        chap4_2.Queue<Node> queue = new Queue<Node>();
+        Queue<Node> queue = new Queue<Node>();
         queue.enqueue(node);
         while (queue.size() != 0) {
             result++;

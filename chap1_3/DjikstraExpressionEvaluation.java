@@ -1,6 +1,6 @@
 package chap1_3;//page 129
 //run as java DjikstraExpressionEvaluation
-//( chap1.chap1_1 + ( ( 2 + 3 ) * ( 4 * 5 ) ) )
+//( 1 + ( ( 2 + 3 ) * ( 4 * 5 ) ) )
 //Ctrl+z
 
 import java.io.BufferedInputStream;

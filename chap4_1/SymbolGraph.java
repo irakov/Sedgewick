@@ -1,13 +1,12 @@
 package chap4_1;//page 548+552
 
-import chap4_2.RedBlackBST;
 
 import java.io.*;
 import java.util.Scanner;
 
 public class SymbolGraph {
     private Graph g;
-    private chap4_2.RedBlackBST<String, Integer> st;
+    private RedBlackBST<String, Integer> st;
     private String[] keys;
 
     public SymbolGraph(String fileName, String delim) {

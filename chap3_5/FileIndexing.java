@@ -1,13 +1,11 @@
 package chap3_5;//page 501
 
-import chap4_2.RedBlackBST;
-
 import java.io.*;
 import java.util.Scanner;
 
 public class FileIndexing {
     public static void main(String[] args) {
-        chap4_2.RedBlackBST<String, SET<File>> bst = new RedBlackBST<String, SET<File>>();
+        RedBlackBST<String, SET<File>> bst = new RedBlackBST<String, SET<File>>();
         for (String fileName : args) {
             File file = new File(fileName);
             if (!file.exists()) continue;

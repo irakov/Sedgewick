@@ -1,8 +1,6 @@
 package chap1_3;//1.3.34
 //page 167
 
-import chap4_2.LinkedList;
-
 import java.io.BufferedInputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -19,7 +17,7 @@ public class RandomBag<Item extends Comparable<Item>> implements Iterable<Item> 
         random = new Random(System.currentTimeMillis());
     }
 
-    private chap4_2.LinkedList<Item> list = new LinkedList<Item>();
+    private LinkedList<Item> list = new LinkedList<Item>();
 
     public static void main(String[] args) {
         Scanner input = new Scanner(new BufferedInputStream(System.in));

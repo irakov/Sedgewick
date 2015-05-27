@@ -1,8 +1,6 @@
 package chap1_3;//page 162
-//chap1.chap1_1.3.10
+//1.3.10
 //usage java InfixToPostfix < operations.txt
-
-import chap4_2.Stack;
 
 import java.io.BufferedInputStream;
 import java.io.OutputStreamWriter;
@@ -14,7 +12,7 @@ public class InfixToPostfix {
         Scanner input = new Scanner(new BufferedInputStream(System.in));
         PrintWriter output = new PrintWriter(new OutputStreamWriter(System.out), true);
 
-        chap4_2.Stack<String> operators = new Stack<String>();
+        Stack<String> operators = new Stack<String>();
 
         while (input.hasNext()) {
             String s = input.next();

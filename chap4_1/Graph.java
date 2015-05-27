@@ -1,9 +1,6 @@
 package chap4_1;//page 526
 //with 4.chap1.chap1_1.3+4.chap1.chap1_1.4+4.chap1.chap1_1.5(558)
 
-import chap4_2.Bag;
-import chap4_2.Stack;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -13,7 +10,7 @@ import java.util.Scanner;
 public class Graph {
     private int vertices;
     private int edges;
-    private chap4_2.Bag<Integer>[] adjency;
+    private Bag<Integer>[] adjency;
 
     public Graph(int V) {
         buildGraph(V);

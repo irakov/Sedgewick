@@ -1,7 +1,6 @@
-package chap1_3;//page 162
-//chap1.chap1_1.3.9
-
-import chap4_2.Stack;
+package chap1_3;
+//page 162
+//1.3.9
 
 import java.io.BufferedInputStream;
 import java.io.OutputStreamWriter;
@@ -13,7 +12,7 @@ public class LeftParentheses {
         Scanner input = new Scanner(new BufferedInputStream(System.in));
         PrintWriter output = new PrintWriter(new OutputStreamWriter(System.out), true);
 
-        chap4_2.Stack<String> reversedInputStack = new Stack<String>();
+        Stack<String> reversedInputStack = new Stack<String>();
         Stack<String> correctedStack = new Stack<String>();
 
         while (input.hasNext()) {

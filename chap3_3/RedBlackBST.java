@@ -19,7 +19,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         Scanner input = new Scanner(new BufferedInputStream(System.in));
         PrintWriter output = new PrintWriter(new OutputStreamWriter(System.out), true);
 
-        chap4_2.RedBlackBST<String, Integer> bst = new chap4_2.RedBlackBST<String, Integer>();
+        RedBlackBST<String, Integer> bst = new RedBlackBST<String, Integer>();
         for (int i = 0; input.hasNext(); i++) {
             String key = input.next();
             bst.put(key, i);

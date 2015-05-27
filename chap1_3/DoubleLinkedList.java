@@ -1,5 +1,5 @@
 package chap1_3;//page 166
-//chap1.chap1_1.3.31
+//1.3.31
 
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;

@@ -1,14 +1,12 @@
 package chap1_3;//1.3.44
 //page 170
 
-import chap4_2.Stack;
-
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
 public class TextEditorBuffer {
     private int size;
-    private chap4_2.Stack<String> left, right;
+    private Stack<String> left, right;
 
     public TextEditorBuffer() {
         left = new Stack<String>();

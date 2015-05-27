@@ -1,12 +1,10 @@
 package chap4_1;//4.1.36(page 562)
 
-import chap4_2.Queue;
-
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
 public class Bridge {
-    chap4_2.Queue<Pair> bridges;
+    Queue<Pair> bridges;
     private int[] order;
     private int[] lowest;
     private int counter;

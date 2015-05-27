@@ -1,5 +1,5 @@
 package chap1_3;//1.3.35
-//with chap1.chap1_1.3.36
+//with 1.3.36
 //page 168
 
 import java.io.BufferedInputStream;

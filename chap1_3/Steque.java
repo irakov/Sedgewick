@@ -1,8 +1,5 @@
 package chap1_3;//page 167
-//chap1.chap1_1.3.32
-
-import chap4_2.LinkedList;
-import chap4_2.LinkedListIterator;
+//1.3.32
 
 import java.io.BufferedInputStream;
 import java.io.OutputStreamWriter;
@@ -12,7 +9,7 @@ import java.util.Scanner;
 
 
 public class Steque<Item extends Comparable<Item>> implements Iterable<Item> {
-    private chap4_2.LinkedList<Item> list = new LinkedList<Item>();
+    private LinkedList<Item> list = new LinkedList<Item>();
 
     public static void main(String[] args) {
         Scanner input = new Scanner(new BufferedInputStream(System.in));

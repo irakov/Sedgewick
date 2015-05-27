@@ -1,14 +1,12 @@
 package chap3_5;//3.5.1 (507)
 
-import chap4_2.RedBlackBST;
-
 import java.io.BufferedInputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class SET<Key extends Comparable<Key>> {
-    private chap4_2.RedBlackBST<Key, Integer> bst;
+    private RedBlackBST<Key, Integer> bst;
 
     public SET() {
         bst = new RedBlackBST<Key, Integer>();

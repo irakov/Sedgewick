@@ -1,7 +1,5 @@
 package chap4_1;//algorithm 4.1(536)
 
-import chap4_2.Stack;
-
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
@@ -50,7 +48,7 @@ public class DepthFirstPaths {
 
     public Iterable<Integer> pathTo(int v) {
         if (!hasPathTo(v)) return null;
-        chap4_2.Stack<Integer> path = new Stack<Integer>();
+        Stack<Integer> path = new Stack<Integer>();
         for (int i = v; i != source; i = edgeTo[i])
             path.push(i);
         path.push(source);

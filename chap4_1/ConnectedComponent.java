@@ -1,7 +1,5 @@
 package chap4_1;//algorithm 4.3(page 544)
 
-import chap4_2.Bag;
-
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
@@ -28,7 +26,7 @@ public class ConnectedComponent {
         PrintWriter output = new PrintWriter(new OutputStreamWriter(System.out), true);
         output.println(cc.count() + " components");
 
-        chap4_2.Bag<Integer>[] components = (Bag<Integer>[]) new Bag[cc.count()];
+        Bag<Integer>[] components = (Bag<Integer>[]) new Bag[cc.count()];
         for (int i = 0; i < cc.count(); i++) components[i] = new Bag<Integer>();
         for (int i = 0; i < g.V(); i++) components[cc.id(i)].add(i);
 

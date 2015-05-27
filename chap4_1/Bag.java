@@ -1,9 +1,6 @@
 package chap4_1;//page 155
 //algorithm chap1.chap1_1.4
 
-import chap4_2.LinkedList;
-import chap4_2.LinkedListIterator;
-
 import java.io.BufferedInputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -11,13 +8,13 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 public class Bag<Item extends Comparable<Item>> implements Iterable<Item> {
-    private chap4_2.LinkedList<Item> list = new LinkedList<Item>();
+    private LinkedList<Item> list = new LinkedList<Item>();
 
     public static void main(String[] args) {
         Scanner input = new Scanner(new BufferedInputStream(System.in));
         PrintWriter output = new PrintWriter(new OutputStreamWriter(System.out), true);
 
-        chap4_2.Bag<String> b = new chap4_2.Bag<String>();
+        Bag<String> b = new Bag<String>();
 
         while (input.hasNext())
             b.add(input.next());

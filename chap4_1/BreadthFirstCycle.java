@@ -1,7 +1,5 @@
 package chap4_1;//for 4.1.18(page 559)
 
-import chap4_2.Queue;
-
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
@@ -34,7 +32,7 @@ public class BreadthFirstCycle {
     private void bfs(Graph g, int v) {
         marked[v] = true;
         distTo[v] = 0;
-        chap4_2.Queue<Integer> queue = new Queue<Integer>();
+        Queue<Integer> queue = new Queue<Integer>();
         queue.enqueue(v);
 
         while (!queue.isEmpty()) {

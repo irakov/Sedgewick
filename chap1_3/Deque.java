@@ -1,7 +1,5 @@
-package chap1_3;//1.3.33(page 167)
-
-import chap4_2.LinkedList;
-import chap4_2.LinkedListIterator;
+package chap1_3;
+//1.3.33(page 167)
 
 import java.io.BufferedInputStream;
 import java.io.OutputStreamWriter;
@@ -10,7 +8,7 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 public class Deque<Item extends Comparable<Item>> implements Iterable<Item> {
-    private chap4_2.LinkedList<Item> list = new LinkedList<Item>();
+    private LinkedList<Item> list = new LinkedList<Item>();
 
     public static void main(String[] args) {
         Scanner input = new Scanner(new BufferedInputStream(System.in));

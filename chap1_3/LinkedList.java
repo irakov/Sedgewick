@@ -1,4 +1,5 @@
-package chap1_3;//page 142
+package chap1_3;
+//page 142
 //with chap1.chap1_1.3.19
 //with chap1.chap1_1.3.20
 //with chap1.chap1_1.3.21
@@ -20,7 +21,7 @@ public class LinkedList<Item extends Comparable<Item>> implements Iterable<Item>
     public static void main(String[] args) {
         PrintWriter output = new PrintWriter(new OutputStreamWriter(System.out), true);
 
-        chap4_2.LinkedList<Integer> list = new chap4_2.LinkedList<Integer>();
+        LinkedList<Integer> list = new LinkedList<Integer>();
         list.insertFirst(8);
         list.insertFirst(1);
         list.insertFirst(2);
@@ -56,7 +57,7 @@ public class LinkedList<Item extends Comparable<Item>> implements Iterable<Item>
             output.println("item " + i);
         }
         output.println("reverse!");
-        chap4_2.LinkedList<Integer> reverse = list.reverse();
+        LinkedList<Integer> reverse = list.reverse();
         for (Integer i : reverse) {
             output.println("item " + i);
         }
@@ -269,10 +270,10 @@ public class LinkedList<Item extends Comparable<Item>> implements Iterable<Item>
         return maxItem;
     }
 
-    public chap4_2.LinkedList<Item> reverse() {
+    public LinkedList<Item> reverse() {
         if (first == null || last == null)
             return null;
-        chap4_2.LinkedList<Item> list = new chap4_2.LinkedList<Item>();
+        LinkedList<Item> list = new LinkedList<Item>();
         Node currentNode = first;
         while (currentNode != null) {
             list.insertFirst(currentNode.item);
@@ -291,7 +292,7 @@ public class LinkedList<Item extends Comparable<Item>> implements Iterable<Item>
     }
 
     public Iterator<Item> iterator() {
-        return new chap4_2.LinkedListIterator<Item>(this);
+        return new LinkedListIterator<Item>(this);
     }
 
     public class Node {

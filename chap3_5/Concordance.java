@@ -1,6 +1,5 @@
 package chap3_5;//3.5.20(510)
 
-import chap4_2.RedBlackBST;
 
 import java.io.*;
 import java.util.Scanner;
@@ -11,7 +10,7 @@ public class Concordance {
         final int CONTEXT = 5;
         Scanner input = new Scanner(new BufferedInputStream(System.in));
         PrintWriter output = new PrintWriter(new OutputStreamWriter(System.out), true);
-        chap4_2.RedBlackBST<String, SET<Integer>> st = new RedBlackBST<String, SET<Integer>>();
+        RedBlackBST<String, SET<Integer>> st = new RedBlackBST<String, SET<Integer>>();
 
         output.println("Building concordance");
         String[] words = null;

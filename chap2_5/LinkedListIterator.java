@@ -1,12 +1,10 @@
 package chap2_5;
 
-import chap4_2.LinkedList;
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class LinkedListIterator<Item extends Comparable<Item>> implements Iterator<Item> {
-    private chap4_2.LinkedList<Item>.Node currentNode;
+    private LinkedList<Item>.Node currentNode;
 
     public LinkedListIterator(LinkedList<Item> linkedList) {
         currentNode = linkedList.getFirst();

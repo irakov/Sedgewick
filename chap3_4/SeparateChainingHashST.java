@@ -2,8 +2,6 @@ package chap3_4;//algorithm 3.5(465)
 //3.4.9(480),3.3.418(482),3.4.19(482)
 //with resizing
 
-import chap4_2.Queue;
-
 import java.io.BufferedInputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -98,7 +96,7 @@ public class SeparateChainingHashST<Key extends Comparable<Key>, Value> {
     }
 
     public Iterable<Key> keys() {
-        chap4_2.Queue<Key> queue = new Queue<Key>();
+        Queue<Key> queue = new Queue<Key>();
         for (int i = 0; i < st.length; i++)
             for (Key key : st[i].keys())
                 queue.enqueue(key);

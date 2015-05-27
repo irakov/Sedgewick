@@ -1,7 +1,5 @@
 package chap3_5;//3.5.8(page 507)
 
-import chap4_2.Queue;
-
 import java.io.BufferedInputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -124,7 +122,7 @@ public class LinearProbingHashSTPrimeDuplicate<Key extends Comparable<Key>, Valu
     }
 
     public Iterable<Key> keys() {
-        chap4_2.Queue<Key> queue = new Queue<Key>();
+        Queue<Key> queue = new Queue<Key>();
         for (int i = 0; i < keys.length; i++)
             if (keys[i] != null) queue.enqueue(keys[i]);
 

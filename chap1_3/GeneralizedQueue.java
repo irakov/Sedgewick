@@ -1,25 +1,22 @@
 package chap1_3;//1.3.38
 //page 169
 
-import chap4_2.LinkedList;
-import chap4_2.LinkedListIterator;
-
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.Iterator;
 
 public class GeneralizedQueue<Item extends Comparable<Item>> implements Iterable<Item> {
-    private chap4_2.LinkedList<Item> list = new LinkedList<Item>();
+    private LinkedList<Item> list = new LinkedList<Item>();
 
     public static void main(String[] args) {
         PrintWriter output = new PrintWriter(new OutputStreamWriter(System.out), true);
 
         GeneralizedQueue<String> queue = new GeneralizedQueue<String>();
 
-        queue.insert("chap1_1");
+        queue.insert("1");
         queue.insert("2");
         queue.insert("3");
-        output.println(queue.delete(chap1.chap1_1));
+        output.println(queue.delete(1));
         queue.insert("4");
         queue.insert("5");
         queue.insert("6");

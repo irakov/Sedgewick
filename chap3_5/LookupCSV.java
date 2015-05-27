@@ -1,7 +1,5 @@
 package chap3_5;//page 491
 
-import chap4_2.RedBlackBST;
-
 import java.io.*;
 import java.util.Scanner;
 
@@ -21,7 +19,7 @@ public class LookupCSV {
             System.err.println(ex);
         }
 
-        chap4_2.RedBlackBST<String, String> st = new RedBlackBST<String, String>();
+        RedBlackBST<String, String> st = new RedBlackBST<String, String>();
         while (fileInput.hasNextLine()) {
             String line = fileInput.nextLine();
             String[] items = line.split(",");

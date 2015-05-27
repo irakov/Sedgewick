@@ -2,8 +2,6 @@ package chap3_2;//algorithm 3.3 (398+399+407+409+411+413)
 //with 3.2.6,3.2.29(1st print),3.2.30(1st print),3.2.31(1st print),3.2.32(1st print)(416+419+420)
 //with 3.2.37(420)
 
-import chap4_2.Queue;
-
 import java.io.BufferedInputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -283,7 +281,7 @@ public class BST<Key extends Comparable<Key>, Value> {
         }
 
         if (node == null) return;
-        chap4_2.Queue<Node> queue = new Queue<Node>();
+        Queue<Node> queue = new Queue<Node>();
         queue.enqueue(node);
         while (!queue.isEmpty()) {
             node = queue.dequeue();

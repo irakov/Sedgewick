@@ -1,7 +1,5 @@
 package chap3_3;//taken from http://algs4.cs.princeton.edu/33balanced/TestRedBlackBST.java.html
 
-import chap4_2.RedBlackBST;
-
 import java.io.BufferedInputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -23,7 +21,7 @@ public class TestRedBlackBST {
 
         String test = "S E A R C H E X A M P L E";
         String[] keys = test.split(" ");
-        chap4_2.RedBlackBST<String, Integer> st = new RedBlackBST<String, Integer>();
+        RedBlackBST<String, Integer> st = new RedBlackBST<String, Integer>();
         for (int i = 0; i < keys.length; i++)
             st.put(keys[i], i);
 

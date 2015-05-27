@@ -1,5 +1,5 @@
 package chap1_3;//page 141
-//algorithm chap1.chap1_1.chap1.chap1_1
+//algorithm 1.1
 
 import java.io.BufferedInputStream;
 import java.io.OutputStreamWriter;

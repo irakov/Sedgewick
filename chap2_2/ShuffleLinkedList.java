@@ -2,8 +2,6 @@ package chap2_2;//2.2.18
 //page 286
 //see http://stackoverflow.com/questions/12167630/algorithm-for-shuffling-a-linked-list-in-n-log-n-time for uniform distribution twist
 
-import chap4_2.LinkedList;
-
 import java.io.BufferedInputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -51,7 +49,7 @@ public class ShuffleLinkedList<Item extends Comparable<Item>> {
         return tokens.toArray(new String[tokens.size()]);
     }
 
-    public void shuffle(chap4_2.LinkedList<Item> list, Item dummy) {
+    public void shuffle(LinkedList<Item> list, Item dummy) {
         if (list.size() == 1)
             return;
 
