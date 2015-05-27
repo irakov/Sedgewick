@@ -1,5 +1,8 @@
 package chap3_5;//page 499
 
+import chap3_3.RedBlackBST;
+import chap1_3.Queue;
+
 import java.io.*;
 import java.util.Scanner;
 

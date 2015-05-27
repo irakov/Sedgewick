@@ -1,8 +1,6 @@
 package chap2_2;//2.2.14+2.2.15
 //page 285
 
-import chap2_5.Queue;
-
 import java.io.BufferedInputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -17,7 +15,7 @@ public class BottomUpQueueMergeSort<Item extends Comparable<Item>> {
 
         String[] a = readStrings();
         BottomUpQueueMergeSort<String> sort = new BottomUpQueueMergeSort<String>();
-        chap2_5.Queue<String> result = sort.sort(a);
+        Queue<String> result = sort.sort(a);
         for (String s : result)
             output.print(s + " ");
 

@@ -1,5 +1,6 @@
 package chap4_1;//algorithm 4.1(536)
 
+import chap1_3.Stack;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 

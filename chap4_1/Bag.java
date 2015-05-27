@@ -1,6 +1,9 @@
 package chap4_1;//page 155
 //algorithm chap1.chap1_1.4
 
+
+import chap1_3.LinkedList;
+import chap1_3.LinkedListIterator;
 import java.io.BufferedInputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;

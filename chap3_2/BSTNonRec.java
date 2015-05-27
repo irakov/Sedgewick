@@ -1,6 +1,9 @@
 package chap3_2;//3.2.6+3.2.13+3.2.14 (417,418)
 //with 3.2.37(420)
 
+import chap1_3.Queue;
+import chap1_3.Stack;
+
 import java.io.BufferedInputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;

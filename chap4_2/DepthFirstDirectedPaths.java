@@ -1,5 +1,6 @@
 package chap4_2;//page 573
 
+import chap1_3.Stack;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 

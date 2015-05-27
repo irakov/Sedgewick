@@ -1,5 +1,7 @@
 package chap2_5;//2.5.13(page 355)
 
+import chap1_3.Queue;
+
 public class Processor implements Comparable<Processor> {
     private double load = 0;
     private Queue<Job> jobs = new Queue<Job>();

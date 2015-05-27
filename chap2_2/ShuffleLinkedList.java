@@ -1,6 +1,7 @@
 package chap2_2;//2.2.18
 //page 286
 //see http://stackoverflow.com/questions/12167630/algorithm-for-shuffling-a-linked-list-in-n-log-n-time for uniform distribution twist
+import chap1_3.LinkedList;
 
 import java.io.BufferedInputStream;
 import java.io.OutputStreamWriter;

@@ -1,6 +1,7 @@
 package chap3_4;//algorithm 3.6(470)
 //3.4.19(482)
 
+import chap1_3.Queue;
 import java.io.BufferedInputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -37,7 +38,7 @@ public class LinearProbingHashST<Key extends Comparable<Key>, Value> {
         Scanner input = new Scanner(new BufferedInputStream(System.in));
         PrintWriter output = new PrintWriter(new OutputStreamWriter(System.out), true);
 
-        chap3_5.LinearProbingHashST<String, Integer> hash = new chap3_5.LinearProbingHashST<String, Integer>();
+        LinearProbingHashST<String, Integer> hash = new LinearProbingHashST<String, Integer>();
         for (int i = 0; input.hasNext(); i++) {
             String s = input.next();
             hash.put(s, i);
@@ -62,7 +63,7 @@ public class LinearProbingHashST<Key extends Comparable<Key>, Value> {
         if (newCapacity < capacity) newLogCapacity = logCapacity - 1;
         else newLogCapacity = logCapacity + 1;
 
-        chap3_5.LinearProbingHashST<Key, Value> temp = new chap3_5.LinearProbingHashST<Key, Value>(newCapacity, newLogCapacity);
+        LinearProbingHashST<Key, Value> temp = new LinearProbingHashST<Key, Value>(newCapacity, newLogCapacity);
         for (int i = 0; i < keys.length; i++)
             if (keys[i] != null) temp.put(keys[i], values[i]);
         keys = temp.keys;

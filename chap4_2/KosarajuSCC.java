@@ -1,5 +1,6 @@
 package chap4_2;//algorithm 4.6 (page 587)
 
+import chap1_3.Bag;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 

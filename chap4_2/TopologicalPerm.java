@@ -1,5 +1,7 @@
 package chap4_2;//4.2.9(597)
 
+import chap1_3.Stack;
+import chap1_3.Bag;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStreamWriter;

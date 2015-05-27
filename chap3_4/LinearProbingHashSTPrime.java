@@ -2,6 +2,8 @@ package chap3_4;//3.4.26(483)
 //algorithm 3.6(470)
 //3.4.19(482)
 
+import chap1_3.Queue;
+
 import java.io.BufferedInputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;

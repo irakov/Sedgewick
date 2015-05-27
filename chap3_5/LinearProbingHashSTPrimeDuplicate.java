@@ -1,5 +1,7 @@
 package chap3_5;//3.5.8(page 507)
 
+import chap1_3.Queue;
+
 import java.io.BufferedInputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;

@@ -14,7 +14,7 @@ public class Deque<Item extends Comparable<Item>> implements Iterable<Item> {
         Scanner input = new Scanner(new BufferedInputStream(System.in));
         PrintWriter output = new PrintWriter(new OutputStreamWriter(System.out), true);
 
-        chap2_1.Deque<String> deque = new chap2_1.Deque<String>();
+        Deque<String> deque = new Deque<String>();
         while (input.hasNext()) {
             String s = input.next();
             if (s.substring(0, 2).equals(">|"))

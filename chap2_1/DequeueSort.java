@@ -1,6 +1,7 @@
 package chap2_1;//algorithm 2.1.14
 //page 265
 
+import chap1_3.Deque;
 import java.io.BufferedInputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;

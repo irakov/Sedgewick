@@ -1,7 +1,8 @@
 package chap4_1;//algorithm 4.2(540)
 //with 4.chap1.chap1_1.13(559)
 
-
+import chap1_3.Queue;
+import chap1_3.Stack;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 

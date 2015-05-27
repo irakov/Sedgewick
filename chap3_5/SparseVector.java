@@ -1,5 +1,6 @@
 package chap3_5;//page 503
 
+import chap3_4.LinearProbingHashST;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
