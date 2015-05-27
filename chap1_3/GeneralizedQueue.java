@@ -1,0 +1,52 @@
+package chap1_3;//1.3.38
+//page 169
+
+import chap4_2.LinkedList;
+import chap4_2.LinkedListIterator;
+
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.util.Iterator;
+
+public class GeneralizedQueue<Item extends Comparable<Item>> implements Iterable<Item> {
+    private chap4_2.LinkedList<Item> list = new LinkedList<Item>();
+
+    public static void main(String[] args) {
+        PrintWriter output = new PrintWriter(new OutputStreamWriter(System.out), true);
+
+        GeneralizedQueue<String> queue = new GeneralizedQueue<String>();
+
+        queue.insert("chap1_1");
+        queue.insert("2");
+        queue.insert("3");
+        output.println(queue.delete(chap1.chap1_1));
+        queue.insert("4");
+        queue.insert("5");
+        queue.insert("6");
+        queue.insert("7");
+        output.println(queue.delete(4));
+        queue.insert("8");
+        queue.insert("9");
+        queue.insert("10");
+        output.println(queue.delete(6));
+        for (String st : queue)
+            output.print(st + " ");
+        output.println();
+    }
+
+    public boolean isEmpty() {
+        return list.size() == 0;
+    }
+
+    public void insert(Item item) {
+        list.insertLast(item);
+    }
+
+    public Item delete(int k) {
+        return list.remove(k);
+    }
+
+    public Iterator<Item> iterator() {
+        return new LinkedListIterator<Item>(list);
+    }
+}
