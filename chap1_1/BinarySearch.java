@@ -1,6 +1,6 @@
 package chap1_1;
 
-//page 9
+//page 9, 47
 
 import java.io.*;
 import java.util.ArrayList;
@@ -9,53 +9,57 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class BinarySearch {
-    public static int rank(int key, int[] a) {
+    public static int rank(final int key, final int[] a) {
         int left = 0;
         int right = a.length - 1;
         while (left <= right) {
-            int middle = left + (right - left) / 2;
-            if (a[middle] < key)
+            final int middle = left + (right - left) / 2;
+            if (a[middle] < key) {
                 left = middle + 1;
-            else if (a[middle] > key)
+            } else if (a[middle] > key) {
                 right = middle - 1;
-            else
+            } else {
                 return middle;
+            }
         }
 
         return -1;
     }
 
-    public static void main(String[] args) {
-        int[] whitelist = readInts(args[0]);
+    public static void main(final String[] args) {
+        final int[] whitelist = readInts(args[0]);
         Arrays.sort(whitelist);
 
-        Scanner input = new Scanner(new BufferedInputStream(System.in));
-        PrintWriter output = new PrintWriter(new OutputStreamWriter(System.out), true);
+        final Scanner input = new Scanner(new BufferedInputStream(System.in));
+        final PrintWriter output = new PrintWriter(new OutputStreamWriter(System.out), true);
 
         while (input.hasNext()) {
-            int key = input.nextInt();
+            final int key = input.nextInt();
             if (rank(key, whitelist) == -1)
                 output.println(key);
         }
     }
 
     private static int[] readInts(String fileName) {
-        Pattern whitespacePattern = Pattern.compile("\\p{javaWhitespace}+");
-        Pattern everythingPattern = Pattern.compile("\\A");
+        final Pattern whitespacePattern = Pattern.compile("\\p{javaWhitespace}+");
+        final Pattern everythingPattern = Pattern.compile("\\A");
 
-        File file = new File(fileName);
+        final File file = new File(fileName);
         try {
             int[] result = null;
-            Scanner scanner = new Scanner(file);
+            final Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
-                String input = scanner.useDelimiter(everythingPattern).next();
+                final String input = scanner.useDelimiter(everythingPattern).next();
                 scanner.useDelimiter(whitespacePattern);
 
-                ArrayList<String> tokens = new ArrayList<String>(Arrays.asList(whitespacePattern.split(input)));
-                if (tokens.get(0).length() == 0) tokens.remove(0);
-
+                final ArrayList<String> tokens = new ArrayList<String>(Arrays.asList(whitespacePattern.split(input)));
+                if (tokens.get(0).length() == 0) {
+                    tokens.remove(0);
+                }
                 result = new int[tokens.size()];
-                for (int i = 0; i < result.length; i++) result[i] = Integer.parseInt(tokens.get(i));
+                for (int i = 0; i < result.length; i++) {
+                    result[i] = Integer.parseInt(tokens.get(i));
+                }
             }
 
             return result;
